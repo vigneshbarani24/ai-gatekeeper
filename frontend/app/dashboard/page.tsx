@@ -6,7 +6,7 @@
  */
 
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import {
   Shield,
@@ -19,6 +19,7 @@ import {
   Menu,
   Bell,
   Sparkles,
+  X,
 } from 'lucide-react';
 import { fetchDashboardStats, fetchRecentCalls, type Call } from '@/lib/api';
 
@@ -34,6 +35,7 @@ export default function DashboardPage() {
   const [recentCalls, setRecentCalls] = useState<Call[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [greeting, setGreeting] = useState('Good Morning');
+  const [showOrbModal, setShowOrbModal] = useState(false);
 
   useEffect(() => {
     // Check onboarding
@@ -150,7 +152,8 @@ export default function DashboardPage() {
             </motion.div>
 
             {/* Main Orb - MASSIVE */}
-            <motion.div
+            <motion.button
+              onClick={() => setShowOrbModal(true)}
               className="relative w-48 h-48 mx-auto bg-gradient-to-br from-blue-500 via-blue-600 to-purple-600 rounded-full flex items-center justify-center shadow-2xl cursor-pointer"
               animate={{
                 boxShadow: [
@@ -184,7 +187,7 @@ export default function DashboardPage() {
               >
                 <div className="w-3 h-3 bg-white rounded-full" />
               </motion.div>
-            </motion.div>
+            </motion.button>
 
             {/* Orbiting Sparkles */}
             {[...Array(8)].map((_, i) => (
@@ -301,6 +304,18 @@ export default function DashboardPage() {
         </motion.div>
       </main>
 
+      {/* Orb Modal - AI Summary & Insights */}
+      <AnimatePresence>
+        {showOrbModal && (
+          <OrbModal
+            userName={userName}
+            stats={stats}
+            recentCalls={recentCalls}
+            onClose={() => setShowOrbModal(false)}
+          />
+        )}
+      </AnimatePresence>
+
       {/* Bottom Nav */}
       <nav className="fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-xl border-t border-gray-200">
         <div className="container mx-auto px-4 py-3 flex justify-around">
@@ -317,6 +332,217 @@ export default function DashboardPage() {
 // ============================================================================
 // Components
 // ============================================================================
+
+function OrbModal({
+  userName,
+  stats,
+  recentCalls,
+  onClose,
+}: {
+  userName: string;
+  stats: {
+    total_calls: number;
+    scams_blocked: number;
+    time_saved_minutes: number;
+    calls_today: number;
+  };
+  recentCalls: Call[];
+  onClose: () => void;
+}) {
+  // Generate AI summary based on stats
+  const generateSummary = () => {
+    if (stats.calls_today === 0) {
+      return "It's been quiet today. I'm standing by, ready to catch any calls you can't take.";
+    }
+
+    const summaryParts = [];
+
+    if (stats.calls_today > 0) {
+      summaryParts.push(`I handled ${stats.calls_today} call${stats.calls_today > 1 ? 's' : ''} while you were busy`);
+    }
+
+    if (stats.scams_blocked > 0) {
+      summaryParts.push(`blocked ${stats.scams_blocked} scam${stats.scams_blocked > 1 ? 's' : ''}`);
+    }
+
+    if (stats.time_saved_minutes > 0) {
+      summaryParts.push(`saved you ${stats.time_saved_minutes} minutes this week`);
+    }
+
+    return `Hi ${userName}! ${summaryParts.join(', ')}. You never missed an opportunity.`;
+  };
+
+  // Generate insights
+  const getInsights = () => {
+    const insights = [];
+
+    const lastScam = recentCalls.find(c => c.outcome === 'blocked');
+    if (lastScam) {
+      insights.push({
+        icon: '🛡️',
+        text: `Last scam blocked: ${new Date(lastScam.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
+        color: 'text-red-600 bg-red-50',
+      });
+    }
+
+    const lastHandled = recentCalls.find(c => c.outcome === 'screened');
+    if (lastHandled) {
+      insights.push({
+        icon: '✅',
+        text: `Last handled: ${lastHandled.caller_name || 'Unknown'} - ${lastHandled.reason || 'Call screened'}`,
+        color: 'text-blue-600 bg-blue-50',
+      });
+    }
+
+    if (stats.time_saved_minutes >= 45) {
+      insights.push({
+        icon: '⏰',
+        text: 'Almost an hour saved this week!',
+        color: 'text-orange-600 bg-orange-50',
+      });
+    }
+
+    if (insights.length === 0) {
+      insights.push({
+        icon: '💤',
+        text: 'All quiet. No missed opportunities.',
+        color: 'text-gray-600 bg-gray-50',
+      });
+    }
+
+    return insights;
+  };
+
+  const summary = generateSummary();
+  const insights = getInsights();
+
+  return (
+    <motion.div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
+    >
+      <motion.div
+        className="bg-white rounded-3xl w-full max-w-lg max-h-[80vh] overflow-y-auto shadow-2xl"
+        initial={{ scale: 0.9, opacity: 0, y: 20 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.9, opacity: 0, y: 20 }}
+        transition={{ type: 'spring', bounce: 0.3 }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header with Orb */}
+        <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-t-3xl border-b border-gray-200">
+          <div className="flex items-start gap-4">
+            {/* Mini Orb */}
+            <motion.div
+              className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg flex-shrink-0"
+              animate={{
+                boxShadow: [
+                  '0 10px 40px rgba(59, 130, 246, 0.4)',
+                  '0 15px 50px rgba(147, 51, 234, 0.5)',
+                  '0 10px 40px rgba(59, 130, 246, 0.4)',
+                ],
+              }}
+              transition={{ duration: 3, repeat: Infinity }}
+            >
+              <Shield size={32} className="text-white" strokeWidth={2} />
+            </motion.div>
+
+            {/* Summary */}
+            <div className="flex-1">
+              <h2 className="text-xl font-bold text-gray-900 mb-2">
+                Your Guardian's Report
+              </h2>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                {summary}
+              </p>
+            </div>
+
+            {/* Close Button */}
+            <button
+              onClick={onClose}
+              className="p-2 hover:bg-white/50 rounded-xl transition-colors"
+            >
+              <X size={24} className="text-gray-500" />
+            </button>
+          </div>
+        </div>
+
+        {/* Stats Grid */}
+        <div className="p-6 border-b border-gray-100">
+          <h3 className="text-sm font-semibold text-gray-600 mb-4">Quick Stats</h3>
+          <div className="grid grid-cols-3 gap-3">
+            <div className="bg-blue-50 rounded-2xl p-3 text-center">
+              <Phone size={20} className="text-blue-600 mx-auto mb-1" />
+              <div className="text-2xl font-bold text-blue-900">{stats.total_calls}</div>
+              <div className="text-xs text-blue-700">Handled</div>
+            </div>
+            <div className="bg-red-50 rounded-2xl p-3 text-center">
+              <Shield size={20} className="text-red-600 mx-auto mb-1" />
+              <div className="text-2xl font-bold text-red-900">{stats.scams_blocked}</div>
+              <div className="text-xs text-red-700">Blocked</div>
+            </div>
+            <div className="bg-orange-50 rounded-2xl p-3 text-center">
+              <Clock size={20} className="text-orange-600 mx-auto mb-1" />
+              <div className="text-2xl font-bold text-orange-900">{stats.time_saved_minutes}</div>
+              <div className="text-xs text-orange-700">Min Saved</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Insights */}
+        <div className="p-6 border-b border-gray-100">
+          <h3 className="text-sm font-semibold text-gray-600 mb-4">Recent Activity</h3>
+          <div className="space-y-3">
+            {insights.map((insight, i) => (
+              <motion.div
+                key={i}
+                className={`p-3 rounded-2xl ${insight.color} flex items-start gap-3`}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: i * 0.1 }}
+              >
+                <span className="text-2xl">{insight.icon}</span>
+                <p className="text-sm font-medium flex-1">{insight.text}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Tips */}
+        <div className="p-6">
+          <h3 className="text-sm font-semibold text-gray-600 mb-3">💡 Tip</h3>
+          <p className="text-sm text-gray-600 leading-relaxed">
+            {stats.scams_blocked > 5
+              ? "You're getting a lot of scam calls. Consider adding your important contacts to the whitelist so they always reach you directly."
+              : "Add your closest contacts to the whitelist to ensure they always ring through to you immediately."}
+          </p>
+        </div>
+
+        {/* Actions */}
+        <div className="p-6 pt-0 flex gap-3">
+          <button
+            onClick={onClose}
+            className="flex-1 px-4 py-3 bg-gray-100 text-gray-700 font-semibold rounded-xl hover:bg-gray-200 transition-colors"
+          >
+            Got it
+          </button>
+          <button
+            onClick={() => {
+              onClose();
+              // Navigate to calls page - we'll need router for this
+            }}
+            className="flex-1 px-4 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold rounded-xl hover:shadow-lg transition-all"
+          >
+            View Details
+          </button>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
 
 function StatChip({
   icon: Icon,
