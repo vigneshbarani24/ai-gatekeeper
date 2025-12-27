@@ -102,69 +102,157 @@ export default function DashboardPage() {
       <main className="container mx-auto px-4 py-6">
         {/* Personalized Greeting */}
         <motion.div
-          className="mb-8"
+          className="mb-6 text-center"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          <h1 className="text-2xl font-bold text-gray-900 mb-1">
             {greeting}, {userName}
           </h1>
-          <p className="text-lg text-gray-600">
+          <p className="text-sm text-gray-600">
             {stats.calls_today > 0
               ? `${stats.calls_today} calls screened today`
               : 'Your guardian is standing watch'}
           </p>
         </motion.div>
 
-        {/* AHA Moment Card - Time Saved */}
+        {/* THE ORB - HERO ELEMENT */}
         <motion.div
-          className="mb-8 bg-gradient-to-br from-orange-400 to-orange-500 rounded-3xl p-6 shadow-lg"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-          whileHover={{ scale: 1.02 }}
+          className="mb-12 flex flex-col items-center"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.8, type: 'spring', bounce: 0.4 }}
         >
-          <div className="flex items-start justify-between mb-4">
-            <div>
-              <div className="text-white/80 text-sm font-semibold mb-1">
-                Time Saved This Week
-              </div>
-              <div className="text-5xl font-bold text-white mb-1">
-                {stats.time_saved_minutes} min
-              </div>
-              <div className="text-white/80 text-sm">
-                {stats.scams_blocked} scams blocked
-              </div>
-            </div>
-            <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center">
-              <Clock size={32} className="text-white" />
-            </div>
+          <div className="relative">
+            {/* Outer Pulsing Rings */}
+            <motion.div
+              className="absolute inset-0 w-64 h-64 -translate-x-16 -translate-y-16"
+              animate={{
+                scale: [1, 1.3, 1],
+                opacity: [0.4, 0.1, 0.4],
+              }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <div className="w-full h-full rounded-full bg-gradient-to-br from-blue-500/40 to-purple-500/40 blur-3xl" />
+            </motion.div>
+
+            {/* Middle Ring */}
+            <motion.div
+              className="absolute inset-0 w-56 h-56 -translate-x-12 -translate-y-12"
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.3, 0.2, 0.3],
+              }}
+              transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+            >
+              <div className="w-full h-full rounded-full bg-gradient-to-br from-blue-400/30 to-purple-400/30 blur-2xl" />
+            </motion.div>
+
+            {/* Main Orb - MASSIVE */}
+            <motion.div
+              className="relative w-48 h-48 mx-auto bg-gradient-to-br from-blue-500 via-blue-600 to-purple-600 rounded-full flex items-center justify-center shadow-2xl cursor-pointer"
+              animate={{
+                boxShadow: [
+                  '0 20px 100px rgba(59, 130, 246, 0.6)',
+                  '0 30px 120px rgba(147, 51, 234, 0.7)',
+                  '0 20px 100px rgba(59, 130, 246, 0.6)',
+                ],
+                scale: [1, 1.03, 1],
+              }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {/* Inner Shimmer */}
+              <motion.div
+                className="absolute inset-6 bg-gradient-to-br from-white/50 to-transparent rounded-full"
+                animate={{ opacity: [0.7, 0.4, 0.7] }}
+                transition={{ duration: 3, repeat: Infinity }}
+              />
+
+              {/* Shield Icon */}
+              <Shield size={96} className="text-white relative z-10" strokeWidth={2} />
+
+              {/* Status Indicator */}
+              <motion.div
+                className="absolute -top-2 -right-2 w-8 h-8 bg-green-500 rounded-full border-4 border-white shadow-lg flex items-center justify-center"
+                animate={{
+                  scale: [1, 1.2, 1],
+                }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <div className="w-3 h-3 bg-white rounded-full" />
+              </motion.div>
+            </motion.div>
+
+            {/* Orbiting Sparkles */}
+            {[...Array(8)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute"
+                style={{
+                  left: `${50 + 70 * Math.cos((i * Math.PI * 2) / 8)}%`,
+                  top: `${50 + 70 * Math.sin((i * Math.PI * 2) / 8)}%`,
+                }}
+                animate={{
+                  y: [-8, 8, -8],
+                  opacity: [0.6, 1, 0.6],
+                  rotate: [0, 360],
+                }}
+                transition={{
+                  duration: 3 + i * 0.3,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+              >
+                <Sparkles size={16} className="text-yellow-400" />
+              </motion.div>
+            ))}
           </div>
 
-          <div className="flex items-center gap-2 text-white/90 text-sm">
-            <TrendingUp size={16} />
-            <span>25% more than last week</span>
-          </div>
+          {/* Status Text Below Orb */}
+          <motion.div
+            className="mt-8 text-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-100 rounded-full">
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+              <span className="text-sm font-semibold text-green-700">
+                Active & Protecting
+              </span>
+            </div>
+          </motion.div>
         </motion.div>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-2 gap-4 mb-8">
-          <StatCard
-            icon={Phone}
-            label="Total Calls"
-            value={stats.total_calls.toString()}
-            color="from-blue-400 to-blue-500"
-            delay={0.3}
+        {/* Quick Stats - Minimal Chips */}
+        <motion.div
+          className="mb-8 flex justify-center gap-3 flex-wrap"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+        >
+          <StatChip
+            icon={Clock}
+            value={`${stats.time_saved_minutes} min`}
+            label="saved"
+            color="bg-orange-100 text-orange-700"
           />
-          <StatCard
+          <StatChip
             icon={Shield}
-            label="Scams Blocked"
             value={stats.scams_blocked.toString()}
-            color="from-red-400 to-red-500"
-            delay={0.4}
+            label="blocked"
+            color="bg-red-100 text-red-700"
           />
-        </div>
+          <StatChip
+            icon={Phone}
+            value={stats.total_calls.toString()}
+            label="screened"
+            color="bg-blue-100 text-blue-700"
+          />
+        </motion.div>
 
         {/* Recent Activity */}
         <motion.div
@@ -229,6 +317,31 @@ export default function DashboardPage() {
 // ============================================================================
 // Components
 // ============================================================================
+
+function StatChip({
+  icon: Icon,
+  value,
+  label,
+  color,
+}: {
+  icon: any;
+  value: string;
+  label: string;
+  color: string;
+}) {
+  return (
+    <motion.div
+      className={`inline-flex items-center gap-2 px-4 py-2 rounded-full ${color} font-semibold text-sm`}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+    >
+      <Icon size={16} />
+      <span>
+        {value} <span className="font-normal">{label}</span>
+      </span>
+    </motion.div>
+  );
+}
 
 function StatCard({
   icon: Icon,
