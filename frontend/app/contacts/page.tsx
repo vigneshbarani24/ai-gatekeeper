@@ -144,9 +144,9 @@ export default function ContactsPage() {
         >
           <CheckCircle size={24} className="text-blue-600 flex-shrink-0 mt-0.5" />
           <div>
-            <h3 className="font-semibold text-blue-900 mb-1">Auto-pass Enabled</h3>
+            <h3 className="font-semibold text-blue-900 mb-1">Privacy First</h3>
             <p className="text-sm text-blue-700">
-              Whitelisted contacts bypass screening and connect directly to you.
+              These contacts ring through to you directly. Everyone else goes to your AI if you don't pick up.
             </p>
           </div>
         </motion.div>

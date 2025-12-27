@@ -112,8 +112,8 @@ export default function DashboardPage() {
           </h1>
           <p className="text-sm text-gray-600">
             {stats.calls_today > 0
-              ? `${stats.calls_today} calls screened today`
-              : 'Your guardian is standing watch'}
+              ? `${stats.calls_today} calls handled when you were busy`
+              : 'Standing by for calls you can\'t take'}
           </p>
         </motion.div>
 
@@ -221,7 +221,7 @@ export default function DashboardPage() {
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-100 rounded-full">
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
               <span className="text-sm font-semibold text-green-700">
-                Active & Protecting
+                Standing By for You
               </span>
             </div>
           </motion.div>
@@ -249,7 +249,7 @@ export default function DashboardPage() {
           <StatChip
             icon={Phone}
             value={stats.total_calls.toString()}
-            label="screened"
+            label="handled"
             color="bg-blue-100 text-blue-700"
           />
         </motion.div>
@@ -493,7 +493,7 @@ function EmptyState() {
         <Shield size={32} className="text-white" />
       </div>
       <h3 className="text-xl font-bold text-gray-900 mb-2">All Quiet</h3>
-      <p className="text-gray-600">No calls yet. Your AI is ready when you are.</p>
+      <p className="text-gray-600">No calls missed. I'm standing by whenever you need me.</p>
     </div>
   );
 }
