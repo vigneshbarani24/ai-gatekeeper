@@ -349,72 +349,70 @@ function OrbModal({
   recentCalls: Call[];
   onClose: () => void;
 }) {
-  // Generate AI summary based on stats
-  const generateSummary = () => {
-    if (stats.calls_today === 0) {
-      return "It's been quiet today. I'm standing by, ready to catch any calls you can't take.";
-    }
+  const [loading, setLoading] = React.useState(true);
+  const [aiData, setAiData] = React.useState<{
+    summary: string;
+    insights: { icon: string; text: string; color: string }[];
+    tip: { icon: string; title: string; description: string; action: string; action_link: string };
+  } | null>(null);
 
-    const summaryParts = [];
+  // Fetch AI summary from backend
+  React.useEffect(() => {
+    const fetchSummary = async () => {
+      try {
+        setLoading(true);
 
-    if (stats.calls_today > 0) {
-      summaryParts.push(`I handled ${stats.calls_today} call${stats.calls_today > 1 ? 's' : ''} while you were busy`);
-    }
+        // TODO: Replace with your actual backend URL
+        const backendUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
-    if (stats.scams_blocked > 0) {
-      summaryParts.push(`blocked ${stats.scams_blocked} scam${stats.scams_blocked > 1 ? 's' : ''}`);
-    }
+        const response = await fetch(`${backendUrl}/api/analytics/summary?user_id=demo_user`);
 
-    if (stats.time_saved_minutes > 0) {
-      summaryParts.push(`saved you ${stats.time_saved_minutes} minutes this week`);
-    }
+        if (!response.ok) {
+          throw new Error('Failed to fetch summary');
+        }
 
-    return `Hi ${userName}! ${summaryParts.join(', ')}. You never missed an opportunity.`;
-  };
+        const data = await response.json();
 
-  // Generate insights
-  const getInsights = () => {
-    const insights = [];
+        setAiData({
+          summary: data.summary,
+          insights: data.insights,
+          tip: data.tip,
+        });
+      } catch (error) {
+        console.error('Error fetching AI summary:', error);
 
-    const lastScam = recentCalls.find(c => c.outcome === 'blocked');
-    if (lastScam) {
-      insights.push({
-        icon: '🛡️',
-        text: `Last scam blocked: ${new Date(lastScam.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
-        color: 'text-red-600 bg-red-50',
-      });
-    }
+        // Fallback to client-side generation on error
+        const fallbackSummary = stats.calls_today === 0
+          ? "It's been quiet today. I'm standing by, ready to catch any calls you can't take."
+          : `Hi ${userName}! I handled ${stats.calls_today} calls while you were busy. You never missed an opportunity.`;
 
-    const lastHandled = recentCalls.find(c => c.outcome === 'screened');
-    if (lastHandled) {
-      insights.push({
-        icon: '✅',
-        text: `Last handled: ${lastHandled.caller_name || 'Unknown'} - ${lastHandled.reason || 'Call screened'}`,
-        color: 'text-blue-600 bg-blue-50',
-      });
-    }
+        setAiData({
+          summary: fallbackSummary,
+          insights: [
+            {
+              icon: '💤',
+              text: 'All quiet. No missed opportunities.',
+              color: 'text-gray-600 bg-gray-50',
+            },
+          ],
+          tip: {
+            icon: '📱',
+            title: 'AI Gatekeeper is Active',
+            description: "I'm standing by to catch important calls when you're busy.",
+            action: 'View Settings',
+            action_link: '/settings',
+          },
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    if (stats.time_saved_minutes >= 45) {
-      insights.push({
-        icon: '⏰',
-        text: 'Almost an hour saved this week!',
-        color: 'text-orange-600 bg-orange-50',
-      });
-    }
+    fetchSummary();
+  }, [stats.calls_today, userName]);
 
-    if (insights.length === 0) {
-      insights.push({
-        icon: '💤',
-        text: 'All quiet. No missed opportunities.',
-        color: 'text-gray-600 bg-gray-50',
-      });
-    }
-
-    return insights;
-  };
-
-  const summary = generateSummary();
-  const insights = getInsights();
+  const summary = aiData?.summary || 'Loading your personalized summary...';
+  const insights = aiData?.insights || [];
 
   return (
     <motion.div
@@ -456,7 +454,20 @@ function OrbModal({
                 Your Guardian's Report
               </h2>
               <p className="text-sm text-gray-600 leading-relaxed">
-                {summary}
+                {loading ? (
+                  <span className="inline-flex items-center gap-2">
+                    <motion.span
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                      className="inline-block"
+                    >
+                      ⚡
+                    </motion.span>
+                    Generating your personalized summary...
+                  </span>
+                ) : (
+                  summary
+                )}
               </p>
             </div>
 
@@ -512,14 +523,24 @@ function OrbModal({
         </div>
 
         {/* Tips */}
-        <div className="p-6">
-          <h3 className="text-sm font-semibold text-gray-600 mb-3">💡 Tip</h3>
-          <p className="text-sm text-gray-600 leading-relaxed">
-            {stats.scams_blocked > 5
-              ? "You're getting a lot of scam calls. Consider adding your important contacts to the whitelist so they always reach you directly."
-              : "Add your closest contacts to the whitelist to ensure they always ring through to you immediately."}
-          </p>
-        </div>
+        {aiData?.tip && (
+          <div className="p-6">
+            <h3 className="text-sm font-semibold text-gray-600 mb-3">
+              {aiData.tip.icon} {aiData.tip.title}
+            </h3>
+            <p className="text-sm text-gray-600 leading-relaxed mb-3">
+              {aiData.tip.description}
+            </p>
+            {aiData.tip.action_link && (
+              <a
+                href={aiData.tip.action_link}
+                className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:text-blue-700"
+              >
+                {aiData.tip.action} →
+              </a>
+            )}
+          </div>
+        )}
 
         {/* Actions */}
         <div className="p-6 pt-0 flex gap-3">
