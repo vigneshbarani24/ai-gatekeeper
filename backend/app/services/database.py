@@ -1,0 +1,212 @@
+"""
+Database Service: Supabase PostgreSQL client
+Handles all database operations for AI Gatekeeper
+"""
+
+import logging
+from typing import Dict, List, Optional
+from supabase import create_client, Client
+
+from app.core.config import settings
+
+logger = logging.getLogger(__name__)
+
+
+class DatabaseService:
+    """
+    Supabase database client
+
+    Tables:
+    - users: User profiles and settings
+    - contacts: Whitelisted contacts
+    - calls: Call records
+    - call_transcripts: Full transcripts
+    - scam_reports: Detected scams
+    """
+
+    def __init__(self):
+        self.client: Optional[Client] = None
+
+    async def init(self) -> None:
+        """Initialize Supabase client"""
+        try:
+            self.client = create_client(
+                settings.SUPABASE_URL,
+                settings.SUPABASE_SERVICE_ROLE_KEY
+            )
+            logger.info("✅ Database initialized")
+
+        except Exception as e:
+            logger.error(f"❌ Failed to initialize database: {e}")
+            raise
+
+    # ========================
+    # USERS
+    # ========================
+
+    async def get_user_by_id(self, user_id: str) -> Optional[Dict]:
+        """Get user by ID"""
+        try:
+            response = self.client.table("users").select("*").eq("id", user_id).single().execute()
+            return response.data
+        except Exception as e:
+            logger.error(f"Error getting user {user_id}: {e}")
+            return None
+
+    async def get_user_by_twilio_number(self, twilio_number: str) -> Optional[Dict]:
+        """Get user by their Twilio phone number"""
+        try:
+            response = self.client.table("users").select("*").eq("twilio_phone_number", twilio_number).single().execute()
+            return response.data
+        except Exception as e:
+            logger.debug(f"No user found for Twilio number {twilio_number}")
+            return None
+
+    # ========================
+    # CONTACTS
+    # ========================
+
+    async def get_contact_by_phone(self, user_id: str, phone_number: str) -> Optional[Dict]:
+        """Check if phone number is in user's whitelist"""
+        try:
+            response = (
+                self.client.table("contacts")
+                .select("*")
+                .eq("user_id", user_id)
+                .eq("phone_number", phone_number)
+                .single()
+                .execute()
+            )
+            return response.data
+        except Exception as e:
+            logger.debug(f"No contact found for {phone_number}")
+            return None
+
+    # ========================
+    # CALLS
+    # ========================
+
+    async def create_call(
+        self,
+        user_id: str,
+        caller_number: str,
+        call_sid: str,
+        status: str
+    ) -> Dict:
+        """Create new call record"""
+        try:
+            response = (
+                self.client.table("calls")
+                .insert({
+                    "user_id": user_id,
+                    "caller_number": caller_number,
+                    "call_sid": call_sid,
+                    "status": status
+                })
+                .execute()
+            )
+            return response.data[0] if response.data else {}
+        except Exception as e:
+            logger.error(f"Error creating call record: {e}")
+            return {}
+
+    async def get_call_by_sid(self, call_sid: str) -> Optional[Dict]:
+        """Get call record by Twilio SID"""
+        try:
+            response = (
+                self.client.table("calls")
+                .select("*")
+                .eq("call_sid", call_sid)
+                .single()
+                .execute()
+            )
+            return response.data
+        except Exception as e:
+            logger.error(f"Error getting call {call_sid}: {e}")
+            return None
+
+    async def update_call(
+        self,
+        call_sid: str,
+        status: Optional[str] = None,
+        intent: Optional[str] = None,
+        scam_score: Optional[float] = None,
+        passed_through: Optional[bool] = None,
+        transcript: Optional[str] = None
+    ) -> None:
+        """Update call record"""
+        try:
+            update_data = {}
+            if status:
+                update_data["status"] = status
+            if intent:
+                update_data["intent"] = intent
+            if scam_score is not None:
+                update_data["scam_score"] = scam_score
+            if passed_through is not None:
+                update_data["passed_through"] = passed_through
+
+            self.client.table("calls").update(update_data).eq("call_sid", call_sid).execute()
+
+            # Update transcript separately if provided
+            if transcript:
+                await self.save_transcript(call_sid, transcript)
+
+        except Exception as e:
+            logger.error(f"Error updating call {call_sid}: {e}")
+
+    async def save_transcript(self, call_sid: str, transcript: str) -> None:
+        """Save call transcript"""
+        try:
+            # Get call ID
+            call = await self.get_call_by_sid(call_sid)
+            if not call:
+                return
+
+            # Upsert transcript
+            self.client.table("call_transcripts").upsert({
+                "call_id": call["id"],
+                "transcript": transcript
+            }).execute()
+
+        except Exception as e:
+            logger.error(f"Error saving transcript: {e}")
+
+    # ========================
+    # SCAM REPORTS
+    # ========================
+
+    async def create_scam_report(
+        self,
+        call_sid: str,
+        scam_type: str,
+        confidence: float,
+        pattern_matched: str
+    ) -> None:
+        """Log a detected scam"""
+        try:
+            call = await self.get_call_by_sid(call_sid)
+            if not call:
+                return
+
+            self.client.table("scam_reports").insert({
+                "call_id": call["id"],
+                "scam_type": scam_type,
+                "confidence": confidence,
+                "pattern_matched": pattern_matched,
+                "action_taken": "blocked"
+            }).execute()
+
+            logger.info(f"✅ Logged scam report for call {call_sid}")
+
+        except Exception as e:
+            logger.error(f"Error creating scam report: {e}")
+
+
+# Singleton instance
+db_service = DatabaseService()
+
+
+async def init_database() -> None:
+    """Initialize database connection (called on app startup)"""
+    await db_service.init()
