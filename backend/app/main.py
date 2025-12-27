@@ -33,6 +33,19 @@ async def lifespan(app: FastAPI):
     logger.info(f"Environment: {settings.ENVIRONMENT}")
     logger.info(f"Twilio Number: {settings.TWILIO_PHONE_NUMBER}")
 
+    # CRITICAL: Run comprehensive runtime validation
+    logger.info("🔍 Running runtime validation checks...")
+    from app.core.runtime_checks import run_startup_validation
+
+    validation_passed = run_startup_validation()
+
+    if not validation_passed:
+        logger.error("❌ RUNTIME VALIDATION FAILED")
+        if settings.is_production():
+            raise RuntimeError("Critical validation failures - cannot start in production")
+        else:
+            logger.warning("⚠️  Continuing in development mode despite validation failures")
+
     # Initialize database connection
     logger.info("📊 Initializing database...")
     await init_database()
@@ -87,11 +100,25 @@ async def global_exception_handler(request: Request, exc: Exception):
 # Health check endpoint
 @app.get("/health")
 async def health_check():
-    """Health check endpoint for load balancers and monitoring"""
+    """
+    Comprehensive health check with runtime validation status
+    Used by load balancers and monitoring systems
+    """
+    from app.core.runtime_checks import get_validation_status
+
+    validation_status = get_validation_status()
+
     return {
-        "status": "healthy",
+        "status": "healthy" if validation_status["healthy"] else "degraded",
         "environment": settings.ENVIRONMENT,
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "validation": {
+            "total_checks": validation_status["total_checks"],
+            "passed": validation_status["passed"],
+            "failed": validation_status["failed"],
+            "critical_failures": validation_status["critical_failures"],
+        },
+        "details": validation_status["checks"] if settings.DEBUG else []
     }
 
 
