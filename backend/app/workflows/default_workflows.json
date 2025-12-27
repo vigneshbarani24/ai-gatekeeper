@@ -1,0 +1,294 @@
+{
+  "workflows": {
+    "personal_family_emergency": {
+      "name": "Family Emergency Call",
+      "category": "emergency",
+      "priority": 10,
+      "triggers": {
+        "keywords": ["emergency", "urgent", "hospital", "accident", "911"],
+        "contacts": ["Mom", "Dad", "Spouse", "Sister", "Brother"],
+        "confidence": ">0.6"
+      },
+      "actions": [
+        {
+          "type": "voice_orb_alert",
+          "params": {
+            "color": "red",
+            "pulse": "fast",
+            "sound": "critical",
+            "message": "🚨 EMERGENCY: {{caller_name}} calling!",
+            "priority": "critical"
+          }
+        },
+        {
+          "type": "ring_user_immediately",
+          "params": {
+            "priority": "high",
+            "override_dnd": true,
+            "timeout_seconds": 60
+          }
+        },
+        {
+          "type": "send_sms_alert",
+          "params": {
+            "message": "🚨 EMERGENCY CALL from {{caller_name}} - {{time}}",
+            "template": "emergency"
+          },
+          "condition": "intent_confidence < 0.8"
+        }
+      ]
+    },
+
+    "personal_friend_verified": {
+      "name": "Verified Friend Call",
+      "category": "personal_friend",
+      "priority": 8,
+      "triggers": {
+        "intent": "friend",
+        "confidence": ">0.8",
+        "contacts": []
+      },
+      "actions": [
+        {
+          "type": "voice_orb_alert",
+          "params": {
+            "color": "blue",
+            "pulse": "medium",
+            "message": "{{caller_name}} is calling..."
+          }
+        },
+        {
+          "type": "ring_user",
+          "params": {
+            "priority": "normal",
+            "timeout_seconds": 30
+          }
+        },
+        {
+          "type": "send_sms",
+          "params": {
+            "template": "missed_call"
+          },
+          "condition": "if_missed"
+        }
+      ]
+    },
+
+    "business_sales_inquiry": {
+      "name": "Business Sales Lead",
+      "category": "business_sales",
+      "priority": 6,
+      "triggers": {
+        "intent": "sales",
+        "keywords": ["interested in", "pricing", "demo", "quote", "information"],
+        "confidence": ">0.7"
+      },
+      "actions": [
+        {
+          "type": "ai_qualify_lead",
+          "params": {
+            "questions": [
+              "What service are you interested in?",
+              "What's your timeline?",
+              "What's your budget range?"
+            ]
+          }
+        },
+        {
+          "type": "google_sheets",
+          "params": {
+            "spreadsheet_id": "YOUR_SPREADSHEET_ID",
+            "sheet_name": "Leads",
+            "data": {
+              "Name": "{{caller_name}}",
+              "Phone": "{{caller_number}}",
+              "Interest": "{{intent}}",
+              "Qualified": "{{qualified}}",
+              "Notes": "{{transcript}}"
+            }
+          }
+        },
+        {
+          "type": "send_email",
+          "params": {
+            "to": "user@example.com",
+            "subject": "New sales inquiry from {{caller_name}}",
+            "template": "business_lead"
+          }
+        },
+        {
+          "type": "mcp_task",
+          "params": {
+            "server": "salesforce",
+            "action": "create_lead",
+            "params": {
+              "name": "{{caller_name}}",
+              "phone": "{{caller_number}}",
+              "source": "AI Gatekeeper",
+              "status": "New"
+            }
+          }
+        },
+        {
+          "type": "voice_orb_alert",
+          "params": {
+            "color": "green",
+            "pulse": "single",
+            "message": "💼 New business lead captured"
+          }
+        }
+      ]
+    },
+
+    "appointment_scheduling": {
+      "name": "Appointment Booking",
+      "category": "appointment",
+      "priority": 7,
+      "triggers": {
+        "intent": "appointment",
+        "keywords": ["appointment", "schedule", "book", "reschedule", "cancel"],
+        "confidence": ">0.7"
+      },
+      "actions": [
+        {
+          "type": "check_calendar",
+          "params": {
+            "date": "tomorrow",
+            "time_range": "morning"
+          }
+        },
+        {
+          "type": "ai_negotiate_time",
+          "params": {
+            "max_back_and_forth": 3,
+            "default_duration": 30,
+            "preferred_times": ["morning", "afternoon"]
+          }
+        },
+        {
+          "type": "create_calendar_event",
+          "params": {
+            "title": "Call with {{caller_name}}",
+            "duration_minutes": 30,
+            "description": "Scheduled via AI Gatekeeper\n\nCaller: {{caller_name}}\nPhone: {{caller_number}}\n\nNotes:\n{{transcript}}"
+          }
+        },
+        {
+          "type": "send_email",
+          "params": {
+            "to": "user@example.com",
+            "subject": "Appointment scheduled with {{caller_name}}",
+            "template": "appointment_confirmed"
+          }
+        },
+        {
+          "type": "voice_orb_alert",
+          "params": {
+            "color": "green",
+            "pulse": "single",
+            "message": "📅 Appointment scheduled with {{caller_name}}"
+          }
+        }
+      ]
+    },
+
+    "scam_detected_block": {
+      "name": "Block Scam Call",
+      "category": "scam",
+      "priority": 9,
+      "triggers": {
+        "intent": "scam",
+        "keywords": ["irs", "social security", "warrant", "suspended", "arrest"],
+        "confidence": ">0.85"
+      },
+      "actions": [
+        {
+          "type": "voice_orb_alert",
+          "params": {
+            "color": "red",
+            "pulse": "fast",
+            "message": "🚫 Scam detected - Blocking call"
+          }
+        },
+        {
+          "type": "hangup",
+          "params": {
+            "reason": "scam_detected"
+          }
+        },
+        {
+          "type": "send_sms",
+          "params": {
+            "template": "scam_blocked"
+          }
+        }
+      ]
+    },
+
+    "sales_call_decline": {
+      "name": "Decline Sales Call",
+      "category": "business_sales",
+      "priority": 5,
+      "triggers": {
+        "intent": "sales",
+        "keywords": ["selling", "offer", "promotion", "deal"],
+        "confidence": ">0.8"
+      },
+      "actions": [
+        {
+          "type": "ai_summarize",
+          "params": {
+            "polite_decline": true,
+            "message": "Thank you for calling, but we're not interested in any offers at this time. Have a great day!"
+          }
+        },
+        {
+          "type": "hangup",
+          "params": {
+            "reason": "sales_declined"
+          }
+        },
+        {
+          "type": "google_sheets",
+          "params": {
+            "spreadsheet_id": "YOUR_SPREADSHEET_ID",
+            "sheet_name": "Declined Calls",
+            "data": {
+              "Caller": "{{caller_name}}",
+              "Number": "{{caller_number}}",
+              "Type": "Sales",
+              "Reason": "Not interested"
+            }
+          }
+        }
+      ]
+    },
+
+    "unknown_screen_continue": {
+      "name": "Unknown Caller - Continue Screening",
+      "category": "unknown",
+      "priority": 3,
+      "triggers": {
+        "intent": "unknown",
+        "confidence": "<0.7"
+      },
+      "actions": [
+        {
+          "type": "voice_orb_alert",
+          "params": {
+            "color": "yellow",
+            "pulse": "medium",
+            "message": "Screening unknown caller..."
+          }
+        },
+        {
+          "type": "ai_summarize",
+          "params": {
+            "ask_clarifying_questions": true,
+            "max_questions": 2
+          }
+        }
+      ]
+    }
+  }
+}
