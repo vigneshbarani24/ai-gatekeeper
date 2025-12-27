@@ -312,6 +312,95 @@ Summary:"""
             logger.error(f"❌ Failed to generate summary: {e}")
             return f"{intent.capitalize()} call, {duration_seconds}s"
 
+    async def generate_analytics_summary(
+        self,
+        stats: Dict[str, Any],
+        recent_calls: List[Dict[str, Any]],
+        user_name: str = "Friend"
+    ) -> str:
+        """
+        Generate a conversational analytics summary for the orb modal
+
+        Args:
+            stats: User stats dict with calls_today, scams_blocked, etc.
+            recent_calls: List of recent call records
+            user_name: User's name for personalization
+
+        Returns:
+            Conversational summary string (1-2 sentences)
+        """
+        self._ensure_initialized()
+
+        if not self.fast_model:
+            # Return template-based for demo mode
+            if stats["calls_today"] == 0:
+                return f"It's been quiet today, {user_name}. I'm standing by, ready to catch any calls you can't take."
+
+            parts = []
+            if stats["calls_today"] > 0:
+                parts.append(f"I handled {stats['calls_today']} call{'s' if stats['calls_today'] > 1 else ''} while you were busy")
+            if stats["scams_blocked"] > 0:
+                parts.append(f"blocked {stats['scams_blocked']} scam{'s' if stats['scams_blocked'] > 1 else ''}")
+            if stats["time_saved_minutes"] > 0:
+                parts.append(f"saved you {stats['time_saved_minutes']} minutes this week")
+
+            return f"Hi {user_name}! {', '.join(parts)}. You never missed an opportunity."
+
+        # Build context from recent calls
+        calls_context = []
+        for call in recent_calls[:3]:  # Only include last 3 calls
+            action = call.get('action_taken', 'unknown')
+            intent = call.get('intent', 'unknown')
+            caller = call.get('caller_number', 'unknown')
+            calls_context.append(f"- {action} {intent} call from {caller}")
+
+        calls_text = "\n".join(calls_context) if calls_context else "No recent calls"
+
+        prompt = f"""You are an AI assistant helping a user understand their call screening activity.
+
+Generate a friendly, conversational 1-2 sentence summary for the user.
+
+User's name: {user_name}
+
+Stats:
+- Calls handled today: {stats['calls_today']}
+- Scams blocked: {stats['scams_blocked']}
+- Calls screened: {stats['calls_handled']}
+- Time saved this week: {stats['time_saved_minutes']} minutes
+- Whitelist contacts: {stats['whitelist_count']}
+- Total calls this week: {stats['total_calls_week']}
+
+Recent calls:
+{calls_text}
+
+Guidelines:
+- Use warm, friendly tone (you're their AI guardian)
+- Focus on opportunities saved and peace of mind
+- Mention specific numbers (e.g., "3 calls", "blocked 2 scams")
+- End with reassurance (e.g., "You never missed an opportunity")
+- Keep it brief: 1-2 sentences max
+- If no activity, say you're "standing by"
+
+Summary:"""
+
+        try:
+            response = self.fast_model.generate_content(
+                prompt,
+                generation_config={
+                    "temperature": 0.7,  # Slightly higher for more natural language
+                    "max_output_tokens": 150,
+                }
+            )
+
+            summary = response.text.strip()
+            logger.info(f"🤖 Generated analytics summary: {summary}")
+            return summary
+
+        except Exception as e:
+            logger.error(f"❌ Failed to generate analytics summary: {e}")
+            # Fallback to template-based
+            return f"Hi {user_name}! I handled {stats['calls_today']} call{'s' if stats['calls_today'] > 1 else ''} while you were busy. You never missed an opportunity."
+
 
 # Singleton instance (lazy-loaded)
 _gemini_service_instance = None

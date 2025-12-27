@@ -9,6 +9,8 @@ from typing import List, Dict, Any
 from datetime import datetime, timedelta
 
 from app.services.database import db_service
+from app.services.gemini_service import get_gemini_service
+from app.core.config import settings
 
 logger = logging.getLogger(__name__)
 
@@ -33,10 +35,8 @@ async def get_ai_summary(user_id: str = "demo_user"):
     # 2. Get recent calls from database
     recent_calls = await get_recent_calls(user_id, limit=10)
 
-    # 3. Generate AI summary
-    # TODO: Use Google Gemini Flash API for production
-    # For now, using template-based generation
-    summary = generate_summary_text(stats, recent_calls, user_id)
+    # 3. Generate AI summary (uses Gemini Flash in production, template in demo)
+    summary = await generate_summary_text(stats, recent_calls, user_id)
 
     # 4. Generate insights
     insights = generate_insights(stats, recent_calls)
@@ -156,33 +156,27 @@ async def get_recent_calls(user_id: str, limit: int = 10) -> List[Dict[str, Any]
         return demo_calls
 
 
-def generate_summary_text(stats: Dict[str, Any], recent_calls: List[Dict[str, Any]], user_id: str) -> str:
+async def generate_summary_text(stats: Dict[str, Any], recent_calls: List[Dict[str, Any]], user_id: str) -> str:
     """
-    Generate conversational summary text
+    Generate conversational summary text using Google Gemini Flash AI
 
-    TODO: Replace with Google Gemini Flash API call for production:
-
-    from google.cloud import aiplatform
-    from vertexai.generative_models import GenerativeModel
-
-    model = GenerativeModel("gemini-2.0-flash-exp")
-    prompt = f'''
-    Generate a friendly, conversational summary of this user's call activity:
-
-    Stats: {stats}
-    Recent calls: {recent_calls}
-
-    Style: Warm, helpful AI assistant. Focus on opportunities saved and peace of mind.
-    Length: 1-2 sentences max.
-    '''
-
-    response = model.generate_content(prompt)
-    return response.text
+    In production mode, uses Gemini 2.0 Flash for natural language generation.
+    In demo mode, falls back to template-based generation.
     """
 
-    # Template-based generation for demo
-    user_name = "Friend"  # TODO: Get from user profile
+    user_name = "Friend"  # TODO: Get from user profile in database
 
+    # Try to use Gemini AI in production mode
+    if settings.is_production():
+        try:
+            gemini = get_gemini_service()
+            summary = await gemini.generate_analytics_summary(stats, recent_calls, user_name)
+            return summary
+        except Exception as e:
+            logger.warning(f"Gemini AI failed, using template fallback: {e}")
+            # Continue to template-based fallback below
+
+    # Template-based generation for demo mode or fallback
     if stats["calls_today"] == 0:
         return f"It's been quiet today, {user_name}. I'm standing by, ready to catch any calls you can't take."
 
