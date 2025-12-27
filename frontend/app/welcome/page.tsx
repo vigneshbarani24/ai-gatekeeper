@@ -40,14 +40,19 @@ export default function WelcomePage() {
       router.push('/dashboard');
     }
 
-    // Load user name from storage or use default
-    const savedName = localStorage.getItem('userName') || 'there';
+    // Load user name from storage or use smart default
+    const savedName = localStorage.getItem('userName') || 'Friend';
     setUserName(savedName);
   }, [router]);
 
   const completeOnboarding = () => {
     localStorage.setItem('hasOnboarded', 'true');
     router.push('/dashboard');
+  };
+
+  const skipToEnd = () => {
+    // Allow skipping entire flow - zero friction!
+    completeOnboarding();
   };
 
   const nextStep = () => {
@@ -82,12 +87,12 @@ export default function WelcomePage() {
 
       <AnimatePresence mode="wait">
         {step === 'welcome' && (
-          <WelcomeStep key="welcome" userName={userName} onNext={nextStep} />
+          <WelcomeStep key="welcome" userName={userName} onNext={nextStep} onSkip={skipToEnd} />
         )}
-        {step === 'value' && <ValueStep key="value" onNext={nextStep} />}
-        {step === 'features' && <FeaturesStep key="features" onNext={nextStep} />}
+        {step === 'value' && <ValueStep key="value" onNext={nextStep} onSkip={skipToEnd} />}
+        {step === 'features' && <FeaturesStep key="features" onNext={nextStep} onSkip={skipToEnd} />}
         {step === 'setup' && (
-          <SetupStep key="setup" onComplete={completeOnboarding} />
+          <SetupStep key="setup" onComplete={completeOnboarding} onSkip={skipToEnd} />
         )}
       </AnimatePresence>
     </div>
@@ -95,49 +100,95 @@ export default function WelcomePage() {
 }
 
 // ============================================================================
-// STEP 1: WELCOME - Personalized Greeting
+// STEP 1: WELCOME - The Orb Is The Hero
 // ============================================================================
 
-function WelcomeStep({ userName, onNext }: { userName: string; onNext: () => void }) {
+function WelcomeStep({ userName, onNext, onSkip }: { userName: string; onNext: () => void; onSkip: () => void }) {
   return (
     <motion.div
-      className="min-h-screen flex flex-col items-center justify-center p-6"
+      className="min-h-screen flex flex-col items-center justify-center p-6 relative"
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 1.05 }}
       transition={{ duration: 0.5 }}
     >
-      {/* Hero Animation */}
+      {/* Skip Button - Top Right */}
+      <motion.button
+        onClick={onSkip}
+        className="absolute top-8 right-8 text-gray-400 hover:text-gray-600 transition-colors text-sm font-medium"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1 }}
+      >
+        Skip
+      </motion.button>
+
+      {/* HERO: The Orb - Massive and Beautiful */}
       <motion.div
-        className="mb-8"
-        initial={{ y: -50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.2, duration: 0.6 }}
+        className="mb-12"
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.8, type: 'spring', bounce: 0.4 }}
       >
         <div className="relative">
-          {/* Animated Shield */}
+          {/* Outer Glow Rings */}
           <motion.div
-            className="w-32 h-32 mx-auto bg-gradient-to-br from-blue-500 to-purple-500 rounded-3xl flex items-center justify-center shadow-2xl"
+            className="absolute inset-0 w-48 h-48 -translate-x-8 -translate-y-8"
             animate={{
-              boxShadow: [
-                '0 20px 60px rgba(59, 130, 246, 0.3)',
-                '0 25px 70px rgba(147, 51, 234, 0.4)',
-                '0 20px 60px rgba(59, 130, 246, 0.3)',
-              ],
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.1, 0.3],
             }}
-            transition={{ duration: 2, repeat: Infinity }}
+            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
           >
-            <Shield size={64} className="text-white" strokeWidth={2} />
+            <div className="w-full h-full rounded-full bg-gradient-to-br from-blue-500/30 to-purple-500/30 blur-2xl" />
           </motion.div>
 
-          {/* Sparkles */}
+          {/* Main Orb - HUGE */}
           <motion.div
-            className="absolute -top-2 -right-2"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
+            className="relative w-40 h-40 mx-auto bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-2xl"
+            animate={{
+              boxShadow: [
+                '0 20px 80px rgba(59, 130, 246, 0.5)',
+                '0 30px 100px rgba(147, 51, 234, 0.6)',
+                '0 20px 80px rgba(59, 130, 246, 0.5)',
+              ],
+              scale: [1, 1.05, 1],
+            }}
+            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
           >
-            <Sparkles size={24} className="text-yellow-500" />
+            {/* Inner Glow */}
+            <motion.div
+              className="absolute inset-4 bg-gradient-to-br from-white/40 to-transparent rounded-full"
+              animate={{ opacity: [0.6, 0.3, 0.6] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+
+            <Shield size={80} className="text-white relative z-10" strokeWidth={2} />
           </motion.div>
+
+          {/* Floating Sparkles Around Orb */}
+          {[...Array(6)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute"
+              style={{
+                left: `${50 + 60 * Math.cos((i * Math.PI * 2) / 6)}%`,
+                top: `${50 + 60 * Math.sin((i * Math.PI * 2) / 6)}%`,
+              }}
+              animate={{
+                y: [-10, 10, -10],
+                opacity: [0.5, 1, 0.5],
+                scale: [0.8, 1.2, 0.8],
+              }}
+              transition={{
+                duration: 2 + i * 0.2,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+            >
+              <Sparkles size={20} className="text-yellow-400" />
+            </motion.div>
+          ))}
         </div>
       </motion.div>
 
@@ -146,7 +197,7 @@ function WelcomeStep({ userName, onNext }: { userName: string; onNext: () => voi
         className="text-center max-w-md"
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.4, duration: 0.6 }}
+        transition={{ delay: 0.6, duration: 0.6 }}
       >
         <h1 className="text-4xl font-bold text-gray-900 mb-3">
           Hi {userName},
@@ -155,7 +206,7 @@ function WelcomeStep({ userName, onNext }: { userName: string; onNext: () => voi
           Your Guardian Is Ready
         </h2>
         <p className="text-lg text-gray-600 leading-relaxed">
-          AI Gatekeeper screens your calls, blocks scams, and protects your time—all
+          AI screens your calls, blocks scams, and protects your time—all
           in your own voice.
         </p>
       </motion.div>
@@ -166,7 +217,7 @@ function WelcomeStep({ userName, onNext }: { userName: string; onNext: () => voi
         className="mt-12 px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-lg font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all flex items-center gap-2"
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.6, duration: 0.6 }}
+        transition={{ delay: 0.8, duration: 0.6 }}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
@@ -181,7 +232,7 @@ function WelcomeStep({ userName, onNext }: { userName: string; onNext: () => voi
 // STEP 2: VALUE - The AHA Moment
 // ============================================================================
 
-function ValueStep({ onNext }: { onNext: () => void }) {
+function ValueStep({ onNext, onSkip }: { onNext: () => void; onSkip: () => void }) {
   const stats = [
     {
       label: 'Time Saved',
@@ -215,12 +266,19 @@ function ValueStep({ onNext }: { onNext: () => void }) {
 
   return (
     <motion.div
-      className="min-h-screen flex flex-col items-center justify-center p-6"
+      className="min-h-screen flex flex-col items-center justify-center p-6 relative"
       initial={{ opacity: 0, x: 50 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -50 }}
       transition={{ duration: 0.4 }}
     >
+      {/* Skip Button */}
+      <button
+        onClick={onSkip}
+        className="absolute top-8 right-8 text-gray-400 hover:text-gray-600 transition-colors text-sm font-medium"
+      >
+        Skip
+      </button>
       <motion.div
         className="text-center max-w-2xl"
         initial={{ y: -20, opacity: 0 }}
@@ -287,7 +345,7 @@ function ValueStep({ onNext }: { onNext: () => void }) {
 // STEP 3: FEATURES - Progressive Disclosure
 // ============================================================================
 
-function FeaturesStep({ onNext }: { onNext: () => void }) {
+function FeaturesStep({ onNext, onSkip }: { onNext: () => void; onSkip: () => void }) {
   const features = [
     {
       title: 'Voice Cloning',
@@ -325,12 +383,19 @@ function FeaturesStep({ onNext }: { onNext: () => void }) {
 
   return (
     <motion.div
-      className="min-h-screen flex flex-col items-center justify-center p-6"
+      className="min-h-screen flex flex-col items-center justify-center p-6 relative"
       initial={{ opacity: 0, x: 50 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -50 }}
       transition={{ duration: 0.4 }}
     >
+      {/* Skip Button */}
+      <button
+        onClick={onSkip}
+        className="absolute top-8 right-8 text-gray-400 hover:text-gray-600 transition-colors text-sm font-medium"
+      >
+        Skip
+      </button>
       <motion.div
         className="text-center max-w-2xl mb-8"
         initial={{ y: -20, opacity: 0 }}
@@ -406,17 +471,17 @@ function FeaturesStep({ onNext }: { onNext: () => void }) {
 }
 
 // ============================================================================
-// STEP 4: SETUP - Quick Configuration
+// STEP 4: SETUP - Quick Configuration (Zero Friction)
 // ============================================================================
 
-function SetupStep({ onComplete }: { onComplete: () => void }) {
-  const [name, setName] = useState('');
+function SetupStep({ onComplete, onSkip }: { onComplete: () => void; onSkip: () => void }) {
+  // Smart defaults - pre-filled!
+  const [name, setName] = useState('Friend');
   const [phone, setPhone] = useState('');
 
   const handleComplete = () => {
-    if (name) {
-      localStorage.setItem('userName', name);
-    }
+    // Save whatever they entered (even defaults)
+    localStorage.setItem('userName', name);
     if (phone) {
       localStorage.setItem('userPhone', phone);
     }
@@ -425,12 +490,20 @@ function SetupStep({ onComplete }: { onComplete: () => void }) {
 
   return (
     <motion.div
-      className="min-h-screen flex flex-col items-center justify-center p-6"
+      className="min-h-screen flex flex-col items-center justify-center p-6 relative"
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 1.05 }}
       transition={{ duration: 0.4 }}
     >
+      {/* Skip Button */}
+      <button
+        onClick={onSkip}
+        className="absolute top-8 right-8 text-gray-400 hover:text-gray-600 transition-colors text-sm font-medium"
+      >
+        Skip for now
+      </button>
+
       <motion.div
         className="bg-white rounded-3xl p-8 shadow-2xl max-w-md w-full"
         initial={{ y: 30, opacity: 0 }}
@@ -442,14 +515,14 @@ function SetupStep({ onComplete }: { onComplete: () => void }) {
             <Sparkles size={32} className="text-white" />
           </div>
           <h2 className="text-3xl font-bold text-gray-900 mb-2">
-            Almost There!
+            Personalize Your Guardian
           </h2>
           <p className="text-gray-600">
-            Just a few details to personalize your experience
+            We've set smart defaults - just tap Continue or customize
           </p>
         </div>
 
-        {/* Form */}
+        {/* Form - Pre-filled with defaults */}
         <div className="space-y-6">
           <div>
             <label
@@ -463,7 +536,7 @@ function SetupStep({ onComplete }: { onComplete: () => void }) {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Sarah"
+              placeholder="Friend"
               className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none transition-colors text-gray-900"
             />
           </div>
@@ -473,7 +546,7 @@ function SetupStep({ onComplete }: { onComplete: () => void }) {
               htmlFor="phone"
               className="block text-sm font-semibold text-gray-700 mb-2"
             >
-              Your phone number (optional)
+              Your phone number <span className="text-gray-400 font-normal">(optional)</span>
             </label>
             <input
               id="phone"
@@ -484,25 +557,32 @@ function SetupStep({ onComplete }: { onComplete: () => void }) {
               className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none transition-colors text-gray-900"
             />
             <p className="mt-2 text-xs text-gray-500">
-              We'll use this to forward legitimate calls
+              For forwarding legitimate calls
             </p>
           </div>
         </div>
 
-        {/* CTA */}
+        {/* Primary CTA - Always enabled */}
         <motion.button
           onClick={handleComplete}
-          disabled={!name}
-          className="mt-8 w-full px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-lg font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-          whileHover={name ? { scale: 1.02 } : {}}
-          whileTap={name ? { scale: 0.98 } : {}}
+          className="mt-8 w-full px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-lg font-semibold rounded-2xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
         >
           Start Protecting My Time
           <ChevronRight size={24} />
         </motion.button>
 
-        <p className="mt-6 text-center text-xs text-gray-500">
-          You can change these settings anytime
+        {/* Secondary Skip Option */}
+        <button
+          onClick={onSkip}
+          className="mt-4 w-full text-gray-500 hover:text-gray-700 text-sm font-medium transition-colors"
+        >
+          I'll set this up later
+        </button>
+
+        <p className="mt-6 text-center text-xs text-gray-400">
+          Change these anytime in settings
         </p>
       </motion.div>
     </motion.div>
