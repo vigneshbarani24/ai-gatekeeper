@@ -7,7 +7,6 @@ import logging
 from typing import List, Dict, Optional
 
 from app.core.config import settings
-from app.services.gemini_service import gemini_service
 
 logger = logging.getLogger(__name__)
 
@@ -27,8 +26,9 @@ class VectorStoreService:
     """
 
     def __init__(self):
-        self.index_endpoint = settings.VECTOR_SEARCH_INDEX_ENDPOINT
-        self.threshold = settings.SCAM_SIMILARITY_THRESHOLD
+        self.index_endpoint = None  # settings.VECTOR_SEARCH_INDEX_ENDPOINT if it exists
+        self.threshold = getattr(settings, 'SCAM_SIMILARITY_THRESHOLD', 0.85)
+        self.gemini_service = None  # Lazy load
 
     async def init(self) -> None:
         """Initialize vector store (called on app startup)"""

@@ -41,20 +41,22 @@ class Settings(BaseSettings):
     # Twilio Configuration
     # ============================================================================
 
-    TWILIO_ACCOUNT_SID: str = Field(..., description="Twilio Account SID (AC...)")
-    TWILIO_AUTH_TOKEN: str = Field(..., description="Twilio Auth Token")
-    TWILIO_PHONE_NUMBER: str = Field(..., description="Your Twilio phone number (+1...)")
+    TWILIO_ACCOUNT_SID: str = Field(default="demo_account_sid", description="Twilio Account SID (AC...)")
+    TWILIO_AUTH_TOKEN: str = Field(default="demo_auth_token", description="Twilio Auth Token")
+    TWILIO_PHONE_NUMBER: str = Field(default="+15555551234", description="Your Twilio phone number (+1...)")
     TWILIO_TWIML_APP_SID: Optional[str] = Field(None, description="TwiML App SID for WebSocket")
 
     # WebSocket
     TWILIO_STREAM_URL: str = Field(
-        default="wss://your-domain.com/streams/audio",
+        default="wss://demo.ngrok.io/streams/audio",
         description="Public WebSocket URL for Twilio to connect"
     )
 
     @validator("TWILIO_PHONE_NUMBER")
     def validate_phone_number(cls, v):
         """Ensure phone number is in E.164 format"""
+        if v == "+15555551234":  # Skip validation for demo mode
+            return v
         if not v.startswith("+"):
             raise ValueError("Phone number must be in E.164 format (e.g., +12125551234)")
         return v
@@ -63,9 +65,9 @@ class Settings(BaseSettings):
     # ElevenLabs Configuration
     # ============================================================================
 
-    ELEVENLABS_API_KEY: str = Field(..., description="ElevenLabs API key (sk_...)")
-    ELEVENLABS_AGENT_ID: str = Field(..., description="Conversational AI Agent ID")
-    ELEVENLABS_VOICE_ID: str = Field(..., description="Cloned voice ID")
+    ELEVENLABS_API_KEY: str = Field(default="demo_elevenlabs_key", description="ElevenLabs API key (sk_...)")
+    ELEVENLABS_AGENT_ID: str = Field(default="demo_agent_id", description="Conversational AI Agent ID")
+    ELEVENLABS_VOICE_ID: str = Field(default="demo_voice_id", description="Cloned voice ID")
 
     # Voice Settings
     ELEVENLABS_MODEL: str = Field(default="eleven_turbo_v2_5", description="TTS model")
@@ -79,15 +81,28 @@ class Settings(BaseSettings):
     # Google Cloud Configuration
     # ============================================================================
 
-    GOOGLE_CLOUD_PROJECT: Optional[str] = Field(None, description="GCP Project ID")
+    GOOGLE_CLOUD_PROJECT: Optional[str] = Field(default="demo-project", description="GCP Project ID")
     GOOGLE_APPLICATION_CREDENTIALS: Optional[str] = Field(
         None,
         description="Path to service account JSON"
     )
 
+    # Vertex AI
+    VERTEX_AI_LOCATION: str = Field(default="us-central1", description="Vertex AI location")
+    GEMINI_MODEL_FAST: str = Field(default="gemini-2.0-flash-exp", description="Fast model for real-time")
+    GEMINI_MODEL_ANALYSIS: str = Field(default="gemini-1.5-pro", description="Powerful model for analysis")
+
     # Calendar API
     GOOGLE_CALENDAR_ID: str = Field(default="primary", description="Calendar ID to check")
     GOOGLE_CALENDAR_TIMEZONE: str = Field(default="America/New_York", description="User timezone")
+
+    # ============================================================================
+    # Supabase Configuration
+    # ============================================================================
+
+    SUPABASE_URL: str = Field(default="https://demo.supabase.co", description="Supabase project URL")
+    SUPABASE_SERVICE_ROLE_KEY: str = Field(default="demo_service_role_key", description="Supabase service role key")
+    SUPABASE_ANON_KEY: Optional[str] = Field(default=None, description="Supabase anon key (for frontend)")
 
     # ============================================================================
     # LLM Configuration (Optional - if using Vertex AI directly)
@@ -129,7 +144,7 @@ class Settings(BaseSettings):
     # ============================================================================
 
     # Webhook Signature Validation
-    WEBHOOK_SECRET: str = Field(..., description="HMAC secret for webhook validation")
+    WEBHOOK_SECRET: str = Field(default="demo_webhook_secret_change_in_production", description="HMAC secret for webhook validation")
     SIGNATURE_TIMEOUT: int = Field(default=300, description="Webhook signature validity (seconds)")
 
     # Rate Limiting
@@ -188,7 +203,7 @@ class Settings(BaseSettings):
     # System Prompt Configuration
     # ============================================================================
 
-    USER_NAME: str = Field(..., description="User's full name for AI to reference")
+    USER_NAME: str = Field(default="Demo User", description="User's full name for AI to reference")
     USER_TITLE: Optional[str] = Field(None, description="e.g., 'Dr.', 'Professor'")
 
     SYSTEM_PROMPT_TEMPLATE: str = Field(

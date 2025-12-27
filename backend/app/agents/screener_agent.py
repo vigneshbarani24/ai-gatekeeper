@@ -6,7 +6,7 @@ Handles greetings, intent classification, and natural conversation
 import logging
 from typing import Dict, Any, Optional
 
-from app.services.gemini_service import gemini_service
+from app.services.gemini_service import get_gemini_service
 
 logger = logging.getLogger(__name__)
 
@@ -23,7 +23,7 @@ class ScreenerAgent:
     """
 
     def __init__(self):
-        self.model = gemini_service.fast_model  # Gemini 2.0 Flash for speed
+        pass  # Lazy load Gemini service when needed
 
     async def greet(self, user_name: str) -> str:
         """
@@ -63,6 +63,7 @@ class ScreenerAgent:
         """
         logger.info(f"[ScreenerAgent] Classifying intent for: {transcript[:100]}...")
 
+        gemini_service = get_gemini_service()
         result = await gemini_service.classify_caller_intent(
             transcript=transcript,
             caller_name=caller_name

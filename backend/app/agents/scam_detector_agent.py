@@ -6,7 +6,7 @@ Uses vector similarity + LLM analysis to detect scams
 import logging
 from typing import Dict, Any, List
 
-from app.services.gemini_service import gemini_service
+from app.services.gemini_service import get_gemini_service
 
 logger = logging.getLogger(__name__)
 
@@ -51,7 +51,6 @@ class ScamDetectorAgent:
     """
 
     def __init__(self):
-        self.model = gemini_service.analysis_model  # Gemini 1.5 Pro for depth
         self.vector_db = None  # TODO: Initialize vector store in vector_store.py
 
     async def run(
@@ -92,6 +91,7 @@ class ScamDetectorAgent:
             }
 
         # Deep LLM analysis (slower, more accurate)
+        gemini_service = get_gemini_service()
         llm_analysis = await gemini_service.analyze_scam_indicators(
             transcript=transcript,
             caller_number=caller_number

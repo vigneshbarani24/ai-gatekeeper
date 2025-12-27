@@ -11,7 +11,7 @@ from typing import Dict, Optional
 
 from app.services.twilio_service import twilio_service
 from app.services.elevenlabs_service import create_elevenlabs_service
-from app.services.gemini_service import gemini_service
+from app.services.gemini_service import get_gemini_service
 from app.services.database import db_service
 from app.core.config import settings
 
@@ -238,6 +238,7 @@ class CallSession:
     async def _analyze_intent(self) -> None:
         """Analyze caller intent using Gemini"""
         try:
+            gemini_service = get_gemini_service()
             result = await gemini_service.classify_caller_intent(
                 transcript=self.transcript,
                 caller_name=None  # TODO: Extract from transcript

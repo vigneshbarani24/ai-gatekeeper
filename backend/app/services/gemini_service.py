@@ -5,19 +5,19 @@ Gemini Service: Google Vertex AI for LLM reasoning and analysis
 import logging
 from typing import Dict, List, Optional, Any
 import json
-from google.cloud import aiplatform
-from vertexai.generative_models import GenerativeModel, Part, Content
-from vertexai.language_models import TextEmbeddingModel
 
 from app.core.config import settings
 
 logger = logging.getLogger(__name__)
 
-# Initialize Vertex AI
-aiplatform.init(
-    project=settings.GOOGLE_CLOUD_PROJECT,
-    location=settings.VERTEX_AI_LOCATION
-)
+# Conditional imports - only import Vertex AI when actually needed
+# This prevents hanging on import when GOOGLE_APPLICATION_CREDENTIALS is not set
+try:
+    _VERTEX_AI_AVAILABLE = True
+    # We'll import these inside _ensure_initialized to avoid hanging
+except ImportError:
+    _VERTEX_AI_AVAILABLE = False
+    logger.warning("⚠️ Vertex AI libraries not available")
 
 
 class GeminiService:
@@ -29,14 +29,42 @@ class GeminiService:
     """
 
     def __init__(self):
-        # Fast model for real-time screening
-        self.fast_model = GenerativeModel(settings.GEMINI_MODEL_FAST)
+        # Lazy initialization - only init when needed
+        self._initialized = False
+        self.fast_model = None
+        self.analysis_model = None
+        self.embedding_model = None
 
-        # Powerful model for deep analysis
-        self.analysis_model = GenerativeModel(settings.GEMINI_MODEL_ANALYSIS)
+    def _ensure_initialized(self):
+        """Initialize Vertex AI and models on first use"""
+        if not self._initialized:
+            try:
+                # Import Vertex AI libraries here to avoid hanging on module import
+                from google.cloud import aiplatform
+                from vertexai.generative_models import GenerativeModel
+                from vertexai.language_models import TextEmbeddingModel
 
-        # Embedding model
-        self.embedding_model = TextEmbeddingModel.from_pretrained("text-embedding-004")
+                # Initialize Vertex AI
+                aiplatform.init(
+                    project=settings.GOOGLE_CLOUD_PROJECT,
+                    location=settings.VERTEX_AI_LOCATION
+                )
+
+                # Fast model for real-time screening
+                self.fast_model = GenerativeModel(settings.GEMINI_MODEL_FAST)
+
+                # Powerful model for deep analysis
+                self.analysis_model = GenerativeModel(settings.GEMINI_MODEL_ANALYSIS)
+
+                # Embedding model
+                self.embedding_model = TextEmbeddingModel.from_pretrained("text-embedding-004")
+
+                self._initialized = True
+                logger.info("✅ Gemini Service initialized")
+
+            except Exception as e:
+                logger.warning(f"⚠️ Gemini Service initialization failed (demo mode?): {e}")
+                # In demo mode, these will remain None
 
     async def classify_caller_intent(
         self,
@@ -59,6 +87,17 @@ class GeminiService:
                 "should_pass_through": bool
             }
         """
+        self._ensure_initialized()
+
+        if not self.fast_model:
+            # Return default for demo mode
+            return {
+                "intent": "unknown",
+                "confidence": 0.5,
+                "reasoning": "Demo mode - Gemini not initialized",
+                "should_pass_through": False
+            }
+
         prompt = f"""You are an expert at analyzing phone call intent.
 
 Transcript:
@@ -135,6 +174,18 @@ Important rules:
                 "recommendation": "block" | "flag" | "allow"
             }
         """
+        self._ensure_initialized()
+
+        if not self.analysis_model:
+            # Return default for demo mode
+            return {
+                "is_scam": False,
+                "scam_type": None,
+                "confidence": 0.0,
+                "red_flags": [],
+                "recommendation": "allow"
+            }
+
         prompt = f"""You are a fraud detection expert analyzing a phone call transcript.
 
 Transcript:
@@ -198,6 +249,12 @@ Recommendation rules:
         Returns:
             List of floats (768 dimensions for text-embedding-004)
         """
+        self._ensure_initialized()
+
+        if not self.embedding_model:
+            # Return empty for demo mode
+            return []
+
         try:
             embeddings = self.embedding_model.get_embeddings([text])
             return embeddings[0].values
@@ -223,6 +280,12 @@ Recommendation rules:
         Returns:
             Brief summary string (1-2 sentences)
         """
+        self._ensure_initialized()
+
+        if not self.fast_model:
+            # Return default for demo mode
+            return f"{intent.capitalize()} call, {duration_seconds}s (demo mode)"
+
         prompt = f"""Summarize this phone call in 1-2 sentences for the user's call log.
 
 Intent: {intent}
@@ -250,5 +313,15 @@ Summary:"""
             return f"{intent.capitalize()} call, {duration_seconds}s"
 
 
-# Singleton instance
-gemini_service = GeminiService()
+# Singleton instance (lazy-loaded)
+_gemini_service_instance = None
+
+def get_gemini_service() -> GeminiService:
+    """Get or create the singleton Gemini service"""
+    global _gemini_service_instance
+    if _gemini_service_instance is None:
+        _gemini_service_instance = GeminiService()
+    return _gemini_service_instance
+
+# Export function, not instance
+gemini_service = None  # Will be set on first use
