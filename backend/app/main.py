@@ -10,7 +10,7 @@ import logging
 from contextlib import asynccontextmanager
 
 from app.core.config import settings
-from app.routers import telephony, webhooks, contacts, calls, analytics
+from app.routers import telephony_optimized as telephony, webhooks, contacts, calls, analytics
 from app.services.database import init_database
 from app.services.vector_store import init_vector_store
 

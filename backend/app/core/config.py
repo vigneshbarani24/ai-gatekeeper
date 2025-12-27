@@ -30,6 +30,10 @@ class Settings(BaseSettings):
     # Server
     HOST: str = Field(default="0.0.0.0")
     PORT: int = Field(default=8000)
+    BACKEND_URL: str = Field(
+        default="http://localhost:8000",
+        description="Public backend URL for webhooks (use ngrok URL in development)"
+    )
 
     # CORS
     CORS_ORIGINS: list[str] = Field(
