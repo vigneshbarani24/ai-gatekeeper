@@ -40,13 +40,18 @@ results = {
 def test(name):
     """Decorator for test functions"""
     def decorator(func):
-        async def wrapper(*args, **kwargs):
+        def wrapper(*args, **kwargs):
             results["total"] += 1
             try:
-                await func(*args, **kwargs) if asyncio.iscoroutinefunction(func) else func(*args, **kwargs)
-                results["passed"] += 1
-                print_test(name, True)
-                return True
+                if asyncio.iscoroutinefunction(func):
+                    # For async functions, we'll handle them separately
+                    return func(*args, **kwargs)
+                else:
+                    # For sync functions, execute immediately
+                    func(*args, **kwargs)
+                    results["passed"] += 1
+                    print_test(name, True)
+                    return True
             except Exception as e:
                 results["failed"] += 1
                 results["errors"].append({
@@ -299,8 +304,36 @@ async def test_tool_check_contact():
 
 # Run async tests
 async def run_async_tests():
-    await test_analytics_structure()
-    await test_tool_check_contact()
+    # Call the decorated functions which return coroutines
+    coro1 = test_analytics_structure()
+    coro2 = test_tool_check_contact()
+
+    # Now await them and handle results
+    try:
+        await coro1
+        results["passed"] += 1
+        print_test("Analytics endpoint structure", True)
+    except Exception as e:
+        results["failed"] += 1
+        results["errors"].append({
+            "test": "Analytics endpoint structure",
+            "error": str(e),
+            "traceback": traceback.format_exc()
+        })
+        print_test("Analytics endpoint structure", False, str(e))
+
+    try:
+        await coro2
+        results["passed"] += 1
+        print_test("Tool endpoint callable", True)
+    except Exception as e:
+        results["failed"] += 1
+        results["errors"].append({
+            "test": "Tool endpoint callable",
+            "error": str(e),
+            "traceback": traceback.format_exc()
+        })
+        print_test("Tool endpoint callable", False, str(e))
 
 asyncio.run(run_async_tests())
 
