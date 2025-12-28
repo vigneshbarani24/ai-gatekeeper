@@ -7,6 +7,7 @@ Intelligence runs via webhooks (zero latency impact)
 
 import logging
 import json
+import httpx
 from fastapi import APIRouter, Request, Response, BackgroundTasks
 from fastapi.responses import PlainTextResponse
 from typing import Dict
@@ -85,15 +86,35 @@ async def incoming_call(request: Request, background_tasks: BackgroundTasks):
                 media_type="application/xml"
             )
 
-        # NOT WHITELISTED → Connect to ElevenLabs for AI screening
+        # NOT WHITELISTED → Connect to ElevenLabs with user's cloned voice
+
+        # Get user's voice profile (their cloned voice - CRITICAL for both modes)
+        voice_profile = await db_service.get_voice_profile(user_id)
+
+        if not voice_profile:
+            logger.warning(f"⚠️ No voice profile found for user {user_id}, using default voice")
+            voice_id = settings.ELEVENLABS_VOICE_ID  # Fallback to default
+        else:
+            voice_id = voice_profile.get("voice_id")
+            logger.info(f"🎤 Using cloned voice: {voice_profile.get('voice_name')} ({voice_id})")
+
+        # Determine user mode (changes terminology and behavior)
+        user_mode = user.get("mode", "gatekeeper")  # Default to gatekeeper mode
+        is_accessibility_mode = user_mode == "accessibility"
+
+        # Mode-specific terminology:
+        # - Accessibility mode: "assisting" (AI is user's voice & ears)
+        # - Gatekeeper mode: "screening" (AI is filtering spam/scams)
+        action_taken = "assisting" if is_accessibility_mode else "screening"
 
         # ElevenLabs WebSocket URL with agent ID
         elevenlabs_ws_url = f"wss://api.elevenlabs.io/v1/convai/conversation?agent_id={settings.ELEVENLABS_AGENT_ID}"
 
-        # Webhook URL for ElevenLabs to send transcripts
+        # Webhook URL for real-time transcript updates (CRITICAL for accessibility mode)
         webhook_url = f"{settings.BACKEND_URL}/api/elevenlabs/webhook"
 
-        logger.info(f"🤖 Connecting to ElevenLabs for AI screening")
+        mode_label = "🦻 Accessibility assistance" if is_accessibility_mode else "🛡️ Call screening"
+        logger.info(f"{mode_label}: Connecting to ElevenLabs with voice {voice_id}")
 
         # Create call record
         background_tasks.add_task(
@@ -103,24 +124,55 @@ async def incoming_call(request: Request, background_tasks: BackgroundTasks):
             caller_number=caller_number,
             intent="unknown",
             scam_score=0.0,
-            action_taken="screening"
+            action_taken=action_taken  # "assisting" or "screening"
         )
 
-        # Return TwiML that connects DIRECTLY to ElevenLabs
-        return PlainTextResponse(
-            content=f"""<?xml version="1.0" encoding="UTF-8"?>
-<Response>
-    <Connect>
-        <Stream url="{elevenlabs_ws_url}">
-            <Parameter name="xi-api-key" value="{settings.ELEVENLABS_API_KEY}" />
-            <Parameter name="call_sid" value="{call_sid}" />
-            <Parameter name="user_id" value="{user_id}" />
-            <Parameter name="caller_number" value="{caller_number}" />
-        </Stream>
-    </Connect>
-</Response>""",
-            media_type="application/xml"
-        )
+        # Call ElevenLabs Register Call API to get TwiML
+        # This returns correct TwiML for connecting to Conversational AI agent
+        try:
+            async with httpx.AsyncClient() as client:
+                elevenlabs_response = await client.post(
+                    "https://api.elevenlabs.io/v1/convai/twilio/register-call",
+                    headers={
+                        "xi-api-key": settings.ELEVENLABS_API_KEY,
+                        "Content-Type": "application/json"
+                    },
+                    json={
+                        "agent_id": settings.ELEVENLABS_AGENT_ID,
+                        "from_number": caller_number,
+                        "to_number": to_number,
+                        "conversation_initiation_client_data": {
+                            "user_id": user_id,
+                            "call_sid": call_sid,
+                            "user_name": user.get("name", "User"),
+                            "mode": user_mode,
+                            "voice_id": voice_id,
+                            "accessibility_mode": is_accessibility_mode
+                        }
+                    },
+                    timeout=10.0
+                )
+
+                if elevenlabs_response.status_code == 200:
+                    # ElevenLabs returns ready-to-use TwiML
+                    twiml = elevenlabs_response.text
+                    logger.info(f"✅ ElevenLabs TwiML received for call {call_sid}")
+                    return PlainTextResponse(content=twiml, media_type="application/xml")
+                else:
+                    logger.error(f"❌ ElevenLabs API error: {elevenlabs_response.status_code} - {elevenlabs_response.text}")
+                    raise Exception(f"ElevenLabs API failed: {elevenlabs_response.status_code}")
+
+        except Exception as e:
+            logger.error(f"❌ Failed to connect to ElevenLabs: {e}")
+
+            # Fallback: Voicemail
+            return PlainTextResponse(
+                content="""<Response>
+                    <Say>I'm sorry, the assistant is temporarily unavailable. Please try again later.</Say>
+                    <Hangup/>
+                </Response>""",
+                media_type="application/xml"
+            )
 
     except Exception as e:
         logger.error(f"❌ Error processing incoming call: {e}", exc_info=True)

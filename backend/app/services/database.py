@@ -173,6 +173,72 @@ class DatabaseService:
             logger.error(f"Error saving transcript: {e}")
 
     # ========================
+    # VOICE PROFILES
+    # ========================
+
+    async def get_voice_profile(self, user_id: str) -> Optional[Dict]:
+        """
+        Get user's voice profile (ElevenLabs cloned voice)
+
+        Returns:
+        - voice_id: ElevenLabs voice ID
+        - voice_name: Display name
+        - language: Voice language (for multilingual support)
+        - created_at: When voice was cloned
+        """
+        try:
+            response = (
+                self.client.table("voice_profiles")
+                .select("*")
+                .eq("user_id", user_id)
+                .eq("is_active", True)
+                .order("created_at", desc=True)
+                .limit(1)
+                .execute()
+            )
+
+            if response.data and len(response.data) > 0:
+                return response.data[0]
+
+            return None
+
+        except Exception as e:
+            logger.error(f"Error getting voice profile for user {user_id}: {e}")
+            return None
+
+    async def create_voice_profile(
+        self,
+        user_id: str,
+        voice_id: str,
+        voice_name: str,
+        language: str = "en"
+    ) -> Dict:
+        """Create new voice profile record"""
+        try:
+            # Deactivate old voice profiles
+            self.client.table("voice_profiles").update({"is_active": False}).eq("user_id", user_id).execute()
+
+            # Insert new voice profile
+            response = (
+                self.client.table("voice_profiles")
+                .insert({
+                    "user_id": user_id,
+                    "voice_id": voice_id,
+                    "voice_name": voice_name,
+                    "language": language,
+                    "is_active": True
+                })
+                .execute()
+            )
+
+            logger.info(f"✅ Created voice profile for user {user_id}: {voice_id}")
+            return response.data[0] if response.data else {}
+
+        except Exception as e:
+            logger.error(f"Error creating voice profile: {e}")
+            return {}
+
+    # ========================
     # SCAM REPORTS
     # ========================
 
