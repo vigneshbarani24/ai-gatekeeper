@@ -203,10 +203,10 @@ function WelcomeStep({ userName, onNext, onSkip }: { userName: string; onNext: (
           Hi {userName},
         </h1>
         <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6">
-          Never Miss an Opportunity
+          Your Voice. Your Ears. Your Independence.
         </h2>
         <p className="text-lg text-gray-600 leading-relaxed">
-          When you can't pick up, your AI answers in your voice—catching important calls and blocking scams.
+          The first AI that gives deaf and speech-impaired people FULL phone independence—speaking in YOUR cloned voice.
         </p>
       </motion.div>
 
@@ -232,34 +232,32 @@ function WelcomeStep({ userName, onNext, onSkip }: { userName: string; onNext: (
 // ============================================================================
 
 function ValueStep({ onNext, onSkip }: { onNext: () => void; onSkip: () => void }) {
-  const stats = [
+  const modes = [
     {
-      label: 'Time Saved',
-      value: '45 min',
-      subtext: 'Weekly average',
-      color: 'from-orange-400 to-orange-500',
-      icon: Clock,
+      title: '🦻 Accessibility Mode',
+      subtitle: 'Voice & Ears for the Deaf',
+      tam: '473M+ people worldwide',
+      features: [
+        '466M with hearing loss (WHO)',
+        '7.6M with speech disabilities',
+        'You type - AI speaks in YOUR voice',
+        'ZERO good solutions exist today'
+      ],
+      color: 'from-blue-500 to-purple-600',
+      highlight: true,
     },
     {
-      label: 'Scams Blocked',
-      value: '12',
-      subtext: 'This month',
-      color: 'from-red-400 to-red-500',
-      icon: Shield,
-    },
-    {
-      label: 'Calls Screened',
-      value: '89',
-      subtext: 'Automatically',
-      color: 'from-blue-400 to-blue-500',
-      icon: Phone,
-    },
-    {
-      label: 'Peace of Mind',
-      value: '100%',
-      subtext: 'Priceless',
-      color: 'from-green-400 to-green-500',
-      icon: TrendingUp,
+      title: '🛡️ Gatekeeper Mode',
+      subtitle: 'For Busy People',
+      tam: '3.5B+ smartphone users',
+      features: [
+        'AI answers calls you miss',
+        '$3.4B lost to scams annually',
+        'Handles appointments & confirmations',
+        'Never miss job offers or opportunities'
+      ],
+      color: 'from-purple-500 to-pink-500',
+      highlight: false,
     },
   ];
 
@@ -285,40 +283,57 @@ function ValueStep({ onNext, onSkip }: { onNext: () => void; onSkip: () => void 
         transition={{ delay: 0.2 }}
       >
         <h2 className="text-4xl font-bold text-gray-900 mb-4">
-          Opportunities Never Missed
+          Two Life-Changing Modes
         </h2>
         <p className="text-xl text-gray-600 mb-12">
-          When you're busy, your AI steps in
+          Accessibility for those who need it. Assistance for everyone else.
         </p>
       </motion.div>
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl w-full mb-12">
-        {stats.map((stat, index) => (
+      {/* Modes Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl w-full mb-12">
+        {modes.map((mode, index) => (
           <motion.div
-            key={stat.label}
-            className="bg-white rounded-3xl p-6 shadow-lg hover:shadow-xl transition-shadow"
+            key={mode.title}
+            className={`bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all relative overflow-hidden ${
+              mode.highlight ? 'ring-2 ring-blue-500' : ''
+            }`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 + index * 0.1 }}
-            whileHover={{ scale: 1.02 }}
+            transition={{ delay: 0.3 + index * 0.2 }}
+            whileHover={{ scale: 1.03, y: -5 }}
           >
-            <div className="flex items-start gap-4">
-              <div
-                className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${stat.color} flex items-center justify-center flex-shrink-0`}
-              >
-                <stat.icon size={24} className="text-white" />
+            {/* Highlight Badge */}
+            {mode.highlight && (
+              <div className="absolute top-4 right-4 px-3 py-1 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-xs font-bold rounded-full">
+                PRIMARY
               </div>
-              <div className="flex-1">
-                <div className="text-3xl font-bold text-gray-900 mb-1">
-                  {stat.value}
-                </div>
-                <div className="text-sm font-semibold text-gray-700 mb-1">
-                  {stat.label}
-                </div>
-                <div className="text-xs text-gray-500">{stat.subtext}</div>
+            )}
+
+            {/* Header */}
+            <div className="mb-4">
+              <h3 className="text-2xl font-bold text-gray-900 mb-1">{mode.title}</h3>
+              <p className="text-sm text-gray-600 mb-2">{mode.subtitle}</p>
+              <div className={`inline-block px-3 py-1 bg-gradient-to-r ${mode.color} text-white text-xs font-bold rounded-full`}>
+                TAM: {mode.tam}
               </div>
             </div>
+
+            {/* Features List */}
+            <ul className="space-y-3">
+              {mode.features.map((feature, i) => (
+                <motion.li
+                  key={i}
+                  className="flex items-start gap-2 text-sm text-gray-700"
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.5 + index * 0.2 + i * 0.1 }}
+                >
+                  <CheckCircle2 size={16} className="text-green-500 flex-shrink-0 mt-0.5" />
+                  <span>{feature}</span>
+                </motion.li>
+              ))}
+            </ul>
           </motion.div>
         ))}
       </div>
