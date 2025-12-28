@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Gatekeeper: Voice & Ears for the Voiceless</title>
+    <title>AI Gatekeeper - The first AI that answers your phone intelligently</title>
 
     <!-- TailwindCSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -11,76 +11,26 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Mermaid for diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
 
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Poppins', sans-serif;
+        * {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
-        /* Animated Gradient Background */
-        .gradient-animation {
-            background: linear-gradient(-45deg, #312e81, #581c87, #831843, #500724);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
+        /* Subtle blue gradient background */
+        .gradient-hero {
+            background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 50%, #eff6ff 100%);
         }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Floating Particles */
-        .particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            animation: float 20s infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
-        }
-
-        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
-        .particle:nth-child(2) { left: 20%; animation-delay: 2s; }
-        .particle:nth-child(3) { left: 30%; animation-delay: 4s; }
-        .particle:nth-child(4) { left: 40%; animation-delay: 6s; }
-        .particle:nth-child(5) { left: 50%; animation-delay: 8s; }
-        .particle:nth-child(6) { left: 60%; animation-delay: 10s; }
-        .particle:nth-child(7) { left: 70%; animation-delay: 12s; }
-        .particle:nth-child(8) { left: 80%; animation-delay: 14s; }
-        .particle:nth-child(9) { left: 90%; animation-delay: 16s; }
-
-        /* Glassmorphism Card */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Fade In Animation */
-        .fade-in {
+        /* Animated transcript */
+        .transcript-line {
             opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease forwards;
+            transform: translateY(10px);
+            animation: fadeInUp 0.5s ease forwards;
         }
 
         @keyframes fadeInUp {
@@ -90,392 +40,628 @@
             }
         }
 
-        .fade-in-delay-1 { animation-delay: 0.2s; }
-        .fade-in-delay-2 { animation-delay: 0.4s; }
-        .fade-in-delay-3 { animation-delay: 0.6s; }
+        .transcript-line:nth-child(1) { animation-delay: 0.5s; }
+        .transcript-line:nth-child(2) { animation-delay: 1s; }
+        .transcript-line:nth-child(3) { animation-delay: 1.5s; }
+        .transcript-line:nth-child(4) { animation-delay: 2s; }
+        .transcript-line:nth-child(5) { animation-delay: 2.5s; }
 
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.9);
+        /* Code block styling */
+        .code-block {
+            background: #0f172a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            overflow-x: auto;
         }
 
-        .modal.active {
-            display: flex;
+        .code-block code {
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, monospace;
+            font-size: 0.875rem;
+            line-height: 1.7;
+        }
+
+        .keyword { color: #c792ea; }
+        .string { color: #c3e88d; }
+        .function { color: #82aaff; }
+        .comment { color: #546e7a; }
+        .property { color: #f07178; }
+
+        /* Hover effects */
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+        }
+
+        /* Status badge */
+        .status-badge {
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: #dbeafe;
+            border: 1px solid #3b82f6;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #1e40af;
         }
 
-        .modal-content {
-            position: relative;
-            width: 90%;
-            max-width: 1200px;
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: #3b82f6;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Waitlist form */
+        input[type="email"] {
+            border: 2px solid #e5e7eb;
+            transition: all 0.2s;
+        }
+
+        input[type="email"]:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        /* Mermaid diagram styling */
+        .mermaid {
+            display: flex;
+            justify-content: center;
         }
     </style>
 </head>
-<body class="bg-gray-900 text-white">
+<body class="bg-white text-gray-900">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-gray-200 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl">🛡️</span>
+                    <span class="font-bold text-xl">AI Gatekeeper</span>
+                </div>
+                <div class="flex items-center gap-6">
+                    <a href="#how-it-works" class="text-gray-600 hover:text-gray-900 text-sm font-medium">How it works</a>
+                    <a href="#roadmap" class="text-gray-600 hover:text-gray-900 text-sm font-medium">Roadmap</a>
+                    <a href="#pricing" class="text-gray-600 hover:text-gray-900 text-sm font-medium">Pricing</a>
+                    <a href="https://github.com/vigneshbarani24/Storytopia/tree/main/ai-gatekeeper" class="text-gray-600 hover:text-gray-900 text-sm font-medium">GitHub</a>
+                    <a href="#early-access" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors">Request Access</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center gradient-animation overflow-hidden">
-        <!-- Floating Particles -->
-        <div class="particles">
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-        </div>
+    <section class="gradient-hero pt-32 pb-20 px-4">
+        <div class="max-w-7xl mx-auto">
+            <!-- Status Badge -->
+            <div class="text-center mb-8">
+                <div class="status-badge inline-flex">
+                    <span class="pulse-dot"></span>
+                    Built for AI Partner Catalyst 2025 · Private Beta
+                </div>
+            </div>
 
-        <!-- Hero Content -->
-        <div class="relative z-10 text-center px-4 max-w-6xl mx-auto fade-in">
-            <h1 class="text-6xl md:text-8xl font-black mb-6 leading-tight">
-                AI Gatekeeper
-            </h1>
-            <p class="text-2xl md:text-4xl font-light mb-4 text-purple-200">
-                Voice & Ears for the Voiceless
-            </p>
-            <p class="text-xl md:text-2xl mb-12 text-white/80 max-w-3xl mx-auto fade-in-delay-1">
-                473M people just gained phone independence. <br class="hidden md:block"/>
-                Plus 3.5B more get scam protection.
-            </p>
+            <!-- Hero Headline -->
+            <div class="text-center mb-12">
+                <h1 class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">
+                    The first AI that<br/>
+                    <span class="text-blue-600">answers your phone</span><br/>
+                    intelligently
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                    Real-time transcription. Voice cloning. Scam blocking in <strong>0.16ms</strong>.<br/>
+                    473M deaf users gain independence. 3.5B more get protection.
+                </p>
+            </div>
 
-            <!-- CTA Buttons -->
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center fade-in-delay-2">
-                <button onclick="openModal()" class="px-10 py-5 bg-white text-purple-900 rounded-xl font-bold text-lg hover:bg-purple-100 transition-all transform hover:scale-105 shadow-2xl">
-                    📹 Watch Demo
-                </button>
-                <a href="https://github.com/vigneshbarani24/Storytopia/tree/main/ai-gatekeeper" class="px-10 py-5 bg-transparent border-2 border-white text-white rounded-xl font-bold text-lg hover:bg-white/10 transition-all">
-                    💻 View Code
+            <!-- Animated Product Demo -->
+            <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-8 mb-12">
+                <!-- Left: Incoming Call -->
+                <div class="bg-white rounded-2xl shadow-xl border border-gray-200 p-6">
+                    <div class="flex items-center gap-3 mb-6 pb-4 border-b border-gray-200">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-xl">📞</div>
+                        <div>
+                            <div class="font-semibold">Incoming Call</div>
+                            <div class="text-sm text-gray-500">+1 (555) 123-4567</div>
+                        </div>
+                    </div>
+                    <div class="space-y-4 font-mono text-sm">
+                        <div class="transcript-line">
+                            <span class="text-gray-400">00:01</span>
+                            <div class="mt-1 text-gray-700">"Hello, this is the IRS. You owe $5,000 in back taxes..."</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: AI Response -->
+                <div class="bg-gradient-to-br from-blue-50 to-white rounded-2xl shadow-xl border border-blue-200 p-6">
+                    <div class="flex items-center gap-3 mb-6 pb-4 border-b border-blue-200">
+                        <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-xl">🤖</div>
+                        <div>
+                            <div class="font-semibold">AI Analysis</div>
+                            <div class="text-sm text-blue-600">Processing...</div>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="transcript-line">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="px-2 py-1 bg-red-100 text-red-700 rounded text-xs font-semibold">SCAM DETECTED</span>
+                                <span class="text-xs text-gray-500">0.16ms</span>
+                            </div>
+                            <div class="text-sm text-gray-700">
+                                <strong>Threat:</strong> IRS impersonation<br/>
+                                <strong>Action:</strong> Blocked & reported<br/>
+                                <strong>Saved:</strong> $5,000
+                            </div>
+                        </div>
+                        <div class="transcript-line mt-4 pt-4 border-t border-blue-100">
+                            <div class="text-sm text-blue-600 font-semibold">✓ Call terminated automatically</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="text-center">
+                <a href="#early-access" class="inline-block px-8 py-4 bg-blue-600 text-white rounded-xl font-semibold text-lg hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                    Request Early Access →
                 </a>
+                <p class="mt-4 text-sm text-gray-500">Limited spots · Invite-only during beta</p>
             </div>
         </div>
     </section>
 
-    <!-- The Problem Section -->
-    <section class="py-24 px-4 bg-gray-900">
+    <!-- Dual-Mode Innovation -->
+    <section class="py-20 px-4 bg-gray-50">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-5xl md:text-6xl font-bold text-center mb-16">
-                The <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">Problem</span>
-            </h2>
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">One platform. Two revolutionary modes.</h2>
+                <p class="text-xl text-gray-600">Built for accessibility. Valuable for everyone.</p>
+            </div>
 
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Card 1: For Deaf Users -->
-                <div class="glass-card rounded-2xl p-8 transform hover:scale-105 transition-all">
-                    <div class="text-5xl mb-6">🦻</div>
-                    <h3 class="text-2xl font-bold mb-4">For Deaf Users</h3>
-                    <p class="text-gray-300 leading-relaxed">
-                        "32-year-old Maria cried scheduling her first dentist appointment alone. <br><br>
-                        <strong>She shouldn't have to wait for family to make calls.</strong>
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Accessibility Mode -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg card-hover border border-gray-200">
+                    <div class="text-4xl mb-4">🦻</div>
+                    <h3 class="text-2xl font-bold mb-4">Accessibility Mode</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        473M deaf & hard-of-hearing people can now make phone calls independently.
+                        No interpreters. No scheduling. Just natural conversation.
                     </p>
-                    <div class="mt-6 p-4 bg-red-500/20 border border-red-500/50 rounded-lg">
-                        <p class="text-sm font-semibold text-red-300">473M people worldwide cannot use phones independently</p>
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-3">
+                            <span class="text-blue-600 font-bold">✓</span>
+                            <span class="text-gray-700">Real-time transcription (see every word)</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-blue-600 font-bold">✓</span>
+                            <span class="text-gray-700">Type to speak (AI uses YOUR cloned voice)</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-blue-600 font-bold">✓</span>
+                            <span class="text-gray-700">Multi-language support (29+ languages)</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-blue-600 font-bold">✓</span>
+                            <span class="text-gray-700">$0.05/min (cheaper than VRS at $0.08/min)</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Card 2: For Everyone Else -->
-                <div class="glass-card rounded-2xl p-8 transform hover:scale-105 transition-all">
-                    <div class="text-5xl mb-6">🚨</div>
-                    <h3 class="text-2xl font-bold mb-4">For Everyone Else</h3>
-                    <p class="text-gray-300 leading-relaxed">
-                        $3.4B lost to phone scams annually. IRS impersonators, tech support frauds, robocalls. <br><br>
-                        <strong>Current call blockers only filter numbers, not content.</strong>
+                <!-- Gatekeeper Mode -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg card-hover border border-gray-200">
+                    <div class="text-4xl mb-4">🛡️</div>
+                    <h3 class="text-2xl font-bold mb-4">Gatekeeper Mode</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        3.5B smartphone users get intelligent call screening. Block scams, route important calls,
+                        book appointments automatically.
                     </p>
-                    <div class="mt-6 p-4 bg-red-500/20 border border-red-500/50 rounded-lg">
-                        <p class="text-sm font-semibold text-red-300">60% of calls are spam or scams</p>
-                    </div>
-                </div>
-
-                <!-- Card 3: Current Solutions Fail -->
-                <div class="glass-card rounded-2xl p-8 transform hover:scale-105 transition-all">
-                    <div class="text-5xl mb-6">❌</div>
-                    <h3 class="text-2xl font-bold mb-4">Current Solutions Fail</h3>
-                    <p class="text-gray-300 leading-relaxed">
-                        VRS requires human interpreters ($0.08/min + scheduling). <br><br>
-                        Call blockers can't detect scams in real-time. <br><br>
-                        <strong>No AI can intelligently answer calls.</strong>
-                    </p>
-                    <div class="mt-6 p-4 bg-red-500/20 border border-red-500/50 rounded-lg">
-                        <p class="text-sm font-semibold text-red-300">Zero accessibility solutions using AI voice</p>
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-3">
+                            <span class="text-blue-600 font-bold">✓</span>
+                            <span class="text-gray-700">0.16ms scam detection (IRS, tech support, etc.)</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-blue-600 font-bold">✓</span>
+                            <span class="text-gray-700">Smart whitelist (VIPs always get through)</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-blue-600 font-bold">✓</span>
+                            <span class="text-gray-700">Calendar integration (books appointments via Google Calendar)</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-blue-600 font-bold">✓</span>
+                            <span class="text-gray-700">$0.02/min (cheaper than assistants at $0.10/min)</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- The Solution Section -->
-    <section class="py-24 px-4 bg-gradient-to-b from-gray-900 to-purple-900/20">
+    <!-- Fundamental Blocks -->
+    <section id="how-it-works" class="py-20 px-4 bg-white">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-5xl md:text-6xl font-bold text-center mb-16">
-                The <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-cyan-600">Solution</span>
-            </h2>
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">How it works</h2>
+                <p class="text-xl text-gray-600">Multi-agent orchestration with Google ADK + ElevenLabs</p>
+            </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Feature 1 -->
-                <div class="glass-card rounded-xl p-6">
-                    <div class="text-4xl mb-4">📝</div>
-                    <h4 class="text-xl font-bold mb-3">Real-time Transcription</h4>
-                    <p class="text-gray-300">See every word as it's spoken. Deaf users read conversations live.</p>
+            <!-- Architecture Diagram -->
+            <div class="mb-16">
+                <h3 class="text-2xl font-bold mb-6 text-center">Architecture</h3>
+                <div class="bg-gray-50 rounded-2xl p-8 border border-gray-200">
+                    <pre class="mermaid">
+graph LR
+    A[📞 Incoming Call] --> B[Twilio Gateway]
+    B --> C{AI Gatekeeper}
+    C --> D[Scam Detector<br/>0.16ms]
+    C --> E[Contact Matcher<br/>Whitelist]
+    C --> F[Decision Agent<br/>Route/Block]
+    C --> G[Screener Agent<br/>Conversation]
+    D --> H[Google Gemini<br/>2.0 Flash]
+    E --> I[Supabase<br/>Vector DB]
+    F --> H
+    G --> J[ElevenLabs<br/>Voice Clone + Conv AI]
+    J --> K[📱 User Dashboard]
+    F --> L[Google Calendar]
+    F --> M[Gmail Integration]
+
+    style C fill:#3b82f6,stroke:#1e40af,stroke-width:3px,color:#fff
+    style H fill:#ea4335,stroke:#c5221f,stroke-width:2px,color:#fff
+    style J fill:#7c3aed,stroke:#6d28d9,stroke-width:2px,color:#fff
+                    </pre>
                 </div>
+            </div>
 
-                <!-- Feature 2 -->
-                <div class="glass-card rounded-xl p-6">
-                    <div class="text-4xl mb-4">🎙️</div>
-                    <h4 class="text-xl font-bold mb-3">Voice Cloning</h4>
-                    <p class="text-gray-300">AI speaks in YOUR voice. Just 30 seconds of audio needed.</p>
+            <!-- Tech Stack -->
+            <div class="mb-16">
+                <h3 class="text-2xl font-bold mb-6 text-center">Tech Stack</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="text-center p-6 bg-gray-50 rounded-xl border border-gray-200 card-hover">
+                        <div class="text-4xl mb-3">🤖</div>
+                        <div class="font-semibold">Google ADK</div>
+                        <div class="text-sm text-gray-500">4 Agents</div>
+                    </div>
+                    <div class="text-center p-6 bg-gray-50 rounded-xl border border-gray-200 card-hover">
+                        <div class="text-4xl mb-3">🎙️</div>
+                        <div class="font-semibold">ElevenLabs</div>
+                        <div class="text-sm text-gray-500">All 4 Features</div>
+                    </div>
+                    <div class="text-center p-6 bg-gray-50 rounded-xl border border-gray-200 card-hover">
+                        <div class="text-4xl mb-3">🧠</div>
+                        <div class="font-semibold">Gemini 2.0 Flash</div>
+                        <div class="text-sm text-gray-500">Analysis</div>
+                    </div>
+                    <div class="text-center p-6 bg-gray-50 rounded-xl border border-gray-200 card-hover">
+                        <div class="text-4xl mb-3">📞</div>
+                        <div class="font-semibold">Twilio</div>
+                        <div class="text-sm text-gray-500">PSTN Gateway</div>
+                    </div>
+                    <div class="text-center p-6 bg-gray-50 rounded-xl border border-gray-200 card-hover">
+                        <div class="text-4xl mb-3">⚡</div>
+                        <div class="font-semibold">FastAPI</div>
+                        <div class="text-sm text-gray-500">Python 3.11</div>
+                    </div>
+                    <div class="text-center p-6 bg-gray-50 rounded-xl border border-gray-200 card-hover">
+                        <div class="text-4xl mb-3">☁️</div>
+                        <div class="font-semibold">Cloud Run</div>
+                        <div class="text-sm text-gray-500">Serverless</div>
+                    </div>
+                    <div class="text-center p-6 bg-gray-50 rounded-xl border border-gray-200 card-hover">
+                        <div class="text-4xl mb-3">⚛️</div>
+                        <div class="font-semibold">Next.js 14</div>
+                        <div class="text-sm text-gray-500">React 19</div>
+                    </div>
+                    <div class="text-center p-6 bg-gray-50 rounded-xl border border-gray-200 card-hover">
+                        <div class="text-4xl mb-3">🗄️</div>
+                        <div class="font-semibold">Supabase</div>
+                        <div class="text-sm text-gray-500">Vector DB</div>
+                    </div>
                 </div>
+            </div>
 
-                <!-- Feature 3 -->
-                <div class="glass-card rounded-xl p-6">
-                    <div class="text-4xl mb-4">⚡</div>
-                    <h4 class="text-xl font-bold mb-3">0.16ms Scam Detection</h4>
-                    <p class="text-gray-300">Instant IRS/tech support fraud blocking. Fastest in the market.</p>
-                </div>
+            <!-- API Code Example -->
+            <div>
+                <h3 class="text-2xl font-bold mb-6 text-center">API Usage</h3>
+                <div class="code-block">
+                    <code>
+<span class="comment"># Clone your voice (30 seconds of audio)</span>
+<span class="keyword">import</span> requests
 
-                <!-- Feature 4 -->
-                <div class="glass-card rounded-xl p-6">
-                    <div class="text-4xl mb-4">📅</div>
-                    <h4 class="text-xl font-bold mb-3">Calendar Integration</h4>
-                    <p class="text-gray-300">AI books appointments via Google Calendar automatically.</p>
-                </div>
+voice <span class="keyword">=</span> requests.<span class="function">post</span>(<span class="string">"https://api.aigatekeeper.io/voice/clone"</span>,
+    files<span class="keyword">=</span>{<span class="string">"audio"</span>: <span class="function">open</span>(<span class="string">"my_voice.mp3"</span>, <span class="string">"rb"</span>)})
 
-                <!-- Feature 5 -->
-                <div class="glass-card rounded-xl p-6">
-                    <div class="text-4xl mb-4">👥</div>
-                    <h4 class="text-xl font-bold mb-3">Whitelist Management</h4>
-                    <p class="text-gray-300">VIP contacts always get through with personalized greetings.</p>
-                </div>
+<span class="comment"># AI answers calls in YOUR voice</span>
+call <span class="keyword">=</span> requests.<span class="function">post</span>(<span class="string">"https://api.aigatekeeper.io/telephony/incoming"</span>,
+    json<span class="keyword">=</span>{
+        <span class="string">"voice_id"</span>: voice[<span class="string">"id"</span>],
+        <span class="string">"mode"</span>: <span class="string">"accessibility"</span>,  <span class="comment"># or "gatekeeper"</span>
+        <span class="string">"whitelist"</span>: [<span class="string">"Mom"</span>, <span class="string">"Doctor"</span>, <span class="string">"Boss"</span>]
+    })
 
-                <!-- Feature 6 -->
-                <div class="glass-card rounded-xl p-6">
-                    <div class="text-4xl mb-4">💰</div>
-                    <h4 class="text-xl font-bold mb-3">Talk-Time Billing</h4>
-                    <p class="text-gray-300">Prepaid credits, no subscriptions. Pay only for what you use.</p>
+<span class="comment"># Result: Real-time transcript + scam detection</span>
+<span class="keyword">print</span>(call[<span class="string">"transcript"</span>])  <span class="comment"># Live transcription</span>
+<span class="keyword">print</span>(call[<span class="string">"threat_level"</span>])  <span class="comment"># 0.16ms detection</span>
+<span class="keyword">print</span>(call[<span class="string">"action"</span>])  <span class="comment"># "blocked", "routed", or "booked"</span>
+                    </code>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- How It Works Section -->
-    <section class="py-24 px-4 bg-gray-900">
+    <!-- Roadmap & Future Integrations -->
+    <section id="roadmap" class="py-20 px-4 bg-gray-50">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-5xl md:text-6xl font-bold text-center mb-16">
-                How It <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-600">Works</span>
-            </h2>
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Roadmap</h2>
+                <p class="text-xl text-gray-600">Building the future of intelligent communication</p>
+            </div>
 
-            <div class="grid md:grid-cols-4 gap-8">
-                <!-- Step 1 -->
-                <div class="text-center">
-                    <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center text-3xl font-bold">
-                        1
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <!-- Phase 1: Current -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg border-2 border-blue-600">
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="px-3 py-1 bg-blue-600 text-white rounded-full text-sm font-semibold">Phase 1</span>
+                        <span class="text-sm text-green-600 font-semibold">✓ LIVE</span>
                     </div>
-                    <h4 class="text-xl font-bold mb-3">Clone Your Voice</h4>
-                    <p class="text-gray-300">Record 30 seconds of audio. AI learns your voice perfectly.</p>
+                    <h3 class="text-xl font-bold mb-4">Voice Calls</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li>✓ Real-time transcription</li>
+                        <li>✓ Voice cloning (30s)</li>
+                        <li>✓ Scam detection (0.16ms)</li>
+                        <li>✓ Whitelist management</li>
+                        <li>✓ Multi-language (29+)</li>
+                    </ul>
                 </div>
 
-                <!-- Step 2 -->
-                <div class="text-center">
-                    <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-pink-500 to-red-600 rounded-full flex items-center justify-center text-3xl font-bold">
-                        2
+                <!-- Phase 2: Q1 2025 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-semibold">Phase 2</span>
+                        <span class="text-sm text-gray-500">Q1 2025</span>
                     </div>
-                    <h4 class="text-xl font-bold mb-3">AI Answers</h4>
-                    <p class="text-gray-300">Incoming call → AI answers in YOUR voice instantly.</p>
+                    <h3 class="text-xl font-bold mb-4">MCP Integrations</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li>→ Claude Desktop integration</li>
+                        <li>→ GPT-4 context sharing</li>
+                        <li>→ Model Context Protocol</li>
+                        <li>→ Cross-model reasoning</li>
+                        <li>→ Knowledge graph sync</li>
+                    </ul>
                 </div>
 
-                <!-- Step 3 -->
-                <div class="text-center">
-                    <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-orange-500 to-yellow-600 rounded-full flex items-center justify-center text-3xl font-bold">
-                        3
+                <!-- Phase 3: Q2 2025 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="px-3 py-1 bg-gray-200 text-gray-700 rounded-full text-sm font-semibold">Phase 3</span>
+                        <span class="text-sm text-gray-500">Q2 2025</span>
                     </div>
-                    <h4 class="text-xl font-bold mb-3">Real-time Handling</h4>
-                    <p class="text-gray-300">See transcript live. Type response. AI speaks for you.</p>
+                    <h3 class="text-xl font-bold mb-4">Assistant Mode</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li>→ Proactive outbound calls</li>
+                        <li>→ Appointment reminders</li>
+                        <li>→ Follow-up scheduling</li>
+                        <li>→ Bill payment automation</li>
+                        <li>→ Healthcare coordination</li>
+                    </ul>
                 </div>
+            </div>
 
-                <!-- Step 4 -->
-                <div class="text-center">
-                    <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-green-500 to-cyan-600 rounded-full flex items-center justify-center text-3xl font-bold">
-                        4
+            <!-- Future Integrations -->
+            <div>
+                <h3 class="text-2xl font-bold mb-8 text-center">Future Integrations</h3>
+                <div class="grid md:grid-cols-5 gap-4">
+                    <div class="bg-white rounded-xl p-6 text-center border border-gray-200 card-hover">
+                        <div class="text-3xl mb-2">📅</div>
+                        <div class="font-semibold text-sm">Google Calendar</div>
+                        <div class="text-xs text-gray-500 mt-1">Auto-booking</div>
                     </div>
-                    <h4 class="text-xl font-bold mb-3">Get Summary</h4>
-                    <p class="text-gray-300">See what happened: booked, blocked, or transferred.</p>
+                    <div class="bg-white rounded-xl p-6 text-center border border-gray-200 card-hover">
+                        <div class="text-3xl mb-2">📧</div>
+                        <div class="font-semibold text-sm">Gmail</div>
+                        <div class="text-xs text-gray-500 mt-1">Follow-ups</div>
+                    </div>
+                    <div class="bg-white rounded-xl p-6 text-center border border-gray-200 card-hover">
+                        <div class="text-3xl mb-2">👥</div>
+                        <div class="font-semibold text-sm">Google Contacts</div>
+                        <div class="text-xs text-gray-500 mt-1">Smart whitelist</div>
+                    </div>
+                    <div class="bg-white rounded-xl p-6 text-center border border-gray-200 card-hover">
+                        <div class="text-3xl mb-2">📝</div>
+                        <div class="font-semibold text-sm">Notion / Docs</div>
+                        <div class="text-xs text-gray-500 mt-1">Call summaries</div>
+                    </div>
+                    <div class="bg-white rounded-xl p-6 text-center border border-gray-200 card-hover">
+                        <div class="text-3xl mb-2">⚡</div>
+                        <div class="font-semibold text-sm">Zapier / Make</div>
+                        <div class="text-xs text-gray-500 mt-1">Workflows</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Tech Stack Section -->
-    <section class="py-24 px-4 bg-gradient-to-b from-gray-900 to-indigo-900/20">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-5xl md:text-6xl font-bold text-center mb-16">
-                Powered By <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">World-Class Tech</span>
-            </h2>
-
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <!-- Twilio -->
-                <div class="glass-card rounded-xl p-6 text-center hover:scale-105 transition-all" title="Telephony - PSTN Gateway">
-                    <div class="text-5xl mb-3">📞</div>
-                    <h5 class="font-bold text-lg">Twilio</h5>
-                    <p class="text-sm text-gray-400 mt-2">PSTN Gateway</p>
-                </div>
-
-                <!-- ElevenLabs -->
-                <div class="glass-card rounded-xl p-6 text-center hover:scale-105 transition-all" title="Voice AI - All 4 Features">
-                    <div class="text-5xl mb-3">🎙️</div>
-                    <h5 class="font-bold text-lg">ElevenLabs</h5>
-                    <p class="text-sm text-gray-400 mt-2">Voice Cloning + Conv AI</p>
-                </div>
-
-                <!-- Google Gemini -->
-                <div class="glass-card rounded-xl p-6 text-center hover:scale-105 transition-all" title="AI Intelligence">
-                    <div class="text-5xl mb-3">🧠</div>
-                    <h5 class="font-bold text-lg">Google Gemini</h5>
-                    <p class="text-sm text-gray-400 mt-2">2.0 Flash + 1.5 Flash</p>
-                </div>
-
-                <!-- Google ADK -->
-                <div class="glass-card rounded-xl p-6 text-center hover:scale-105 transition-all" title="Multi-Agent Orchestration">
-                    <div class="text-5xl mb-3">🤖</div>
-                    <h5 class="font-bold text-lg">Google ADK</h5>
-                    <p class="text-sm text-gray-400 mt-2">4 Agents</p>
-                </div>
-
-                <!-- FastAPI -->
-                <div class="glass-card rounded-xl p-6 text-center hover:scale-105 transition-all" title="Backend Framework">
-                    <div class="text-5xl mb-3">⚡</div>
-                    <h5 class="font-bold text-lg">FastAPI</h5>
-                    <p class="text-sm text-gray-400 mt-2">Python 3.11</p>
-                </div>
-
-                <!-- Cloud Run -->
-                <div class="glass-card rounded-xl p-6 text-center hover:scale-105 transition-all" title="Serverless Hosting">
-                    <div class="text-5xl mb-3">☁️</div>
-                    <h5 class="font-bold text-lg">Cloud Run</h5>
-                    <p class="text-sm text-gray-400 mt-2">Autoscaling</p>
-                </div>
-
-                <!-- Next.js -->
-                <div class="glass-card rounded-xl p-6 text-center hover:scale-105 transition-all" title="Frontend Framework">
-                    <div class="text-5xl mb-3">⚛️</div>
-                    <h5 class="font-bold text-lg">Next.js 14</h5>
-                    <p class="text-sm text-gray-400 mt-2">React 19</p>
-                </div>
-
-                <!-- Supabase -->
-                <div class="glass-card rounded-xl p-6 text-center hover:scale-105 transition-all" title="Database">
-                    <div class="text-5xl mb-3">🗄️</div>
-                    <h5 class="font-bold text-lg">Supabase</h5>
-                    <p class="text-sm text-gray-400 mt-2">PostgreSQL + Vector</p>
-                </div>
+    <!-- Pricing -->
+    <section id="pricing" class="py-20 px-4 bg-white">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Simple, talk-time pricing</h2>
+                <p class="text-xl text-gray-600">No subscriptions. Pay only for what you use.</p>
             </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section class="py-24 px-4 bg-gray-900">
-        <div class="max-w-5xl mx-auto text-center">
-            <h2 class="text-5xl md:text-6xl font-bold mb-16">
-                Simple <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-600">Pricing</span>
-            </h2>
 
             <div class="grid md:grid-cols-2 gap-8 mb-12">
                 <!-- Accessibility Pricing -->
-                <div class="glass-card rounded-2xl p-10 border-2 border-purple-500">
+                <div class="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-10 shadow-lg border-2 border-blue-200">
                     <div class="text-4xl mb-4">🦻</div>
-                    <h3 class="text-3xl font-bold mb-4">Accessibility Mode</h3>
-                    <div class="text-6xl font-black mb-4">$10</div>
-                    <p class="text-gray-300 mb-6">= 200 minutes</p>
-                    <p class="text-2xl font-bold text-purple-300 mb-6">$0.05/min</p>
-                    <p class="text-sm text-gray-400">Cheaper than VRS ($0.08/min)</p>
+                    <h3 class="text-2xl font-bold mb-2">Accessibility Mode</h3>
+                    <div class="text-5xl font-black mb-2">$0.05<span class="text-2xl text-gray-500">/min</span></div>
+                    <p class="text-gray-600 mb-6">$10 = 200 minutes</p>
+                    <div class="space-y-3 mb-8">
+                        <div class="flex items-start gap-2">
+                            <span class="text-blue-600">✓</span>
+                            <span class="text-sm text-gray-700">Real-time transcription</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="text-blue-600">✓</span>
+                            <span class="text-sm text-gray-700">Voice cloning included</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="text-blue-600">✓</span>
+                            <span class="text-sm text-gray-700">29+ languages</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="text-blue-600">✓</span>
+                            <span class="text-sm text-gray-700">Unlimited storage</span>
+                        </div>
+                    </div>
+                    <div class="bg-blue-100 border border-blue-300 rounded-lg p-4">
+                        <p class="text-sm font-semibold text-blue-900">37.5% cheaper than VRS ($0.08/min)</p>
+                    </div>
                 </div>
 
                 <!-- Gatekeeper Pricing -->
-                <div class="glass-card rounded-2xl p-10 border-2 border-cyan-500">
+                <div class="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-10 shadow-lg border-2 border-gray-300">
                     <div class="text-4xl mb-4">🛡️</div>
-                    <h3 class="text-3xl font-bold mb-4">Gatekeeper Mode</h3>
-                    <div class="text-6xl font-black mb-4">$10</div>
-                    <p class="text-gray-300 mb-6">= 500 minutes</p>
-                    <p class="text-2xl font-bold text-cyan-300 mb-6">$0.02/min</p>
-                    <p class="text-sm text-gray-400">Cheaper than assistants ($0.10/min)</p>
+                    <h3 class="text-2xl font-bold mb-2">Gatekeeper Mode</h3>
+                    <div class="text-5xl font-black mb-2">$0.02<span class="text-2xl text-gray-500">/min</span></div>
+                    <p class="text-gray-600 mb-6">$10 = 500 minutes</p>
+                    <div class="space-y-3 mb-8">
+                        <div class="flex items-start gap-2">
+                            <span class="text-gray-700">✓</span>
+                            <span class="text-sm text-gray-700">Scam detection (0.16ms)</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="text-gray-700">✓</span>
+                            <span class="text-sm text-gray-700">Whitelist management</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="text-gray-700">✓</span>
+                            <span class="text-sm text-gray-700">Calendar integration</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="text-gray-700">✓</span>
+                            <span class="text-sm text-gray-700">Call summaries</span>
+                        </div>
+                    </div>
+                    <div class="bg-gray-200 border border-gray-400 rounded-lg p-4">
+                        <p class="text-sm font-semibold text-gray-900">80% cheaper than assistants ($0.10/min)</p>
+                    </div>
                 </div>
             </div>
 
-            <p class="text-xl text-gray-300">
-                <strong>No subscriptions. No surprises. Just talk time.</strong>
-            </p>
+            <p class="text-center text-gray-500 text-sm">Enterprise plans with custom SLAs available. Contact us.</p>
+        </div>
+    </section>
+
+    <!-- Early Access -->
+    <section id="early-access" class="py-20 px-4 bg-gradient-to-br from-blue-600 to-blue-800 text-white">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">Request Early Access</h2>
+            <p class="text-xl mb-8 text-blue-100">Limited spots available during private beta. Join the waitlist.</p>
+
+            <form class="max-w-md mx-auto" id="waitlistForm">
+                <div class="flex gap-3">
+                    <input
+                        type="email"
+                        placeholder="your.email@example.com"
+                        required
+                        class="flex-1 px-6 py-4 rounded-lg text-gray-900 font-medium"
+                    />
+                    <button
+                        type="submit"
+                        class="px-8 py-4 bg-white text-blue-600 rounded-lg font-bold hover:bg-gray-100 transition-colors whitespace-nowrap"
+                    >
+                        Join Waitlist
+                    </button>
+                </div>
+                <p class="mt-4 text-sm text-blue-200">We'll notify you when spots open up. No spam, ever.</p>
+            </form>
+
+            <div class="mt-12 pt-12 border-t border-blue-500">
+                <div class="grid grid-cols-3 gap-8">
+                    <div>
+                        <div class="text-4xl font-black mb-2">473M</div>
+                        <div class="text-sm text-blue-200">Potential users</div>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-black mb-2">0.16ms</div>
+                        <div class="text-sm text-blue-200">Scam detection</div>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-black mb-2">29+</div>
+                        <div class="text-sm text-blue-200">Languages</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 px-4 bg-black/50 border-t border-white/10">
+    <footer class="py-12 px-4 bg-gray-900 text-gray-400">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-8">
-                <h3 class="text-3xl font-bold mb-2">AI Gatekeeper</h3>
-                <p class="text-gray-400">Built for AI Partner Catalyst 2025</p>
-            </div>
-
-            <div class="flex flex-wrap justify-center gap-8 mb-8">
-                <a href="https://github.com/vigneshbarani24/Storytopia/tree/main/ai-gatekeeper" class="text-gray-300 hover:text-white transition-colors">GitHub</a>
-                <a href="#" class="text-gray-300 hover:text-white transition-colors">Demo Video</a>
-                <a href="#" class="text-gray-300 hover:text-white transition-colors">Devpost</a>
-                <a href="mailto:contact@example.com" class="text-gray-300 hover:text-white transition-colors">Contact</a>
-            </div>
-
-            <div class="flex justify-center gap-6 mb-8">
-                <div class="text-center">
-                    <p class="text-sm text-gray-500 mb-1">Powered by</p>
-                    <p class="font-semibold">Google Cloud + ElevenLabs</p>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl">🛡️</span>
+                    <span class="font-bold text-white text-xl">AI Gatekeeper</span>
+                </div>
+                <div class="flex gap-8">
+                    <a href="https://github.com/vigneshbarani24/Storytopia/tree/main/ai-gatekeeper" class="hover:text-white transition-colors">GitHub</a>
+                    <a href="#" class="hover:text-white transition-colors">Demo Video</a>
+                    <a href="#" class="hover:text-white transition-colors">Devpost</a>
+                    <a href="mailto:contact@aigatekeeper.io" class="hover:text-white transition-colors">Contact</a>
                 </div>
             </div>
-
-            <div class="text-center text-gray-500 text-sm">
-                <p>&copy; 2025 AI Gatekeeper. Built with ❤️ for the voiceless.</p>
+            <div class="mt-8 text-center text-sm">
+                <p>Built for AI Partner Catalyst 2025 · Google Cloud + ElevenLabs</p>
+                <p class="mt-2">&copy; 2025 AI Gatekeeper. Built for the voiceless.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Modal for Demo Video -->
-    <div id="demoModal" class="modal">
-        <div class="modal-content">
-            <div class="text-right mb-4">
-                <button onclick="closeModal()" class="text-white text-4xl hover:text-gray-300 transition-colors">&times;</button>
-            </div>
-            <div class="aspect-video bg-black rounded-lg overflow-hidden">
-                <iframe id="demoVideo" width="100%" height="100%" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-            <p class="text-center mt-4 text-gray-300">Upload your demo video and replace the YouTube link in the code</p>
-        </div>
-    </div>
-
+    <!-- Scripts -->
     <script>
-        function openModal() {
-            const modal = document.getElementById('demoModal');
-            const video = document.getElementById('demoVideo');
-            // Replace with your actual YouTube video ID
-            video.src = 'https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1';
-            modal.classList.add('active');
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('demoModal');
-            const video = document.getElementById('demoVideo');
-            video.src = '';
-            modal.classList.remove('active');
-        }
-
-        // Close modal on outside click
-        document.getElementById('demoModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'neutral',
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
             }
+        });
+
+        // Waitlist form
+        document.getElementById('waitlistForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input[type="email"]').value;
+            alert('Thanks for joining the waitlist! We\'ll notify you at: ' + email);
+            this.reset();
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
         });
     </script>
 </body>
