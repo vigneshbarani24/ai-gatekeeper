@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Gatekeeper: Voice & Ears for the Voiceless</title>
+
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Animated Gradient Background */
+        .gradient-animation {
+            background: linear-gradient(-45deg, #312e81, #581c87, #831843, #500724);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 20s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: 2s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 4s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: 6s; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 8s; }
+        .particle:nth-child(6) { left: 60%; animation-delay: 10s; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 12s; }
+        .particle:nth-child(8) { left: 80%; animation-delay: 14s; }
+        .particle:nth-child(9) { left: 90%; animation-delay: 16s; }
+
+        /* Glassmorphism Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Fade In Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-delay-1 { animation-delay: 0.2s; }
+        .fade-in-delay-2 { animation-delay: 0.4s; }
+        .fade-in-delay-3 { animation-delay: 0.6s; }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 1200px;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center gradient-animation overflow-hidden">
+        <!-- Floating Particles -->
+        <div class="particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 text-center px-4 max-w-6xl mx-auto fade-in">
+            <h1 class="text-6xl md:text-8xl font-black mb-6 leading-tight">
+                AI Gatekeeper
+            </h1>
+            <p class="text-2xl md:text-4xl font-light mb-4 text-purple-200">
+                Voice & Ears for the Voiceless
+            </p>
+            <p class="text-xl md:text-2xl mb-12 text-white/80 max-w-3xl mx-auto fade-in-delay-1">
+                473M people just gained phone independence. <br class="hidden md:block"/>
+                Plus 3.5B more get scam protection.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center fade-in-delay-2">
+                <button onclick="openModal()" class="px-10 py-5 bg-white text-purple-900 rounded-xl font-bold text-lg hover:bg-purple-100 transition-all transform hover:scale-105 shadow-2xl">
+                    📹 Watch Demo
+                </button>
+                <a href="https://github.com/vigneshbarani24/Storytopia/tree/main/ai-gatekeeper" class="px-10 py-5 bg-transparent border-2 border-white text-white rounded-xl font-bold text-lg hover:bg-white/10 transition-all">
+                    💻 View Code
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Problem Section -->
+    <section class="py-24 px-4 bg-gray-900">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-5xl md:text-6xl font-bold text-center mb-16">
+                The <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">Problem</span>
+            </h2>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1: For Deaf Users -->
+                <div class="glass-card rounded-2xl p-8 transform hover:scale-105 transition-all">
+                    <div class="text-5xl mb-6">🦻</div>
+                    <h3 class="text-2xl font-bold mb-4">For Deaf Users</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        "32-year-old Maria cried scheduling her first dentist appointment alone. <br><br>
+                        <strong>She shouldn't have to wait for family to make calls.</strong>
+                    </p>
+                    <div class="mt-6 p-4 bg-red-500/20 border border-red-500/50 rounded-lg">
+                        <p class="text-sm font-semibold text-red-300">473M people worldwide cannot use phones independently</p>
+                    </div>
+                </div>
+
+                <!-- Card 2: For Everyone Else -->
+                <div class="glass-card rounded-2xl p-8 transform hover:scale-105 transition-all">
+                    <div class="text-5xl mb-6">🚨</div>
+                    <h3 class="text-2xl font-bold mb-4">For Everyone Else</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        $3.4B lost to phone scams annually. IRS impersonators, tech support frauds, robocalls. <br><br>
+                        <strong>Current call blockers only filter numbers, not content.</strong>
+                    </p>
+                    <div class="mt-6 p-4 bg-red-500/20 border border-red-500/50 rounded-lg">
+                        <p class="text-sm font-semibold text-red-300">60% of calls are spam or scams</p>
+                    </div>
+                </div>
+
+                <!-- Card 3: Current Solutions Fail -->
+                <div class="glass-card rounded-2xl p-8 transform hover:scale-105 transition-all">
+                    <div class="text-5xl mb-6">❌</div>
+                    <h3 class="text-2xl font-bold mb-4">Current Solutions Fail</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        VRS requires human interpreters ($0.08/min + scheduling). <br><br>
+                        Call blockers can't detect scams in real-time. <br><br>
+                        <strong>No AI can intelligently answer calls.</strong>
+                    </p>
+                    <div class="mt-6 p-4 bg-red-500/20 border border-red-500/50 rounded-lg">
+                        <p class="text-sm font-semibold text-red-300">Zero accessibility solutions using AI voice</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Solution Section -->
+    <section class="py-24 px-4 bg-gradient-to-b from-gray-900 to-purple-900/20">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-5xl md:text-6xl font-bold text-center mb-16">
+                The <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-cyan-600">Solution</span>
+            </h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Feature 1 -->
+                <div class="glass-card rounded-xl p-6">
+                    <div class="text-4xl mb-4">📝</div>
+                    <h4 class="text-xl font-bold mb-3">Real-time Transcription</h4>
+                    <p class="text-gray-300">See every word as it's spoken. Deaf users read conversations live.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="glass-card rounded-xl p-6">
+                    <div class="text-4xl mb-4">🎙️</div>
+                    <h4 class="text-xl font-bold mb-3">Voice Cloning</h4>
+                    <p class="text-gray-300">AI speaks in YOUR voice. Just 30 seconds of audio needed.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="glass-card rounded-xl p-6">
+                    <div class="text-4xl mb-4">⚡</div>
+                    <h4 class="text-xl font-bold mb-3">0.16ms Scam Detection</h4>
+                    <p class="text-gray-300">Instant IRS/tech support fraud blocking. Fastest in the market.</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="glass-card rounded-xl p-6">
+                    <div class="text-4xl mb-4">📅</div>
+                    <h4 class="text-xl font-bold mb-3">Calendar Integration</h4>
+                    <p class="text-gray-300">AI books appointments via Google Calendar automatically.</p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="glass-card rounded-xl p-6">
+                    <div class="text-4xl mb-4">👥</div>
+                    <h4 class="text-xl font-bold mb-3">Whitelist Management</h4>
+                    <p class="text-gray-300">VIP contacts always get through with personalized greetings.</p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="glass-card rounded-xl p-6">
+                    <div class="text-4xl mb-4">💰</div>
+                    <h4 class="text-xl font-bold mb-3">Talk-Time Billing</h4>
+                    <p class="text-gray-300">Prepaid credits, no subscriptions. Pay only for what you use.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-24 px-4 bg-gray-900">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-5xl md:text-6xl font-bold text-center mb-16">
+                How It <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-600">Works</span>
+            </h2>
+
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Step 1 -->
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center text-3xl font-bold">
+                        1
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Clone Your Voice</h4>
+                    <p class="text-gray-300">Record 30 seconds of audio. AI learns your voice perfectly.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-pink-500 to-red-600 rounded-full flex items-center justify-center text-3xl font-bold">
+                        2
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">AI Answers</h4>
+                    <p class="text-gray-300">Incoming call → AI answers in YOUR voice instantly.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-orange-500 to-yellow-600 rounded-full flex items-center justify-center text-3xl font-bold">
+                        3
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Real-time Handling</h4>
+                    <p class="text-gray-300">See transcript live. Type response. AI speaks for you.</p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="text-center">
+                    <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-green-500 to-cyan-600 rounded-full flex items-center justify-center text-3xl font-bold">
+                        4
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Get Summary</h4>
+                    <p class="text-gray-300">See what happened: booked, blocked, or transferred.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="py-24 px-4 bg-gradient-to-b from-gray-900 to-indigo-900/20">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-5xl md:text-6xl font-bold text-center mb-16">
+                Powered By <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">World-Class Tech</span>
+            </h2>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Twilio -->
+                <div class="glass-card rounded-xl p-6 text-center hover:scale-105 transition-all" title="Telephony - PSTN Gateway">
+                    <div class="text-5xl mb-3">📞</div>
+                    <h5 class="font-bold text-lg">Twilio</h5>
+                    <p class="text-sm text-gray-400 mt-2">PSTN Gateway</p>
+                </div>
+
+                <!-- ElevenLabs -->
+                <div class="glass-card rounded-xl p-6 text-center hover:scale-105 transition-all" title="Voice AI - All 4 Features">
+                    <div class="text-5xl mb-3">🎙️</div>
+                    <h5 class="font-bold text-lg">ElevenLabs</h5>
+                    <p class="text-sm text-gray-400 mt-2">Voice Cloning + Conv AI</p>
+                </div>
+
+                <!-- Google Gemini -->
+                <div class="glass-card rounded-xl p-6 text-center hover:scale-105 transition-all" title="AI Intelligence">
+                    <div class="text-5xl mb-3">🧠</div>
+                    <h5 class="font-bold text-lg">Google Gemini</h5>
+                    <p class="text-sm text-gray-400 mt-2">2.0 Flash + 1.5 Flash</p>
+                </div>
+
+                <!-- Google ADK -->
+                <div class="glass-card rounded-xl p-6 text-center hover:scale-105 transition-all" title="Multi-Agent Orchestration">
+                    <div class="text-5xl mb-3">🤖</div>
+                    <h5 class="font-bold text-lg">Google ADK</h5>
+                    <p class="text-sm text-gray-400 mt-2">4 Agents</p>
+                </div>
+
+                <!-- FastAPI -->
+                <div class="glass-card rounded-xl p-6 text-center hover:scale-105 transition-all" title="Backend Framework">
+                    <div class="text-5xl mb-3">⚡</div>
+                    <h5 class="font-bold text-lg">FastAPI</h5>
+                    <p class="text-sm text-gray-400 mt-2">Python 3.11</p>
+                </div>
+
+                <!-- Cloud Run -->
+                <div class="glass-card rounded-xl p-6 text-center hover:scale-105 transition-all" title="Serverless Hosting">
+                    <div class="text-5xl mb-3">☁️</div>
+                    <h5 class="font-bold text-lg">Cloud Run</h5>
+                    <p class="text-sm text-gray-400 mt-2">Autoscaling</p>
+                </div>
+
+                <!-- Next.js -->
+                <div class="glass-card rounded-xl p-6 text-center hover:scale-105 transition-all" title="Frontend Framework">
+                    <div class="text-5xl mb-3">⚛️</div>
+                    <h5 class="font-bold text-lg">Next.js 14</h5>
+                    <p class="text-sm text-gray-400 mt-2">React 19</p>
+                </div>
+
+                <!-- Supabase -->
+                <div class="glass-card rounded-xl p-6 text-center hover:scale-105 transition-all" title="Database">
+                    <div class="text-5xl mb-3">🗄️</div>
+                    <h5 class="font-bold text-lg">Supabase</h5>
+                    <p class="text-sm text-gray-400 mt-2">PostgreSQL + Vector</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="py-24 px-4 bg-gray-900">
+        <div class="max-w-5xl mx-auto text-center">
+            <h2 class="text-5xl md:text-6xl font-bold mb-16">
+                Simple <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-600">Pricing</span>
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <!-- Accessibility Pricing -->
+                <div class="glass-card rounded-2xl p-10 border-2 border-purple-500">
+                    <div class="text-4xl mb-4">🦻</div>
+                    <h3 class="text-3xl font-bold mb-4">Accessibility Mode</h3>
+                    <div class="text-6xl font-black mb-4">$10</div>
+                    <p class="text-gray-300 mb-6">= 200 minutes</p>
+                    <p class="text-2xl font-bold text-purple-300 mb-6">$0.05/min</p>
+                    <p class="text-sm text-gray-400">Cheaper than VRS ($0.08/min)</p>
+                </div>
+
+                <!-- Gatekeeper Pricing -->
+                <div class="glass-card rounded-2xl p-10 border-2 border-cyan-500">
+                    <div class="text-4xl mb-4">🛡️</div>
+                    <h3 class="text-3xl font-bold mb-4">Gatekeeper Mode</h3>
+                    <div class="text-6xl font-black mb-4">$10</div>
+                    <p class="text-gray-300 mb-6">= 500 minutes</p>
+                    <p class="text-2xl font-bold text-cyan-300 mb-6">$0.02/min</p>
+                    <p class="text-sm text-gray-400">Cheaper than assistants ($0.10/min)</p>
+                </div>
+            </div>
+
+            <p class="text-xl text-gray-300">
+                <strong>No subscriptions. No surprises. Just talk time.</strong>
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 bg-black/50 border-t border-white/10">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-8">
+                <h3 class="text-3xl font-bold mb-2">AI Gatekeeper</h3>
+                <p class="text-gray-400">Built for AI Partner Catalyst 2025</p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-8 mb-8">
+                <a href="https://github.com/vigneshbarani24/Storytopia/tree/main/ai-gatekeeper" class="text-gray-300 hover:text-white transition-colors">GitHub</a>
+                <a href="#" class="text-gray-300 hover:text-white transition-colors">Demo Video</a>
+                <a href="#" class="text-gray-300 hover:text-white transition-colors">Devpost</a>
+                <a href="mailto:contact@example.com" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+            </div>
+
+            <div class="flex justify-center gap-6 mb-8">
+                <div class="text-center">
+                    <p class="text-sm text-gray-500 mb-1">Powered by</p>
+                    <p class="font-semibold">Google Cloud + ElevenLabs</p>
+                </div>
+            </div>
+
+            <div class="text-center text-gray-500 text-sm">
+                <p>&copy; 2025 AI Gatekeeper. Built with ❤️ for the voiceless.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal for Demo Video -->
+    <div id="demoModal" class="modal">
+        <div class="modal-content">
+            <div class="text-right mb-4">
+                <button onclick="closeModal()" class="text-white text-4xl hover:text-gray-300 transition-colors">&times;</button>
+            </div>
+            <div class="aspect-video bg-black rounded-lg overflow-hidden">
+                <iframe id="demoVideo" width="100%" height="100%" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <p class="text-center mt-4 text-gray-300">Upload your demo video and replace the YouTube link in the code</p>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            const modal = document.getElementById('demoModal');
+            const video = document.getElementById('demoVideo');
+            // Replace with your actual YouTube video ID
+            video.src = 'https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=1';
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('demoModal');
+            const video = document.getElementById('demoVideo');
+            video.src = '';
+            modal.classList.remove('active');
+        }
+
+        // Close modal on outside click
+        document.getElementById('demoModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
