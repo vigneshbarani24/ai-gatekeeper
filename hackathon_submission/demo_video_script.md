@@ -4,6 +4,12 @@
 **Format:** Two-column table [VISUAL | AUDIO]
 **Tone:** Emotional → Inspiring → Technical → Impactful
 
+**Landing Page:** Linear-style dark mode design available at `hackathon_submission/landing_page.html`
+- Features live animated transcript demo
+- Deep blue → cyan gradient (#0a0f29, #06b6d4)
+- Mermaid architecture diagram
+- All 7 sections: Social Proof, Dual-Mode, Tech Stack, How It Works, Roadmap, Pricing, Waitlist
+
 ---
 
 ## PRODUCTION NOTES
@@ -13,6 +19,7 @@
 - Use **REAL data** from Supabase database
 - Display **ACTUAL API endpoints** from the codebase
 - Show **REAL logs** from Cloud Run/local testing
+- Consider recording demo using deployed landing page as intro/outro
 
 **Files to show:**
 - `backend/app/routers/telephony_optimized.py` (call routing)

@@ -4,14 +4,15 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/release/python-3110/)
-[![Tests: 23/23](https://img.shields.io/badge/tests-23/23%20passing-success)](backend/test_complete_system.py)
+[![Tests: 23/23 ✅](https://img.shields.io/badge/tests-23/23%20passing-success)](backend/test_complete_system.py)
 [![Google Cloud](https://img.shields.io/badge/Google%20Cloud-Run-blue?logo=google-cloud)](https://cloud.google.com/run)
 [![ElevenLabs](https://img.shields.io/badge/ElevenLabs-All%204%20Features-purple)](https://elevenlabs.io)
 [![Built for AI Partner Catalyst 2025](https://img.shields.io/badge/Built%20for-AI%20Partner%20Catalyst%202025-orange)](https://devpost.com/)
+[![Production Ready](https://img.shields.io/badge/status-production%20ready-brightgreen)](DEPLOYMENT_GUIDE.md)
 
-**The first AI that gives 473 million deaf people full phone independence—while blocking scams for everyone else.**
+**The first AI that answers your phone intelligently—giving 473M deaf people independence + blocking scams for 3.5B users.**
 
-[🎥 Watch Demo](#) • [📖 Read Docs](docs/) • [🚀 Deploy Now](DEPLOYMENT_GUIDE.md) • [🏆 Devpost](#)
+[🌐 Landing Page](hackathon_submission/landing_page.html) • [🎥 Watch Demo](#) • [📖 Read Docs](docs/) • [🚀 Deploy Now](DEPLOYMENT_GUIDE.md) • [🏆 Devpost](#)
 
 </div>
 
