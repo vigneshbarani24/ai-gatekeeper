@@ -17,6 +17,80 @@ logger = logging.getLogger(__name__)
 router = APIRouter(tags=["analytics"])
 
 
+@router.get("/dashboard")
+async def get_dashboard_stats(user_id: str = "demo_user"):
+    """
+    Get dashboard statistics for the bento grid
+
+    Returns:
+    - total_calls: Total calls all time
+    - scams_blocked: Total scams blocked
+    - time_saved_minutes: Total time saved
+    - current_status: Current AI status
+    - today_calls: Calls today
+    - block_rate: Scam block rate (0-1)
+    - avg_call_duration: Average call duration in seconds
+    """
+
+    # Demo data (matches frontend expectations)
+    demo_stats = {
+        "total_calls": 1247,
+        "scams_blocked": 89,
+        "time_saved_minutes": 2340,
+        "current_status": "active",
+        "today_calls": 12,
+        "block_rate": 0.987,
+        "avg_call_duration": 45,
+    }
+
+    try:
+        if not db_service.client:
+            logger.info("Database not initialized, returning demo dashboard stats")
+            return demo_stats
+
+        # Get all-time stats
+        all_calls = db_service.client.table('calls').select('*').eq('user_id', user_id).execute()
+        calls_data = all_calls.data if all_calls.data else []
+
+        total_calls = len(calls_data)
+        scams_blocked = sum(1 for call in calls_data if call.get('intent') == 'scam' and call.get('status') == 'blocked')
+
+        # Get today's calls
+        today_start = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
+        today_calls_response = db_service.client.table('calls').select('*').eq('user_id', user_id).gte('started_at', today_start.isoformat()).execute()
+        today_calls_data = today_calls_response.data if today_calls_response.data else []
+        today_calls = len(today_calls_data)
+
+        # Calculate block rate
+        scam_calls = [c for c in calls_data if c.get('intent') == 'scam']
+        blocked_scams = sum(1 for call in scam_calls if call.get('status') == 'blocked')
+        block_rate = blocked_scams / len(scam_calls) if len(scam_calls) > 0 else 1.0
+
+        # Calculate average call duration
+        durations = [c.get('duration_seconds', 0) for c in calls_data if c.get('duration_seconds')]
+        avg_call_duration = sum(durations) / len(durations) if durations else 45
+
+        # Calculate time saved (blocked calls * avg duration / 60)
+        time_saved_minutes = int((scams_blocked * avg_call_duration) / 60)
+
+        # Determine current status
+        current_status = "active" if today_calls > 0 else "idle"
+
+        return {
+            "total_calls": total_calls,
+            "scams_blocked": scams_blocked,
+            "time_saved_minutes": time_saved_minutes,
+            "current_status": current_status,
+            "today_calls": today_calls,
+            "block_rate": round(block_rate, 3),
+            "avg_call_duration": int(avg_call_duration),
+        }
+
+    except Exception as e:
+        logger.error(f"Error getting dashboard stats: {e}")
+        return demo_stats
+
+
 @router.get("/summary")
 async def get_ai_summary(user_id: str = "demo_user"):
     """

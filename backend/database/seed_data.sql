@@ -1,269 +1,543 @@
 -- ===============================================
 -- AI Gatekeeper - Seed Data
--- Comprehensive test data for demo and development
+-- Matches frontend demo data for seamless testing
 -- ===============================================
 
 -- ======================
--- USERS (Demo Accounts)
+-- USERS (Demo Account)
 -- ======================
 
-INSERT INTO users (id, phone_number, twilio_phone_number, elevenlabs_voice_id, created_at)
-VALUES
-    -- User 1: Sarah (Professional with high call volume)
-    (
-        'user_sarah_123',
-        '+15551234567',
-        '+15559876543',
-        'voice_sarah_abc',
-        NOW() - INTERVAL '30 days'
-    ),
-
-    -- User 2: John (Small business owner)
-    (
-        'user_john_456',
-        '+15552345678',
-        '+15558765432',
-        'voice_john_def',
-        NOW() - INTERVAL '15 days'
-    ),
-
-    -- User 3: Demo Account (For testing)
-    (
-        'user_demo_789',
-        '+15559999999',
-        '+15551111111',
-        'demo_voice_id',
-        NOW()
-    )
-ON CONFLICT (id) DO NOTHING;
+-- Main demo user (matches frontend expectations)
+INSERT INTO users (
+    id,
+    phone_number,
+    name,
+    email,
+    elevenlabs_voice_id,
+    twilio_phone_number,
+    plan_tier,
+    scam_detection_enabled,
+    auto_pass_contacts,
+    created_at
+) VALUES (
+    '00000000-0000-0000-0000-000000000001',
+    '+15551234567',
+    'Tom',
+    'tom@example.com',
+    'demo_voice_tom',
+    '+15559876543',
+    'premium',
+    true,
+    true,
+    NOW() - INTERVAL '30 days'
+) ON CONFLICT (id) DO UPDATE SET
+    name = EXCLUDED.name,
+    email = EXCLUDED.email,
+    elevenlabs_voice_id = EXCLUDED.elevenlabs_voice_id;
 
 
 -- ======================
 -- CONTACTS (Whitelist)
 -- ======================
 
-INSERT INTO contacts (id, user_id, phone_number, name, auto_pass, created_at)
-VALUES
-    -- Sarah's contacts
-    ('contact_001', 'user_sarah_123', '+15555555551', 'Mom', TRUE, NOW() - INTERVAL '30 days'),
-    ('contact_002', 'user_sarah_123', '+15555555552', 'Dad', TRUE, NOW() - INTERVAL '30 days'),
-    ('contact_003', 'user_sarah_123', '+15555555553', 'Doctor Office', TRUE, NOW() - INTERVAL '20 days'),
-    ('contact_004', 'user_sarah_123', '+15555555554', 'Best Friend Alice', TRUE, NOW() - INTERVAL '25 days'),
-    ('contact_005', 'user_sarah_123', '+15555555555', 'Work - Boss', TRUE, NOW() - INTERVAL '15 days'),
+INSERT INTO contacts (
+    id,
+    user_id,
+    name,
+    phone_number,
+    relationship,
+    priority,
+    auto_pass,
+    created_at
+) VALUES
+    -- Family
+    (
+        '10000000-0000-0000-0000-000000000001',
+        '00000000-0000-0000-0000-000000000001',
+        'Mom',
+        '+15555551001',
+        'family',
+        10,
+        true,
+        NOW() - INTERVAL '30 days'
+    ),
+    (
+        '10000000-0000-0000-0000-000000000002',
+        '00000000-0000-0000-0000-000000000001',
+        'Dad',
+        '+15555551002',
+        'family',
+        10,
+        true,
+        NOW() - INTERVAL '30 days'
+    ),
 
-    -- John's contacts
-    ('contact_101', 'user_john_456', '+15556666661', 'Wife', TRUE, NOW() - INTERVAL '15 days'),
-    ('contact_102', 'user_john_456', '+15556666662', 'Business Partner', TRUE, NOW() - INTERVAL '10 days'),
-    ('contact_103', 'user_john_456', '+15556666663', 'Accountant', TRUE, NOW() - INTERVAL '5 days'),
+    -- Friends
+    (
+        '10000000-0000-0000-0000-000000000003',
+        '00000000-0000-0000-0000-000000000001',
+        'Sarah',
+        '+15555551003',
+        'friend',
+        9,
+        true,
+        NOW() - INTERVAL '25 days'
+    ),
 
-    -- Demo contacts
-    ('contact_201', 'user_demo_789', '+15557777771', 'Test Contact 1', FALSE, NOW()),
-    ('contact_202', 'user_demo_789', '+15557777772', 'Test Contact 2', TRUE, NOW())
-ON CONFLICT (id) DO NOTHING;
+    -- Professional
+    (
+        '10000000-0000-0000-0000-000000000004',
+        '00000000-0000-0000-0000-000000000001',
+        'Dr. Smith''s Office',
+        '+15555551004',
+        'doctor',
+        8,
+        true,
+        NOW() - INTERVAL '20 days'
+    )
+ON CONFLICT (id) DO UPDATE SET
+    name = EXCLUDED.name,
+    phone_number = EXCLUDED.phone_number;
 
 
 -- ======================
--- CALLS (History)
+-- CALLS (Matches Frontend Demo Data)
 -- ======================
 
-INSERT INTO calls (id, user_id, call_sid, caller_number, intent, scam_score, action_taken, duration, created_at)
-VALUES
-    -- Sarah's calls (mix of legitimate and scams)
+INSERT INTO calls (
+    id,
+    user_id,
+    caller_number,
+    caller_name,
+    call_sid,
+    status,
+    intent,
+    scam_score,
+    passed_through,
+    started_at,
+    ended_at,
+    duration_seconds
+) VALUES
+    -- Call 1: Sarah (Friend) - 2 hours ago
+    (
+        '20000000-0000-0000-0000-000000000001',
+        '00000000-0000-0000-0000-000000000001',
+        '+15555551003',
+        'Sarah',
+        'CA_demo_001',
+        'ended',
+        'friend',
+        0.05,
+        true,
+        NOW() - INTERVAL '2 hours',
+        NOW() - INTERVAL '2 hours' + INTERVAL '5 minutes',
+        300
+    ),
 
-    -- Scam calls (blocked)
-    ('call_001', 'user_sarah_123', 'CA001_irs_scam', '+15551111111', 'scam', 0.95, 'blocked', 15, NOW() - INTERVAL '2 days'),
-    ('call_002', 'user_sarah_123', 'CA002_tech_scam', '+15552222222', 'scam', 0.92, 'blocked', 22, NOW() - INTERVAL '3 days'),
-    ('call_003', 'user_sarah_123', 'CA003_social_scam', '+15553333333', 'scam', 0.88, 'blocked', 18, NOW() - INTERVAL '5 days'),
-    ('call_004', 'user_sarah_123', 'CA004_warrant_scam', '+15554444444', 'scam', 0.97, 'blocked', 12, NOW() - INTERVAL '7 days'),
+    -- Call 2: Unknown (IRS Scam) - 5 hours ago - BLOCKED
+    (
+        '20000000-0000-0000-0000-000000000002',
+        '00000000-0000-0000-0000-000000000001',
+        '+18005551234',
+        'Unknown',
+        'CA_demo_002',
+        'blocked',
+        'scam',
+        0.95,
+        false,
+        NOW() - INTERVAL '5 hours',
+        NOW() - INTERVAL '5 hours' + INTERVAL '15 seconds',
+        15
+    ),
 
-    -- Sales calls (screened)
-    ('call_005', 'user_sarah_123', 'CA005_insurance', '+15555555556', 'sales', 0.15, 'screened', 45, NOW() - INTERVAL '1 day'),
-    ('call_006', 'user_sarah_123', 'CA006_solar_panels', '+15555555557', 'sales', 0.10, 'screened', 60, NOW() - INTERVAL '4 days'),
-    ('call_007', 'user_sarah_123', 'CA007_credit_card', '+15555555558', 'sales', 0.25, 'blocked', 30, NOW() - INTERVAL '6 days'),
+    -- Call 3: Mom - 1 day ago
+    (
+        '20000000-0000-0000-0000-000000000003',
+        '00000000-0000-0000-0000-000000000001',
+        '+15555551001',
+        'Mom',
+        'CA_demo_003',
+        'ended',
+        'friend',
+        0.02,
+        true,
+        NOW() - INTERVAL '1 day',
+        NOW() - INTERVAL '1 day' + INTERVAL '8 minutes',
+        480
+    ),
 
-    -- Legitimate calls (passed through)
-    ('call_008', 'user_sarah_123', 'CA008_mom', '+15555555551', 'friend', 0.02, 'passed', 180, NOW() - INTERVAL '1 day'),
-    ('call_009', 'user_sarah_123', 'CA009_doctor', '+15555555553', 'appointment', 0.05, 'passed', 90, NOW() - INTERVAL '2 days'),
-    ('call_010', 'user_sarah_123', 'CA010_boss', '+15555555555', 'friend', 0.01, 'passed', 240, NOW() - INTERVAL '3 days'),
+    -- Call 4: Sales Call - 1 day ago - BLOCKED
+    (
+        '20000000-0000-0000-0000-000000000004',
+        '00000000-0000-0000-0000-000000000001',
+        '+18885559999',
+        'Unknown',
+        'CA_demo_004',
+        'blocked',
+        'sales',
+        0.35,
+        false,
+        NOW() - INTERVAL '1 day' - INTERVAL '3 hours',
+        NOW() - INTERVAL '1 day' - INTERVAL '3 hours' + INTERVAL '45 seconds',
+        45
+    ),
 
-    -- John's calls
-    ('call_101', 'user_john_456', 'CA101_warranty_scam', '+15556666664', 'scam', 0.90, 'blocked', 20, NOW() - INTERVAL '1 day'),
-    ('call_102', 'user_john_456', 'CA102_wife', '+15556666661', 'friend', 0.00, 'passed', 300, NOW() - INTERVAL '2 days'),
-    ('call_103', 'user_john_456', 'CA103_accountant', '+15556666663', 'appointment', 0.03, 'passed', 120, NOW() - INTERVAL '3 days'),
+    -- Call 5: Dr. Smith's Office (Appointment) - 2 days ago
+    (
+        '20000000-0000-0000-0000-000000000005',
+        '00000000-0000-0000-0000-000000000001',
+        '+15555551004',
+        'Dr. Smith''s Office',
+        'CA_demo_005',
+        'ended',
+        'appointment',
+        0.08,
+        true,
+        NOW() - INTERVAL '2 days',
+        NOW() - INTERVAL '2 days' + INTERVAL '2 minutes',
+        120
+    ),
 
-    -- Demo calls
-    ('call_201', 'user_demo_789', 'CA201_demo_scam', '+15557777773', 'scam', 0.85, 'blocked', 10, NOW()),
-    ('call_202', 'user_demo_789', 'CA202_demo_sales', '+15557777774', 'sales', 0.20, 'screened', 35, NOW())
-ON CONFLICT (id) DO NOTHING;
+    -- Call 6: Unknown (Tech Support Scam) - 3 days ago - BLOCKED
+    (
+        '20000000-0000-0000-0000-000000000006',
+        '00000000-0000-0000-0000-000000000001',
+        '+18665554321',
+        'Unknown',
+        'CA_demo_006',
+        'blocked',
+        'scam',
+        0.92,
+        false,
+        NOW() - INTERVAL '3 days',
+        NOW() - INTERVAL '3 days' + INTERVAL '22 seconds',
+        22
+    ),
+
+    -- Call 7: Dad - 3 days ago
+    (
+        '20000000-0000-0000-0000-000000000007',
+        '00000000-0000-0000-0000-000000000001',
+        '+15555551002',
+        'Dad',
+        'CA_demo_007',
+        'ended',
+        'friend',
+        0.01,
+        true,
+        NOW() - INTERVAL '3 days' - INTERVAL '6 hours',
+        NOW() - INTERVAL '3 days' - INTERVAL '6 hours' + INTERVAL '6 minutes',
+        360
+    ),
+
+    -- Call 8: Delivery Driver - 4 days ago
+    (
+        '20000000-0000-0000-0000-000000000008',
+        '00000000-0000-0000-0000-000000000001',
+        '+15555559876',
+        'Unknown',
+        'CA_demo_008',
+        'ended',
+        'unknown',
+        0.15,
+        true,
+        NOW() - INTERVAL '4 days',
+        NOW() - INTERVAL '4 days' + INTERVAL '1 minute',
+        60
+    )
+ON CONFLICT (id) DO UPDATE SET
+    caller_name = EXCLUDED.caller_name,
+    status = EXCLUDED.status,
+    intent = EXCLUDED.intent,
+    scam_score = EXCLUDED.scam_score;
 
 
 -- ======================
 -- CALL TRANSCRIPTS
 -- ======================
 
-INSERT INTO call_transcripts (id, call_id, transcript, created_at)
-VALUES
-    -- IRS Scam
+INSERT INTO call_transcripts (
+    id,
+    call_id,
+    transcript,
+    sentiment,
+    summary,
+    created_at
+) VALUES
+    -- Sarah (Friend) transcript
     (
-        'transcript_001',
-        'call_001',
-        'Hello, this is the Internal Revenue Service calling about your unpaid taxes. We have issued a warrant for your arrest. You must call us back immediately at this number to resolve this matter, or the police will be at your door within 24 hours. This is your final warning.',
+        '30000000-0000-0000-0000-000000000001',
+        '20000000-0000-0000-0000-000000000001',
+        'Hey Tom! It''s Sarah. I was just calling to see if you wanted to grab coffee this weekend. I know a great new place that opened downtown. Let me know when you''re free!',
+        'positive',
+        'Friend calling to make weekend plans for coffee',
+        NOW() - INTERVAL '2 hours'
+    ),
+
+    -- IRS Scam transcript
+    (
+        '30000000-0000-0000-0000-000000000002',
+        '20000000-0000-0000-0000-000000000002',
+        'This is the Internal Revenue Service. We have issued a warrant for your arrest due to unpaid taxes. You must call us back immediately at this number or the police will be dispatched to your location within 24 hours. This is your final warning.',
+        'negative',
+        'IRS impersonation scam with arrest threats',
+        NOW() - INTERVAL '5 hours'
+    ),
+
+    -- Mom transcript
+    (
+        '30000000-0000-0000-0000-000000000003',
+        '20000000-0000-0000-0000-000000000003',
+        'Hi sweetheart, it''s Mom. I just wanted to check in and see how you''re doing. Your father and I would love to have you over for dinner this Sunday if you''re available. Call me back when you get a chance. Love you!',
+        'positive',
+        'Mother calling to check in and invite for dinner',
+        NOW() - INTERVAL '1 day'
+    ),
+
+    -- Sales Call transcript
+    (
+        '30000000-0000-0000-0000-000000000004',
+        '20000000-0000-0000-0000-000000000004',
+        'Hello, I''m calling about your car''s extended warranty. This is your final opportunity to extend your coverage before it expires. Press 1 to speak with a representative or press 2 to be removed from our list.',
+        'neutral',
+        'Unsolicited car warranty sales call',
+        NOW() - INTERVAL '1 day' - INTERVAL '3 hours'
+    ),
+
+    -- Dr. Smith's Office transcript
+    (
+        '30000000-0000-0000-0000-000000000005',
+        '20000000-0000-0000-0000-000000000005',
+        'Hello, this is Dr. Smith''s office calling to confirm your appointment scheduled for tomorrow at 2:30 PM. Please call us back at 555-1004 if you need to reschedule. Thank you.',
+        'neutral',
+        'Doctor''s office confirming appointment',
         NOW() - INTERVAL '2 days'
     ),
 
-    -- Tech Support Scam
+    -- Tech Support Scam transcript
     (
-        'transcript_002',
-        'call_002',
-        'Hello, this is Microsoft support. We have detected a virus on your computer that is sending your personal information to hackers. We need to remote access your computer immediately to fix this critical security issue. Please provide your credit card for a one-time security fee of $299.',
+        '30000000-0000-0000-0000-000000000006',
+        '20000000-0000-0000-0000-000000000006',
+        'Hello, this is Microsoft technical support. We have detected a critical virus on your computer that is sending your personal information to hackers. We need immediate remote access to your computer to fix this security breach. Please stay on the line.',
+        'negative',
+        'Tech support scam impersonating Microsoft',
         NOW() - INTERVAL '3 days'
     ),
 
-    -- Social Security Scam
+    -- Dad transcript
     (
-        'transcript_003',
-        'call_003',
-        'This is the Social Security Administration. Your social security number has been suspended due to suspicious activity. Press 1 immediately to speak with an officer, or your benefits will be terminated permanently.',
-        NOW() - INTERVAL '5 days'
+        '30000000-0000-0000-0000-000000000007',
+        '20000000-0000-0000-0000-000000000007',
+        'Hey son, it''s Dad. I need your help with something on the computer when you get a chance. Nothing urgent, but when you have some time could you give me a call back? Thanks.',
+        'positive',
+        'Father requesting help with computer',
+        NOW() - INTERVAL '3 days' - INTERVAL '6 hours'
     ),
 
-    -- Warrant Scam
+    -- Delivery Driver transcript
     (
-        'transcript_004',
-        'call_004',
-        'This is Officer Johnson from the county sheriff. There is an active arrest warrant for you. You missed your court date. You need to pay $5,000 in bail immediately or we will come to arrest you. Do not hang up this call.',
-        NOW() - INTERVAL '7 days'
-    ),
-
-    -- Insurance Sales (Legitimate)
-    (
-        'transcript_005',
-        'call_005',
-        'Hello, my name is Jennifer from State Farm Insurance. I'm calling to see if you would be interested in reviewing your current insurance coverage. We have some new plans that might save you money. Would you have a few minutes to discuss your options?',
-        NOW() - INTERVAL '1 day'
-    ),
-
-    -- Mom (Legitimate)
-    (
-        'transcript_008',
-        'call_008',
-        'Hi honey, it's mom! I wanted to check in and see how you're doing. Are you free for dinner this Sunday? Dad and I would love to see you.',
-        NOW() - INTERVAL '1 day'
-    ),
-
-    -- Doctor Appointment (Legitimate)
-    (
-        'transcript_009',
-        'call_009',
-        'Hello, this is Dr. Smith's office calling to confirm your appointment tomorrow at 2 PM. Please call us back if you need to reschedule. Thank you.',
-        NOW() - INTERVAL '2 days'
+        '30000000-0000-0000-0000-000000000008',
+        '20000000-0000-0000-0000-000000000008',
+        'Hi, this is your delivery driver. I have a package for you but I can''t find your apartment number. Can you come down to the lobby? I''m in a white van.',
+        'neutral',
+        'Delivery driver requesting assistance',
+        NOW() - INTERVAL '4 days'
     )
-ON CONFLICT (id) DO NOTHING;
+ON CONFLICT (call_id) DO UPDATE SET
+    transcript = EXCLUDED.transcript,
+    summary = EXCLUDED.summary;
 
 
 -- ======================
 -- SCAM REPORTS
 -- ======================
 
-INSERT INTO scam_reports (id, call_id, scam_type, red_flags, confidence, created_at)
-VALUES
+INSERT INTO scam_reports (
+    id,
+    call_id,
+    scam_type,
+    confidence,
+    pattern_matched,
+    action_taken,
+    reported_at
+) VALUES
+    -- IRS Scam report
     (
-        'scam_001',
-        'call_001',
+        '40000000-0000-0000-0000-000000000001',
+        '20000000-0000-0000-0000-000000000002',
         'irs',
-        ARRAY['irs', 'warrant', 'arrest', 'immediate payment', 'urgency', 'threat'],
         0.95,
-        NOW() - INTERVAL '2 days'
+        'IRS impersonation with arrest warrant threat and urgency tactics',
+        'blocked',
+        NOW() - INTERVAL '5 hours'
     ),
 
+    -- Tech Support Scam report
     (
-        'scam_002',
-        'call_002',
+        '40000000-0000-0000-0000-000000000002',
+        '20000000-0000-0000-0000-000000000006',
         'tech_support',
-        ARRAY['microsoft support', 'virus', 'remote access', 'credit card', 'urgent'],
         0.92,
+        'Microsoft impersonation with virus threat and remote access request',
+        'blocked',
         NOW() - INTERVAL '3 days'
-    ),
+    )
+ON CONFLICT (id) DO UPDATE SET
+    confidence = EXCLUDED.confidence,
+    pattern_matched = EXCLUDED.pattern_matched;
 
+
+-- ======================
+-- CALL ANALYTICS (Last 30 days)
+-- ======================
+
+INSERT INTO call_analytics (
+    id,
+    user_id,
+    date,
+    total_calls,
+    scams_blocked,
+    sales_blocked,
+    contacts_passed,
+    unknown_screened,
+    avg_call_duration_seconds,
+    created_at
+) VALUES
+    -- Last 7 days of analytics
     (
-        'scam_003',
-        'call_003',
-        'social_security',
-        ARRAY['social security suspended', 'benefits terminated', 'press 1', 'urgency'],
-        0.88,
+        '50000000-0000-0000-0000-000000000001',
+        '00000000-0000-0000-0000-000000000001',
+        CURRENT_DATE - INTERVAL '6 days',
+        5,
+        1,
+        0,
+        3,
+        1,
+        180,
+        NOW() - INTERVAL '6 days'
+    ),
+    (
+        '50000000-0000-0000-0000-000000000002',
+        '00000000-0000-0000-0000-000000000001',
+        CURRENT_DATE - INTERVAL '5 days',
+        3,
+        0,
+        1,
+        2,
+        0,
+        120,
         NOW() - INTERVAL '5 days'
     ),
-
     (
-        'scam_004',
-        'call_004',
-        'warrant',
-        ARRAY['arrest warrant', 'sheriff', 'bail', 'immediate payment', 'threat'],
-        0.97,
-        NOW() - INTERVAL '7 days'
+        '50000000-0000-0000-0000-000000000003',
+        '00000000-0000-0000-0000-000000000001',
+        CURRENT_DATE - INTERVAL '4 days',
+        7,
+        2,
+        1,
+        3,
+        1,
+        90,
+        NOW() - INTERVAL '4 days'
     ),
-
     (
-        'scam_101',
-        'call_101',
-        'warranty',
-        ARRAY['car warranty', 'expires soon', 'final notice', 'urgency'],
-        0.90,
+        '50000000-0000-0000-0000-000000000004',
+        '00000000-0000-0000-0000-000000000001',
+        CURRENT_DATE - INTERVAL '3 days',
+        4,
+        1,
+        0,
+        2,
+        1,
+        240,
+        NOW() - INTERVAL '3 days'
+    ),
+    (
+        '50000000-0000-0000-0000-000000000005',
+        '00000000-0000-0000-0000-000000000001',
+        CURRENT_DATE - INTERVAL '2 days',
+        6,
+        1,
+        1,
+        3,
+        1,
+        150,
+        NOW() - INTERVAL '2 days'
+    ),
+    (
+        '50000000-0000-0000-0000-000000000006',
+        '00000000-0000-0000-0000-000000000001',
+        CURRENT_DATE - INTERVAL '1 day',
+        8,
+        0,
+        2,
+        4,
+        2,
+        200,
         NOW() - INTERVAL '1 day'
+    ),
+    (
+        '50000000-0000-0000-0000-000000000007',
+        '00000000-0000-0000-0000-000000000001',
+        CURRENT_DATE,
+        2,
+        1,
+        1,
+        0,
+        0,
+        45,
+        NOW()
     )
-ON CONFLICT (id) DO NOTHING;
+ON CONFLICT (id) DO UPDATE SET
+    total_calls = EXCLUDED.total_calls,
+    scams_blocked = EXCLUDED.scams_blocked;
 
 
 -- ======================
--- CALL ANALYTICS
+-- VERIFICATION QUERIES
 -- ======================
 
-INSERT INTO call_analytics (id, user_id, date, total_calls, scams_blocked, time_saved_minutes, created_at)
-VALUES
-    -- Sarah's analytics (last 30 days)
-    ('analytics_001', 'user_sarah_123', CURRENT_DATE - INTERVAL '29 days', 2, 0, 0, NOW() - INTERVAL '29 days'),
-    ('analytics_002', 'user_sarah_123', CURRENT_DATE - INTERVAL '28 days', 3, 1, 23, NOW() - INTERVAL '28 days'),
-    ('analytics_003', 'user_sarah_123', CURRENT_DATE - INTERVAL '27 days', 1, 0, 0, NOW() - INTERVAL '27 days'),
-    ('analytics_004', 'user_sarah_123', CURRENT_DATE - INTERVAL '7 days', 4, 1, 15, NOW() - INTERVAL '7 days'),
-    ('analytics_005', 'user_sarah_123', CURRENT_DATE - INTERVAL '5 days', 3, 1, 18, NOW() - INTERVAL '5 days'),
-    ('analytics_006', 'user_sarah_123', CURRENT_DATE - INTERVAL '3 days', 2, 1, 22, NOW() - INTERVAL '3 days'),
-    ('analytics_007', 'user_sarah_123', CURRENT_DATE - INTERVAL '2 days', 5, 1, 15, NOW() - INTERVAL '2 days'),
-    ('analytics_008', 'user_sarah_123', CURRENT_DATE - INTERVAL '1 day', 3, 0, 45, NOW() - INTERVAL '1 day'),
-    ('analytics_009', 'user_sarah_123', CURRENT_DATE, 2, 0, 30, NOW()),
+-- Display seeded data counts
+SELECT 'Users created:' AS info, COUNT(*)::text AS count FROM users;
+SELECT 'Contacts created:' AS info, COUNT(*)::text AS count FROM contacts;
+SELECT 'Calls logged:' AS info, COUNT(*)::text AS count FROM calls;
+SELECT 'Transcripts saved:' AS info, COUNT(*)::text AS count FROM call_transcripts;
+SELECT 'Scams detected:' AS info, COUNT(*)::text AS count FROM scam_reports;
+SELECT 'Analytics entries:' AS info, COUNT(*)::text AS count FROM call_analytics;
 
-    -- John's analytics
-    ('analytics_101', 'user_john_456', CURRENT_DATE - INTERVAL '3 days', 1, 0, 0, NOW() - INTERVAL '3 days'),
-    ('analytics_102', 'user_john_456', CURRENT_DATE - INTERVAL '2 days', 2, 0, 0, NOW() - INTERVAL '2 days'),
-    ('analytics_103', 'user_john_456', CURRENT_DATE - INTERVAL '1 day', 3, 1, 20, NOW() - INTERVAL '1 day')
-ON CONFLICT (id) DO NOTHING;
-
-
--- ======================
--- AGGREGATE STATS
--- ======================
-
--- Verify data
-SELECT 'Users created:', COUNT(*) FROM users;
-SELECT 'Contacts created:', COUNT(*) FROM contacts;
-SELECT 'Calls logged:', COUNT(*) FROM calls;
-SELECT 'Transcripts saved:', COUNT(*) FROM call_transcripts;
-SELECT 'Scams detected:', COUNT(*) FROM scam_reports;
-SELECT 'Analytics entries:', COUNT(*) FROM call_analytics;
-
--- Summary stats
+-- Summary statistics
 SELECT
-    'Total scams blocked:' AS metric,
-    COUNT(*) AS value
+    'Total scams blocked' AS metric,
+    COUNT(*)::text AS value
 FROM calls
-WHERE action_taken = 'blocked' AND scam_score > 0.85;
+WHERE intent = 'scam' AND status = 'blocked';
 
 SELECT
-    'Average scam score:' AS metric,
-    ROUND(AVG(scam_score)::numeric, 2) AS value
+    'Total sales blocked' AS metric,
+    COUNT(*)::text AS value
+FROM calls
+WHERE intent = 'sales' AND status = 'blocked';
+
+SELECT
+    'Average scam score' AS metric,
+    ROUND(AVG(scam_score)::numeric, 3)::text AS value
 FROM calls
 WHERE intent = 'scam';
 
 SELECT
-    'Total time saved (minutes):' AS metric,
-    SUM(time_saved_minutes) AS value
-FROM call_analytics;
+    'Total calls today' AS metric,
+    COUNT(*)::text AS value
+FROM calls
+WHERE started_at >= CURRENT_DATE;
+
+-- Display recent calls for verification
+SELECT
+    id,
+    caller_name,
+    intent,
+    scam_score,
+    status,
+    started_at
+FROM calls
+ORDER BY started_at DESC
+LIMIT 10;
