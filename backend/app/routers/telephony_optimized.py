@@ -15,8 +15,7 @@ from typing import Dict
 from app.services.database import db_service
 from app.services.rag_service import rag_service
 from app.services.gcs_service import gcs_service
-from app.services.local_intelligence import local_intelligence
-from app.agents.orchestrator import screen_incoming_call
+from app.agents.orchestrator import analyze_ongoing_call
 from app.core.config import settings
 
 logger = logging.getLogger(__name__)
@@ -242,17 +241,30 @@ async def analyze_call_realtime(
     """
     Background task: Analyze call in real-time
 
-    Runs LOCAL intelligence (5-50ms) + RAG (parallel)
+    Uses Google ADK multi-agent orchestrator:
+    - ScamDetectorAgent: Fraud pattern detection (keywords + LLM)
+    - ScreenerAgent: Intent classification (friend, sales, scam)
+    - Runs in parallel for speed
+
     If scam detected → End call via Twilio API
     """
     try:
-        # 1. INSTANT local analysis (5-50ms)
-        local_result = local_intelligence.analyze_fast(transcript)
+        # 1. Multi-agent analysis using Google ADK orchestrator
+        analysis = await analyze_ongoing_call(
+            user_id=user_id,
+            caller_number=caller_number,
+            call_sid=call_sid,
+            updated_transcript=transcript
+        )
 
-        logger.info(f"🧠 Local analysis: scam_score={local_result['scam_score']:.2f}")
+        scam_score = analysis.get("scam_score", 0.0)
+        should_block = analysis.get("should_block", False)
+        intent = analysis.get("intent", "unknown")
+
+        logger.info(f"🧠 ADK analysis: scam_score={scam_score:.2f}, intent={intent}")
 
         # 2. HIGH CONFIDENCE SCAM → Block immediately
-        if local_result["is_scam"] and local_result["scam_score"] > 0.90:
+        if should_block and scam_score > 0.85:
             logger.warning(f"🚨 HIGH CONFIDENCE SCAM DETECTED: {call_sid}")
 
             # End call via Twilio API
@@ -264,7 +276,7 @@ async def analyze_call_realtime(
                 call_sid=call_sid,
                 updates={
                     "intent": "scam",
-                    "scam_score": local_result["scam_score"],
+                    "scam_score": scam_score,
                     "action_taken": "blocked"
                 }
             )
@@ -272,9 +284,9 @@ async def analyze_call_realtime(
             # Save scam report
             await db_service.create_scam_report(
                 call_sid=call_sid,
-                scam_type=local_result.get("scam_type", "unknown"),
-                red_flags=local_result["red_flags"],
-                confidence=local_result["scam_score"]
+                scam_type=intent,  # "scam" from intent classification
+                red_flags=[],  # TODO: Extract from orchestrator analysis
+                confidence=scam_score
             )
 
             # Upload evidence to GCS (immutable)
@@ -283,7 +295,7 @@ async def analyze_call_realtime(
                 user_id=user_id,
                 evidence={
                     "transcript": transcript,
-                    "local_analysis": local_result,
+                    "adk_analysis": analysis,
                     "caller_number": caller_number
                 }
             )
@@ -293,8 +305,8 @@ async def analyze_call_realtime(
 
             return
 
-        # 3. MEDIUM RISK → Run deep analysis in parallel
-        if local_result["scam_score"] > 0.5:
+        # 3. MEDIUM RISK → Run deep analysis with phone number database
+        if scam_score > 0.5:
             logger.info(f"⚠️ Medium risk call, running deep analysis")
 
             # Check phone number against databases (parallel)
@@ -303,8 +315,8 @@ async def analyze_call_realtime(
             if phone_check["is_known_scammer"]:
                 logger.warning(f"📞 Known scammer: {caller_number} ({phone_check['reports_count']} reports)")
 
-                # Increase scam score
-                combined_score = max(local_result["scam_score"], phone_check["confidence"])
+                # Increase scam score by combining ADK analysis with phone database
+                combined_score = max(scam_score, phone_check["confidence"])
 
                 if combined_score > 0.85:
                     # Block
@@ -323,14 +335,16 @@ async def analyze_call_realtime(
         # 4. Save transcript
         await db_service.update_call_transcript(call_sid, transcript)
 
-        # 5. Upload to GCS
+        # 5. Upload to GCS with ADK analysis metadata
         await gcs_service.upload_transcript(
             call_sid=call_sid,
             user_id=user_id,
             transcript_text=transcript,
             metadata={
-                "local_analysis": local_result,
-                "caller_number": caller_number
+                "adk_analysis": analysis,
+                "caller_number": caller_number,
+                "intent": intent,
+                "scam_score": scam_score
             }
         )
 
