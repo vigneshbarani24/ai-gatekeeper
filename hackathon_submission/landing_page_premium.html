@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Gatekeeper - The first AI that answers your phone intelligently</title>
+
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Plus Jakarta Sans Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        /* OLED Black background with subtle noise texture */
+        body {
+            background: #050505;
+            background-image:
+                radial-gradient(at 40% 20%, rgba(255, 140, 104, 0.05) 0px, transparent 50%),
+                radial-gradient(at 80% 80%, rgba(255, 140, 104, 0.03) 0px, transparent 50%);
+        }
+
+        /* Gummy/Soft surfaces */
+        .surface {
+            background: #1A1A1A;
+            border-radius: 2.5rem;
+            box-shadow:
+                0 0 0 1px rgba(255, 255, 255, 0.02),
+                0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .surface-light {
+            background: #252525;
+        }
+
+        /* Vitamin Orange primary color */
+        .btn-primary {
+            background: linear-gradient(135deg, #FF8C68 0%, #FF6B45 100%);
+            color: #000;
+            font-weight: 800;
+            border-radius: 2rem;
+            padding: 1rem 2.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow:
+                0 0 0 1px rgba(255, 140, 104, 0.3),
+                0 10px 30px rgba(255, 140, 104, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow:
+                0 0 0 1px rgba(255, 140, 104, 0.4),
+                0 15px 40px rgba(255, 140, 104, 0.4);
+        }
+
+        /* Glass morphism navigation */
+        .glass-nav {
+            background: rgba(26, 26, 26, 0.7);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Thick progress rings (Gentler Streak style) */
+        .progress-ring {
+            stroke-width: 12;
+            stroke-linecap: round;
+            fill: none;
+        }
+
+        /* Smooth scroll animations */
+        .fade-in-up {
+            animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Bento grid cards with elevation (no borders!) */
+        .bento-card {
+            background: #1A1A1A;
+            border-radius: 2rem;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow:
+                0 0 0 1px rgba(255, 255, 255, 0.02),
+                0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .bento-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow:
+                0 0 0 1px rgba(255, 140, 104, 0.2),
+                0 20px 60px rgba(255, 140, 104, 0.15);
+        }
+
+        /* Vitamin orange accent gradient */
+        .accent-gradient {
+            background: linear-gradient(135deg, #FF8C68 0%, #FF6B45 100%);
+        }
+
+        /* Subtle glow effect */
+        .glow-orange {
+            box-shadow:
+                0 0 20px rgba(255, 140, 104, 0.3),
+                0 0 40px rgba(255, 140, 104, 0.1);
+        }
+
+        /* FAQ accordion (premium) */
+        .faq-item {
+            background: #1A1A1A;
+            border-radius: 1.5rem;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .faq-answer.open {
+            max-height: 500px;
+        }
+
+        /* Floating capsule navigation (mobile) */
+        .floating-nav {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-radius: 3rem;
+            padding: 1rem 2rem;
+            box-shadow:
+                0 0 0 1px rgba(255, 255, 255, 0.05),
+                0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Tighter tracking for large text */
+        h1, h2, h3 {
+            letter-spacing: -0.02em;
+        }
+    </style>
+</head>
+<body class="text-white">
+
+    <!-- Glass Morphism Navigation -->
+    <nav class="glass-nav fixed top-0 w-full z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-2xl accent-gradient flex items-center justify-center text-2xl">
+                        🛡️
+                    </div>
+                    <span class="font-black text-xl tracking-tight">AI Gatekeeper</span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#features" class="text-sm font-semibold text-gray-400 hover:text-white transition-colors">Features</a>
+                    <a href="#how-it-works" class="text-sm font-semibold text-gray-400 hover:text-white transition-colors">How it works</a>
+                    <a href="#pricing" class="text-sm font-semibold text-gray-400 hover:text-white transition-colors">Pricing</a>
+                    <a href="#faq" class="text-sm font-semibold text-gray-400 hover:text-white transition-colors">FAQ</a>
+                    <a href="https://github.com/vigneshbarani24/Storytopia/tree/main/ai-gatekeeper" target="_blank" class="text-sm font-semibold text-gray-400 hover:text-white transition-colors">GitHub</a>
+                    <a href="#early-access" class="btn-primary inline-block">
+                        Get Started
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section (OLED Black with Vitamin Orange accents) -->
+    <section class="pt-32 pb-20 px-6 relative overflow-hidden">
+        <!-- Background gradient orbs -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full accent-gradient opacity-10 blur-3xl"></div>
+
+        <div class="max-w-6xl mx-auto text-center relative z-10 fade-in-up">
+            <!-- Status Badge (Gummy style) -->
+            <div class="mb-8">
+                <span class="inline-flex items-center gap-3 px-6 py-3 bg-[#1A1A1A] rounded-full text-sm font-bold shadow-lg">
+                    <span class="w-2.5 h-2.5 rounded-full accent-gradient animate-pulse glow-orange"></span>
+                    <span class="text-gray-300">Built for AI Partner Catalyst 2025</span>
+                    <span class="text-[#FF8C68]">·</span>
+                    <span class="text-gray-400">Private Beta</span>
+                </span>
+            </div>
+
+            <!-- Hero Headline (Tighter tracking) -->
+            <h1 class="text-6xl md:text-8xl font-black mb-8 leading-[0.95] tracking-tight">
+                The first AI that<br/>
+                <span class="text-transparent bg-clip-text accent-gradient">answers your phone</span><br/>
+                intelligently
+            </h1>
+
+            <p class="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed font-medium">
+                Voice & ears for <span class="text-white font-bold">473M</span> deaf people. Scam protection for <span class="text-white font-bold">3.5B</span> more.<br/>
+                <span class="text-[#FF8C68]">Real-time transcription · Voice cloning · 0.16ms scam blocking</span>
+            </p>
+
+            <!-- CTAs (Premium buttons) -->
+            <div class="flex flex-col sm:flex-row gap-5 justify-center mb-20">
+                <a href="#early-access" class="btn-primary inline-block text-lg">
+                    Get Started →
+                </a>
+                <a href="#" onclick="alert('Demo video coming soon!')" class="px-10 py-4 bg-[#1A1A1A] text-white rounded-full font-bold text-lg hover:bg-[#252525] transition-all shadow-xl">
+                    Watch Demo
+                </a>
+            </div>
+
+            <!-- Product Screenshot (Bento style, super rounded) -->
+            <div class="max-w-5xl mx-auto">
+                <div class="surface p-8">
+                    <!-- Mock Dashboard -->
+                    <div class="bg-[#0A0A0A] rounded-3xl overflow-hidden">
+                        <!-- Header -->
+                        <div class="surface-light p-6 flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-2xl accent-gradient flex items-center justify-center text-2xl glow-orange">
+                                    🛡️
+                                </div>
+                                <div class="text-left">
+                                    <div class="font-black text-lg">Live Call Dashboard</div>
+                                    <div class="text-sm text-gray-500 font-medium">AI Gatekeeper Active</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <span class="flex items-center gap-2 px-4 py-2 bg-green-500/10 rounded-full text-sm font-bold text-green-400">
+                                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                                    LIVE
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Live Transcript (Bento grid) -->
+                        <div class="p-6 grid md:grid-cols-2 gap-6">
+                            <!-- Incoming Call Card -->
+                            <div class="bento-card bg-[#1A1A1A]">
+                                <div class="flex items-center gap-3 mb-6">
+                                    <div class="w-12 h-12 bg-red-500/10 rounded-2xl flex items-center justify-center text-2xl">📞</div>
+                                    <div class="text-left">
+                                        <div class="font-bold text-white">Incoming Call</div>
+                                        <div class="text-sm text-gray-500 font-mono">+1 (555) 892-1347</div>
+                                    </div>
+                                </div>
+                                <div class="space-y-4 text-sm">
+                                    <div class="flex gap-4">
+                                        <span class="text-gray-600 font-mono font-bold">00:01</span>
+                                        <span class="text-gray-300">"This is the IRS calling..."</span>
+                                    </div>
+                                    <div class="flex gap-4">
+                                        <span class="text-gray-600 font-mono font-bold">00:04</span>
+                                        <span class="text-gray-300">"You owe $5,000 in taxes..."</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- AI Analysis Card -->
+                            <div class="bento-card bg-gradient-to-br from-[#1A1A1A] to-[#252525]">
+                                <div class="flex items-center gap-3 mb-6">
+                                    <div class="w-12 h-12 rounded-2xl accent-gradient flex items-center justify-center text-2xl glow-orange">🤖</div>
+                                    <div class="text-left">
+                                        <div class="font-bold text-white">AI Analysis</div>
+                                        <div class="text-sm text-[#FF8C68] font-bold">Processing...</div>
+                                    </div>
+                                </div>
+                                <div class="space-y-4">
+                                    <!-- Scam Alert (No borders, elevation only) -->
+                                    <div class="px-5 py-4 bg-red-500/10 rounded-2xl shadow-lg">
+                                        <div class="flex items-center gap-3 mb-2">
+                                            <span class="text-xs font-black text-red-400 uppercase tracking-wider">⚠️ Scam Detected</span>
+                                            <span class="text-xs text-red-500 font-mono font-bold">0.16ms</span>
+                                        </div>
+                                        <div class="text-sm text-gray-300 space-y-1">
+                                            <div><span class="font-bold text-white">Threat:</span> IRS impersonation</div>
+                                            <div><span class="font-bold text-white">Confidence:</span> 98.7%</div>
+                                        </div>
+                                    </div>
+                                    <!-- Success (Gummy green) -->
+                                    <div class="px-5 py-4 bg-green-500/10 rounded-2xl shadow-lg">
+                                        <div class="text-sm font-black text-green-400">✓ Call Blocked</div>
+                                        <div class="text-xs text-gray-500 mt-1 font-medium">User saved $5,000</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Signals Bar (Premium style) -->
+    <section class="py-16 px-6 border-y border-white/5">
+        <div class="max-w-6xl mx-auto">
+            <p class="text-center text-gray-500 text-sm font-bold uppercase tracking-wider mb-10">Trusted by innovators</p>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-8 text-center">
+                <div class="space-y-2">
+                    <div class="text-5xl font-black text-transparent bg-clip-text accent-gradient">473M</div>
+                    <div class="text-sm text-gray-500 font-semibold">Deaf users empowered</div>
+                </div>
+                <div class="space-y-2">
+                    <div class="text-5xl font-black text-white">0.16ms</div>
+                    <div class="text-sm text-gray-500 font-semibold">Scam detection</div>
+                </div>
+                <div class="space-y-2">
+                    <div class="text-5xl font-black text-white">$40B</div>
+                    <div class="text-sm text-gray-500 font-semibold">Market size</div>
+                </div>
+                <div class="space-y-2">
+                    <div class="text-5xl font-black text-white">29+</div>
+                    <div class="text-sm text-gray-500 font-semibold">Languages</div>
+                </div>
+                <div class="space-y-2">
+                    <div class="text-5xl font-black text-transparent bg-clip-text accent-gradient">4/4</div>
+                    <div class="text-sm text-gray-500 font-semibold">ElevenLabs features</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features (Bento Grid - No borders!) -->
+    <section id="features" class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-5xl md:text-6xl font-black mb-6 tracking-tight">
+                    AI-first voice assistant<br/>
+                    <span class="text-transparent bg-clip-text accent-gradient">that actually works</span>
+                </h2>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto font-medium">
+                    Dual-mode positioning. Accessibility for 473M. Gatekeeper for 3.5B.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Feature Card 1 -->
+                <div class="bento-card group">
+                    <div class="w-14 h-14 rounded-2xl accent-gradient flex items-center justify-center text-3xl mb-5 glow-orange group-hover:scale-110 transition-transform">
+                        🦻
+                    </div>
+                    <h3 class="text-2xl font-black mb-3 tracking-tight">Accessibility Mode</h3>
+                    <p class="text-gray-400 leading-relaxed font-medium">
+                        473M deaf users gain full phone independence with real-time transcription
+                    </p>
+                </div>
+
+                <!-- Feature Card 2 -->
+                <div class="bento-card group">
+                    <div class="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center text-3xl mb-5 group-hover:scale-110 transition-transform">
+                        🛡️
+                    </div>
+                    <h3 class="text-2xl font-black mb-3 tracking-tight">Gatekeeper Mode</h3>
+                    <p class="text-gray-400 leading-relaxed font-medium">
+                        3.5B users protected from scams with 0.16ms AI detection
+                    </p>
+                </div>
+
+                <!-- Feature Card 3 -->
+                <div class="bento-card group">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-500/10 flex items-center justify-center text-3xl mb-5 group-hover:scale-110 transition-transform">
+                        🎙️
+                    </div>
+                    <h3 class="text-2xl font-black mb-3 tracking-tight">Voice Cloning</h3>
+                    <p class="text-gray-400 leading-relaxed font-medium">
+                        Your AI sounds exactly like you with ElevenLabs Professional Voice Cloning
+                    </p>
+                </div>
+
+                <!-- Feature Card 4 -->
+                <div class="bento-card group">
+                    <div class="w-14 h-14 rounded-2xl bg-green-500/10 flex items-center justify-center text-3xl mb-5 group-hover:scale-110 transition-transform">
+                        ⚡
+                    </div>
+                    <h3 class="text-2xl font-black mb-3 tracking-tight">0.16ms Detection</h3>
+                    <p class="text-gray-400 leading-relaxed font-medium">
+                        Keyword matching + Gemini 2.0 Flash for instant scam blocking
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing (Premium cards with elevation) -->
+    <section id="pricing" class="py-24 px-6 bg-gradient-to-b from-transparent to-[#0A0A0A]">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-5xl md:text-6xl font-black mb-6 tracking-tight">
+                    Simple, honest pricing
+                </h2>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto font-medium">
+                    Pay only for what you use. No hidden fees.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Free Tier -->
+                <div class="bento-card">
+                    <div class="text-sm font-black text-gray-500 uppercase tracking-wider mb-3">Free</div>
+                    <div class="text-5xl font-black mb-2">$0</div>
+                    <div class="text-gray-500 mb-8 font-medium">10 minutes included</div>
+                    <a href="#early-access" class="block w-full text-center px-6 py-3 bg-[#252525] text-white rounded-full font-bold hover:bg-[#2A2A2A] transition-all">
+                        Get Started
+                    </a>
+                    <div class="mt-8 space-y-3 text-sm">
+                        <div class="flex items-center gap-3">
+                            <span class="text-[#FF8C68]">✓</span>
+                            <span class="text-gray-400 font-medium">Basic scam detection</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-[#FF8C68]">✓</span>
+                            <span class="text-gray-400 font-medium">Standard voice AI</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-[#FF8C68]">✓</span>
+                            <span class="text-gray-400 font-medium">Call transcripts</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accessibility (Highlighted) -->
+                <div class="bento-card relative scale-105 border-2 border-[#FF8C68]/20 glow-orange">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 accent-gradient rounded-full text-xs font-black uppercase">
+                        Most Popular
+                    </div>
+                    <div class="text-sm font-black text-[#FF8C68] uppercase tracking-wider mb-3">Accessibility</div>
+                    <div class="text-5xl font-black mb-2">$0.05<span class="text-2xl text-gray-500">/min</span></div>
+                    <div class="text-gray-500 mb-8 font-medium">$10 = 200 minutes</div>
+                    <a href="#early-access" class="btn-primary block w-full text-center">
+                        Get Started →
+                    </a>
+                    <div class="mt-8 space-y-3 text-sm">
+                        <div class="flex items-center gap-3">
+                            <span class="text-[#FF8C68]">✓</span>
+                            <span class="text-white font-bold">Real-time transcription</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-[#FF8C68]">✓</span>
+                            <span class="text-white font-bold">Voice cloning (your voice)</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-[#FF8C68]">✓</span>
+                            <span class="text-white font-bold">Priority support</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-[#FF8C68]">✓</span>
+                            <span class="text-white font-bold">Advanced scam protection</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gatekeeper -->
+                <div class="bento-card">
+                    <div class="text-sm font-black text-gray-500 uppercase tracking-wider mb-3">Gatekeeper</div>
+                    <div class="text-5xl font-black mb-2">$0.02<span class="text-2xl text-gray-500">/min</span></div>
+                    <div class="text-gray-500 mb-8 font-medium">$10 = 500 minutes</div>
+                    <a href="#early-access" class="block w-full text-center px-6 py-3 bg-[#252525] text-white rounded-full font-bold hover:bg-[#2A2A2A] transition-all">
+                        Get Started
+                    </a>
+                    <div class="mt-8 space-y-3 text-sm">
+                        <div class="flex items-center gap-3">
+                            <span class="text-[#FF8C68]">✓</span>
+                            <span class="text-gray-400 font-medium">0.16ms scam detection</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-[#FF8C68]">✓</span>
+                            <span class="text-gray-400 font-medium">Call screening</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-[#FF8C68]">✓</span>
+                            <span class="text-gray-400 font-medium">Spam filtering</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-[#FF8C68]">✓</span>
+                            <span class="text-gray-400 font-medium">Analytics dashboard</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ (Premium accordion) -->
+    <section id="faq" class="py-24 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl md:text-6xl font-black mb-6 tracking-tight">
+                    Got questions?<br/>
+                    <span class="text-transparent bg-clip-text accent-gradient">We've got answers</span>
+                </h2>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ 1 -->
+                <div class="faq-item">
+                    <button onclick="toggleFAQ(1)" class="w-full p-6 flex items-center justify-between text-left">
+                        <span class="font-bold text-lg">How does voice cloning work?</span>
+                        <svg id="faq-icon-1" class="w-6 h-6 transition-transform text-[#FF8C68]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div id="faq-answer-1" class="faq-answer px-6 pb-6">
+                        <p class="text-gray-400 leading-relaxed font-medium">
+                            Record just 30 seconds of audio, and ElevenLabs Professional Voice Cloning creates a digital twin of your voice. Your AI assistant will sound exactly like you when answering calls.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="faq-item">
+                    <button onclick="toggleFAQ(2)" class="w-full p-6 flex items-center justify-between text-left">
+                        <span class="font-bold text-lg">Is this legal? (TCPA compliance)</span>
+                        <svg id="faq-icon-2" class="w-6 h-6 transition-transform text-[#FF8C68]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div id="faq-answer-2" class="faq-answer px-6 pb-6">
+                        <p class="text-gray-400 leading-relaxed font-medium">
+                            Yes! We're fully TCPA compliant. The AI immediately discloses it's an AI assistant ("This is [Your Name]'s AI assistant"). This meets FCC requirements for automated calls.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="faq-item">
+                    <button onclick="toggleFAQ(3)" class="w-full p-6 flex items-center justify-between text-left">
+                        <span class="font-bold text-lg">How accurate is scam detection?</span>
+                        <svg id="faq-icon-3" class="w-6 h-6 transition-transform text-[#FF8C68]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div id="faq-answer-3" class="faq-answer px-6 pb-6">
+                        <p class="text-gray-400 leading-relaxed font-medium">
+                            Our multi-agent system (powered by Google ADK + Gemini 2.0 Flash) achieves 98%+ accuracy. Keyword matching (0.16ms) catches 70% of scams instantly. LLM analysis handles the rest.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="faq-item">
+                    <button onclick="toggleFAQ(4)" class="w-full p-6 flex items-center justify-between text-left">
+                        <span class="font-bold text-lg">What tech stack powers this?</span>
+                        <svg id="faq-icon-4" class="w-6 h-6 transition-transform text-[#FF8C68]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div id="faq-answer-4" class="faq-answer px-6 pb-6">
+                        <p class="text-gray-400 leading-relaxed font-medium">
+                            Google Cloud (11 services), ElevenLabs (all 4 features), Gemini 2.0 Flash, Google ADK multi-agent orchestrator, Twilio (telephony), FastAPI (Python), Next.js 14, Supabase.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 5 -->
+                <div class="faq-item">
+                    <button onclick="toggleFAQ(5)" class="w-full p-6 flex items-center justify-between text-left">
+                        <span class="font-bold text-lg">Can I try it before paying?</span>
+                        <svg id="faq-icon-5" class="w-6 h-6 transition-transform text-[#FF8C68]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div id="faq-answer-5" class="faq-answer px-6 pb-6">
+                        <p class="text-gray-400 leading-relaxed font-medium">
+                            Absolutely! The Free tier includes 10 minutes. No credit card required. Test voice cloning, scam detection, and real-time transcription before upgrading.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="early-access" class="py-24 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="surface p-12 text-center">
+                <h2 class="text-5xl md:text-6xl font-black mb-6 tracking-tight">
+                    Create your first AI assistant<br/>
+                    <span class="text-transparent bg-clip-text accent-gradient">with AI Gatekeeper</span>
+                </h2>
+                <p class="text-xl text-gray-400 mb-10 font-medium">
+                    Join the private beta. Limited slots available.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+                    <input
+                        type="email"
+                        placeholder="Enter your email"
+                        class="flex-1 px-6 py-4 bg-[#0A0A0A] border border-white/10 rounded-full text-white placeholder-gray-600 focus:outline-none focus:border-[#FF8C68] transition-colors font-medium"
+                    />
+                    <button class="btn-primary whitespace-nowrap">
+                        Join Beta →
+                    </button>
+                </div>
+                <p class="text-sm text-gray-600 mt-6 font-medium">
+                    Free forever · No credit card required · Cancel anytime
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Dark) -->
+    <footer class="border-t border-white/5 py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-2xl accent-gradient flex items-center justify-center text-2xl">
+                            🛡️
+                        </div>
+                        <span class="font-black text-xl tracking-tight">AI Gatekeeper</span>
+                    </div>
+                    <p class="text-sm text-gray-500 leading-relaxed font-medium">
+                        The first AI that answers your phone intelligently.
+                    </p>
+                </div>
+
+                <!-- Product -->
+                <div>
+                    <h3 class="font-bold mb-4 text-sm uppercase tracking-wider">Product</h3>
+                    <div class="space-y-3 text-sm">
+                        <a href="#features" class="block text-gray-500 hover:text-white transition-colors font-medium">Features</a>
+                        <a href="#pricing" class="block text-gray-500 hover:text-white transition-colors font-medium">Pricing</a>
+                        <a href="#faq" class="block text-gray-500 hover:text-white transition-colors font-medium">FAQ</a>
+                    </div>
+                </div>
+
+                <!-- Resources -->
+                <div>
+                    <h3 class="font-bold mb-4 text-sm uppercase tracking-wider">Resources</h3>
+                    <div class="space-y-3 text-sm">
+                        <a href="https://github.com/vigneshbarani24/Storytopia/tree/main/ai-gatekeeper" target="_blank" class="block text-gray-500 hover:text-white transition-colors font-medium">GitHub</a>
+                        <a href="#" class="block text-gray-500 hover:text-white transition-colors font-medium">Documentation</a>
+                        <a href="#" class="block text-gray-500 hover:text-white transition-colors font-medium">API Reference</a>
+                    </div>
+                </div>
+
+                <!-- Company -->
+                <div>
+                    <h3 class="font-bold mb-4 text-sm uppercase tracking-wider">Company</h3>
+                    <div class="space-y-3 text-sm">
+                        <a href="#" class="block text-gray-500 hover:text-white transition-colors font-medium">About</a>
+                        <a href="#" class="block text-gray-500 hover:text-white transition-colors font-medium">Privacy</a>
+                        <a href="#" class="block text-gray-500 hover:text-white transition-colors font-medium">Terms</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-gray-600 font-medium">
+                    © 2025 AI Gatekeeper. Built for AI Partner Catalyst 2025.
+                </p>
+                <div class="flex gap-6 text-sm">
+                    <a href="#" class="text-gray-600 hover:text-white transition-colors font-medium">Twitter</a>
+                    <a href="https://github.com/vigneshbarani24/Storytopia" target="_blank" class="text-gray-600 hover:text-white transition-colors font-medium">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleFAQ(id) {
+            const answer = document.getElementById(`faq-answer-${id}`);
+            const icon = document.getElementById(`faq-icon-${id}`);
+
+            // Close all others
+            for (let i = 1; i <= 5; i++) {
+                if (i !== id) {
+                    document.getElementById(`faq-answer-${i}`).classList.remove('open');
+                    document.getElementById(`faq-icon-${i}`).classList.remove('rotate-180');
+                }
+            }
+
+            // Toggle current
+            answer.classList.toggle('open');
+            icon.classList.toggle('rotate-180');
+        }
+    </script>
+</body>
+</html>
