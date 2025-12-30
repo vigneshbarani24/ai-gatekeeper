@@ -1,0 +1,2129 @@
+------------------------ REMOTE BUILD OUTPUT ------------------------
+starting build "9c0ee1a6-4e53-4974-b341-5d595c25c847"
+FETCHSOURCE
+Fetching storage object: gs://run-sources-wingman-478813-us-central1/services/ai-gatekeeper-backend/1767106195.015977-155eadc777f9437ea8d954914caa1e49.zip#1767106201073891
+Copying gs://run-sources-wingman-478813-us-central1/services/ai-gatekeeper-backend/1767106195.015977-155eadc777f9437ea8d954914caa1e49.zip#1767106201073891...
+/ [0 files][    0.0 B/  6.4 MiB]                                                / [1 files][  6.4 MiB/  6.4 MiB]
+Operation completed over 1 objects/6.4 MiB.
+Archive:  /tmp/source-archive.zip
+   creating: /workspace/database/
+   creating: /workspace/app/
+   creating: /workspace/tests/
+   creating: /workspace/.venv/
+   creating: /workspace/app/routers/
+   creating: /workspace/app/core/
+   creating: /workspace/app/workflows/
+   creating: /workspace/app/agents/
+   creating: /workspace/app/services/
+   creating: /workspace/app/workflows/executors/
+   creating: /workspace/.venv/bin/
+   creating: /workspace/.venv/include/
+   creating: /workspace/.venv/lib/
+   creating: /workspace/.venv/include/python3.13/
+   creating: /workspace/.venv/lib/python3.9/
+   creating: /workspace/.venv/lib/python3.13/
+   creating: /workspace/.venv/lib/python3.9/site-packages/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip-21.2.4.dist-info/
+   creating: /workspace/.venv/lib/python3.9/site-packages/setuptools/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pkg_resources/
+   creating: /workspace/.venv/lib/python3.9/site-packages/_distutils_hack/
+   creating: /workspace/.venv/lib/python3.9/site-packages/setuptools-58.0.4.dist-info/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/network/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/utils/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/models/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/cli/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/operations/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/req/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/resolution/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/vcs/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/locations/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/index/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/commands/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/metadata/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/distributions/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/operations/install/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/operations/build/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/resolution/legacy/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/resolution/resolvelib/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/packaging/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/msgpack/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/webencodings/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/progress/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/pep517/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/distlib/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/colorama/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/cachecontrol/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/idna/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/tenacity/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/requests/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/tomli/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/certifi/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/pkg_resources/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/resolvelib/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/cli/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/metadata/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/pep517/in_process/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/distlib/_backport/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/cachecontrol/caches/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/filters/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/treewalkers/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/treebuilders/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/_trie/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/treeadapters/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/util/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/contrib/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/packages/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/contrib/_securetransport/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/packages/backports/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/packages/ssl_match_hostname/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/resolvelib/compat/
+   creating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_vendor/
+   creating: /workspace/.venv/lib/python3.9/site-packages/setuptools/command/
+   creating: /workspace/.venv/lib/python3.9/site-packages/setuptools/extern/
+   creating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/
+   creating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_vendor/packaging/
+   creating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_vendor/more_itertools/
+   creating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/command/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pkg_resources/_vendor/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pkg_resources/tests/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pkg_resources/extern/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pkg_resources/_vendor/packaging/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pkg_resources/tests/data/
+   creating: /workspace/.venv/lib/python3.9/site-packages/pkg_resources/tests/data/my-test-package-source/
+   creating: /workspace/.venv/lib/python3.13/site-packages/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/packaging/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/truststore/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/msgpack/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/dependency_groups/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/pygments/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/distlib/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/distro/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/cachecontrol/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/idna/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/requests/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/tomli/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/certifi/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/pyproject_hooks/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/rich/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/tomli_w/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/urllib3/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/pkg_resources/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/resolvelib/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/platformdirs/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/network/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/models/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/cli/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/req/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/vcs/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/locations/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/index/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/metadata/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/distributions/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/network/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/models/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/cli/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/install/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/build/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/install/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/build/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/req/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/legacy/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/legacy/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/vcs/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/locations/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/index/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/metadata/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/metadata/importlib/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/metadata/importlib/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/distributions/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/truststore/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/msgpack/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/dependency_groups/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/distlib/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/distro/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/cachecontrol/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/idna/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/tomli/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/certifi/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pyproject_hooks/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/tomli_w/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pkg_resources/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/resolvelib/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/platformdirs/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/licenses/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/licenses/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/truststore/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/msgpack/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/dependency_groups/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/filters/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/lexers/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/formatters/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/styles/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/filters/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/lexers/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/formatters/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/styles/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/distlib/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/distro/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/cachecontrol/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/cachecontrol/caches/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/cachecontrol/caches/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/idna/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/tomli/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/certifi/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pyproject_hooks/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pyproject_hooks/_in_process/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pyproject_hooks/_in_process/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/tomli_w/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/util/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/contrib/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/packages/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/util/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/contrib/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/contrib/_securetransport/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/contrib/_securetransport/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/packages/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/packages/backports/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/packages/backports/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pkg_resources/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/resolvelib/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/resolvelib/resolvers/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/resolvelib/resolvers/__pycache__/
+   creating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/platformdirs/__pycache__/
+  inflating: /workspace/test_orchestrator_structure.py
+  inflating: /workspace/requirements.txt
+  inflating: /workspace/Dockerfile
+  inflating: /workspace/requirements-fixed.txt
+  inflating: /workspace/cloudbuild.yaml
+  inflating: /workspace/API_ENDPOINTS.md
+  inflating: /workspace/test_analytics.py
+  inflating: /workspace/TESTING.md
+  inflating: /workspace/test_orchestrator_integration.py
+  inflating: /workspace/.dockerignore
+  inflating: /workspace/quick_check.sh
+  inflating: /workspace/run_tests.sh
+  inflating: /workspace/.env
+  inflating: /workspace/test_complete_system.py
+  inflating: /workspace/database/schema.sql
+  inflating: /workspace/database/seed_data.sql
+  inflating: /workspace/app/main.py
+  inflating: /workspace/app/routers/contacts.py
+  inflating: /workspace/app/routers/telephony.py
+  inflating: /workspace/app/routers/telephony_optimized.py
+  inflating: /workspace/app/routers/__init__.py
+  inflating: /workspace/app/routers/analytics.py
+  inflating: /workspace/app/routers/webhooks.py
+  inflating: /workspace/app/routers/calls.py
+  inflating: /workspace/app/routers/elevenlabs_tools.py
+  inflating: /workspace/app/core/config.py
+  inflating: /workspace/app/core/runtime_checks.py
+  inflating: /workspace/app/workflows/default_workflows.json
+  inflating: /workspace/app/workflows/engine.py
+  inflating: /workspace/app/workflows/executors/notification_actions.py
+  inflating: /workspace/app/workflows/executors/calendar_actions.py
+  inflating: /workspace/app/workflows/executors/mcp_actions.py
+  inflating: /workspace/app/workflows/executors/call_actions.py
+  inflating: /workspace/app/workflows/executors/business_actions.py
+  inflating: /workspace/app/workflows/executors/base.py
+  inflating: /workspace/app/agents/screener_agent.py
+  inflating: /workspace/app/agents/decision_agent.py
+  inflating: /workspace/app/agents/orchestrator.py
+  inflating: /workspace/app/agents/scam_detector_agent.py
+  inflating: /workspace/app/agents/contact_matcher_agent.py
+  inflating: /workspace/app/services/vector_store.py
+  inflating: /workspace/app/services/rag_service.py
+  inflating: /workspace/app/services/database.py
+  inflating: /workspace/app/services/gcs_service.py
+  inflating: /workspace/app/services/gemini_service.py
+  inflating: /workspace/app/services/elevenlabs_service.py
+  inflating: /workspace/app/services/twilio_service.py
+  inflating: /workspace/app/services/local_intelligence.py
+  inflating: /workspace/tests/test_api_stability.py
+  inflating: /workspace/tests/test_endpoints.py
+  inflating: /workspace/tests/test_complete.py
+  inflating: /workspace/.venv/pyvenv.cfg
+  inflating: /workspace/.venv/.gitignore
+  inflating: /workspace/.venv/bin/pip3.9
+  inflating: /workspace/.venv/bin/Activate.ps1
+  inflating: /workspace/.venv/bin/python3
+  inflating: /workspace/.venv/bin/pip3.13
+  inflating: /workspace/.venv/bin/python
+  inflating: /workspace/.venv/bin/pip3
+  inflating: /workspace/.venv/bin/activate.fish
+  inflating: /workspace/.venv/bin/python3.9
+  inflating: /workspace/.venv/bin/pip
+  inflating: /workspace/.venv/bin/activate
+  inflating: /workspace/.venv/bin/python3.13
+  inflating: /workspace/.venv/bin/activate.csh
+  inflating: /workspace/.venv/lib/python3.9/site-packages/distutils-precedence.pth
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/py.typed
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/__main__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/configuration.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/pyproject.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/cache.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/exceptions.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/main.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/wheel_builder.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/self_outdated_check.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/build_env.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/network/auth.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/network/xmlrpc.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/network/download.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/network/session.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/network/cache.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/network/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/network/utils.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/network/lazy_wheel.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/utils/logging.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/utils/misc.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/utils/compat.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/utils/encoding.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/utils/models.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/utils/deprecation.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/utils/subprocess.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/utils/filesystem.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/utils/direct_url_helpers.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/utils/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/utils/temp_dir.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/utils/appdirs.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/utils/inject_securetransport.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/utils/setuptools_build.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/utils/packaging.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/utils/distutils_args.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/utils/entrypoints.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/utils/filetypes.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/utils/pkg_resources.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/utils/parallel.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/utils/compatibility_tags.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/utils/datetime.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/utils/urls.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/utils/hashes.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/utils/virtualenv.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/utils/_log.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/utils/glibc.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/utils/wheel.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/utils/unpacking.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/models/link.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/models/selection_prefs.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/models/direct_url.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/models/index.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/models/target_python.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/models/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/models/search_scope.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/models/candidate.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/models/format_control.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/models/scheme.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/models/wheel.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/cli/cmdoptions.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/cli/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/cli/status_codes.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/cli/parser.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/cli/command_context.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/cli/spinners.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/cli/autocompletion.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/cli/base_command.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/cli/main_parser.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/cli/progress_bars.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/cli/main.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/cli/req_command.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/operations/check.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/operations/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/operations/freeze.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/operations/prepare.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/operations/install/legacy.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/operations/install/editable_legacy.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/operations/install/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/operations/install/wheel.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/operations/build/wheel_legacy.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/operations/build/metadata.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/operations/build/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/operations/build/metadata_legacy.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/operations/build/wheel.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/req/req_install.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/req/req_tracker.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/req/req_set.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/req/req_uninstall.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/req/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/req/req_file.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/req/constructors.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/resolution/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/resolution/base.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/resolution/legacy/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/resolution/legacy/resolver.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/resolution/resolvelib/provider.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/resolution/resolvelib/found_candidates.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/resolution/resolvelib/reporter.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/resolution/resolvelib/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/resolution/resolvelib/factory.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/resolution/resolvelib/requirements.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/resolution/resolvelib/resolver.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/resolution/resolvelib/candidates.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/resolution/resolvelib/base.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/vcs/git.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/vcs/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/vcs/mercurial.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/vcs/bazaar.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/vcs/versioncontrol.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/vcs/subversion.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/locations/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/locations/_sysconfig.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/locations/_distutils.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/locations/base.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/index/collector.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/index/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/index/sources.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/index/package_finder.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/commands/configuration.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/commands/show.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/commands/list.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/commands/check.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/commands/index.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/commands/completion.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/commands/download.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/commands/cache.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/commands/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/commands/hash.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/commands/debug.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/commands/uninstall.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/commands/freeze.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/commands/search.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/commands/install.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/commands/help.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/commands/wheel.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/metadata/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/metadata/pkg_resources.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/metadata/base.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/distributions/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/distributions/sdist.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/distributions/installed.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/distributions/base.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_internal/distributions/wheel.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/vendor.txt
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/appdirs.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/six.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/distro.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/pyparsing.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/packaging/tags.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/packaging/_musllinux.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/packaging/version.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/packaging/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/packaging/utils.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/packaging/requirements.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/packaging/_structures.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/packaging/markers.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/packaging/__about__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/packaging/_manylinux.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/packaging/specifiers.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/msgpack/_version.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/msgpack/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/msgpack/exceptions.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/msgpack/fallback.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/msgpack/ext.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/enums.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/langhungarianmodel.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/mbcssm.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/langthaimodel.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/version.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/compat.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/langbulgarianmodel.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/euckrprober.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/sjisprober.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/cp949prober.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/euctwfreq.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/langhebrewmodel.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/chardistribution.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/latin1prober.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/charsetprober.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/gb2312prober.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/mbcharsetprober.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/euctwprober.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/langrussianmodel.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/codingstatemachine.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/escprober.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/universaldetector.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/utf8prober.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/gb2312freq.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/mbcsgroupprober.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/langgreekmodel.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/eucjpprober.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/jisfreq.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/escsm.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/langturkishmodel.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/sbcharsetprober.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/big5freq.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/euckrfreq.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/big5prober.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/hebrewprober.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/charsetgroupprober.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/sbcsgroupprober.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/jpcntx.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/cli/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/cli/chardetect.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/metadata/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/chardet/metadata/languages.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/webencodings/labels.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/webencodings/mklabels.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/webencodings/x_user_defined.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/webencodings/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/webencodings/tests.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/progress/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/progress/bar.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/progress/spinner.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/progress/counter.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/pep517/build.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/pep517/compat.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/pep517/dirtools.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/pep517/check.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/pep517/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/pep517/envbuild.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/pep517/wrappers.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/pep517/colorlog.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/pep517/meta.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/pep517/in_process/_in_process.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/pep517/in_process/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/distlib/w32.exe
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/distlib/locators.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/distlib/metadata.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/distlib/version.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/distlib/compat.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/distlib/index.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/distlib/manifest.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/distlib/util.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/distlib/database.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/distlib/t32.exe
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/distlib/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/distlib/w64.exe
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/distlib/markers.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/distlib/resources.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/distlib/scripts.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/distlib/t64.exe
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/distlib/wheel.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/distlib/_backport/shutil.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/distlib/_backport/misc.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/distlib/_backport/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/distlib/_backport/sysconfig.cfg
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/distlib/_backport/tarfile.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/distlib/_backport/sysconfig.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/colorama/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/colorama/win32.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/colorama/ansitowin32.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/colorama/ansi.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/colorama/winterm.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/colorama/initialise.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/cachecontrol/serialize.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/cachecontrol/wrapper.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/cachecontrol/controller.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/cachecontrol/compat.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/cachecontrol/filewrapper.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/cachecontrol/heuristics.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/cachecontrol/adapter.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/cachecontrol/cache.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/cachecontrol/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/cachecontrol/_cmd.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/cachecontrol/caches/file_cache.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/cachecontrol/caches/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/cachecontrol/caches/redis_cache.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/idna/intranges.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/idna/package_data.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/idna/compat.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/idna/idnadata.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/idna/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/idna/core.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/idna/codec.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/idna/uts46data.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/tenacity/before.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/tenacity/before_sleep.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/tenacity/_asyncio.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/tenacity/stop.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/tenacity/wait.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/tenacity/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/tenacity/nap.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/tenacity/after.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/tenacity/retry.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/tenacity/tornadoweb.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/tenacity/_utils.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/requests/cookies.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/requests/auth.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/requests/sessions.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/requests/hooks.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/requests/compat.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/requests/models.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/requests/certs.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/requests/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/requests/status_codes.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/requests/packages.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/requests/__version__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/requests/api.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/requests/_internal_utils.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/requests/utils.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/requests/exceptions.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/requests/structures.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/requests/help.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/requests/adapters.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/_inputstream.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/_ihatexml.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/constants.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/html5parser.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/serializer.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/_tokenizer.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/_utils.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/filters/sanitizer.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/filters/inject_meta_charset.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/filters/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/filters/base.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/filters/alphabeticalattributes.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/filters/optionaltags.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/filters/lint.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/filters/whitespace.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/treewalkers/etree_lxml.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/treewalkers/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/treewalkers/etree.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/treewalkers/genshi.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/treewalkers/base.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/treewalkers/dom.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/treebuilders/etree_lxml.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/treebuilders/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/treebuilders/etree.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/treebuilders/base.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/treebuilders/dom.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/_trie/_base.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/_trie/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/_trie/py.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/treeadapters/sax.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/treeadapters/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/html5lib/treeadapters/genshi.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/tomli/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/tomli/_parser.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/tomli/_re.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/certifi/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/certifi/core.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/certifi/cacert.pem
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/certifi/__main__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/filepost.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/fields.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/_version.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/request.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/poolmanager.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/response.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/connection.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/_collections.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/exceptions.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/connectionpool.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/util/queue.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/util/ssltransport.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/util/proxy.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/util/wait.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/util/request.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/util/timeout.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/util/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/util/response.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/util/ssl_.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/util/retry.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/util/url.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/util/connection.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/contrib/securetransport.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/contrib/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/contrib/socks.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/contrib/_appengine_environ.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/contrib/pyopenssl.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/contrib/appengine.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/contrib/ntlmpool.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/contrib/_securetransport/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/contrib/_securetransport/low_level.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/contrib/_securetransport/bindings.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/packages/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/packages/six.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/packages/backports/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/packages/backports/makefile.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/packages/ssl_match_hostname/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/urllib3/packages/ssl_match_hostname/_implementation.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/pkg_resources/py31compat.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/pkg_resources/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/resolvelib/resolvers.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/resolvelib/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/resolvelib/providers.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/resolvelib/structs.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/resolvelib/reporters.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/resolvelib/compat/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip/_vendor/resolvelib/compat/collections_abc.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip-21.2.4.dist-info/RECORD
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip-21.2.4.dist-info/WHEEL
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip-21.2.4.dist-info/entry_points.txt
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip-21.2.4.dist-info/top_level.txt
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip-21.2.4.dist-info/LICENSE.txt
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip-21.2.4.dist-info/REQUESTED
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip-21.2.4.dist-info/INSTALLER
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pip-21.2.4.dist-info/METADATA
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/windows_support.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_deprecation_warning.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/package_index.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/archive_util.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_imp.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/config.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/version.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/cli-64.exe
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/gui-64.exe
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/depends.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/installer.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/glob.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/sandbox.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/py34compat.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/script.tmpl
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/launch.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/extension.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/unicode_utils.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/monkey.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/build_meta.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/cli.exe
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/errors.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/dep_util.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/msvc.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/cli-32.exe
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/gui-32.exe
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/gui.exe
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/dist.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/wheel.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/namespaces.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/script (dev).tmpl
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_vendor/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_vendor/ordered_set.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_vendor/pyparsing.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_vendor/packaging/tags.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_vendor/packaging/version.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_vendor/packaging/_typing.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_vendor/packaging/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_vendor/packaging/utils.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_vendor/packaging/requirements.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_vendor/packaging/_structures.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_vendor/packaging/markers.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_vendor/packaging/__about__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_vendor/packaging/_compat.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_vendor/packaging/specifiers.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_vendor/more_itertools/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_vendor/more_itertools/more.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_vendor/more_itertools/recipes.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/command/bdist_egg.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/command/alias.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/command/py36compat.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/command/build_ext.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/command/easy_install.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/command/launcher manifest.xml
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/command/install_scripts.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/command/upload.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/command/register.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/command/dist_info.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/command/install_lib.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/command/upload_docs.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/command/build_py.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/command/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/command/sdist.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/command/test.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/command/saveopts.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/command/bdist_rpm.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/command/build_clib.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/command/egg_info.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/command/install.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/command/develop.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/command/rotate.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/command/install_egg_info.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/command/setopt.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/extern/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/_msvccompiler.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/unixccompiler.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/filelist.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/ccompiler.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/msvc9compiler.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/archive_util.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/cmd.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/config.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/version.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/log.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/util.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/fancy_getopt.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/versionpredicate.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/file_util.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/core.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/py35compat.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/cygwinccompiler.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/extension.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/debug.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/spawn.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/text_file.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/msvccompiler.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/errors.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/dep_util.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/dir_util.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/sysconfig.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/py38compat.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/dist.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/bcppcompiler.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/command/build.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/command/py37compat.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/command/build_ext.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/command/config.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/command/clean.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/command/check.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/command/install_scripts.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/command/upload.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/command/register.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/command/bdist_wininst.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/command/install_headers.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/command/install_lib.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/command/build_py.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/command/bdist_dumb.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/command/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/command/sdist.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/command/bdist.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/command/build_scripts.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/command/bdist_rpm.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/command/build_clib.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/command/install.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/command/bdist_msi.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/command/install_egg_info.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools/_distutils/command/install_data.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pkg_resources/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pkg_resources/_vendor/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pkg_resources/_vendor/appdirs.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pkg_resources/_vendor/pyparsing.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pkg_resources/_vendor/packaging/tags.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pkg_resources/_vendor/packaging/version.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pkg_resources/_vendor/packaging/_typing.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pkg_resources/_vendor/packaging/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pkg_resources/_vendor/packaging/utils.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pkg_resources/_vendor/packaging/requirements.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pkg_resources/_vendor/packaging/_structures.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pkg_resources/_vendor/packaging/markers.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pkg_resources/_vendor/packaging/__about__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pkg_resources/_vendor/packaging/_compat.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pkg_resources/_vendor/packaging/specifiers.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pkg_resources/tests/data/my-test-package-source/setup.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/pkg_resources/extern/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/_distutils_hack/__init__.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/_distutils_hack/override.py
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools-58.0.4.dist-info/RECORD
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools-58.0.4.dist-info/LICENSE
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools-58.0.4.dist-info/WHEEL
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools-58.0.4.dist-info/entry_points.txt
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools-58.0.4.dist-info/top_level.txt
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools-58.0.4.dist-info/REQUESTED
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools-58.0.4.dist-info/INSTALLER
+  inflating: /workspace/.venv/lib/python3.9/site-packages/setuptools-58.0.4.dist-info/METADATA
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/RECORD
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/WHEEL
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/entry_points.txt
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/top_level.txt
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/REQUESTED
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/INSTALLER
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/METADATA
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/LICENSE.txt
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/AUTHORS.txt
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/packaging/LICENSE
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/packaging/LICENSE.APACHE
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/packaging/LICENSE.BSD
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/truststore/LICENSE
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/msgpack/COPYING
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/dependency_groups/LICENSE.txt
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/pygments/LICENSE
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/distlib/LICENSE.txt
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/distro/LICENSE
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/cachecontrol/LICENSE.txt
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/idna/LICENSE.md
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/requests/LICENSE
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/tomli/LICENSE-HEADER
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/tomli/LICENSE
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/certifi/LICENSE
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/pyproject_hooks/LICENSE
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/rich/LICENSE
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/tomli_w/LICENSE
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/urllib3/LICENSE.txt
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/pkg_resources/LICENSE
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/resolvelib/LICENSE
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip-25.2.dist-info/licenses/src/pip/_vendor/platformdirs/LICENSE
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/py.typed
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/__pip-runner__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/__main__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/configuration.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/pyproject.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/cache.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/exceptions.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/main.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/wheel_builder.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/self_outdated_check.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/build_env.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/network/auth.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/network/xmlrpc.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/network/download.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/network/session.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/network/cache.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/network/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/network/utils.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/network/lazy_wheel.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/network/__pycache__/session.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/network/__pycache__/download.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/network/__pycache__/xmlrpc.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/network/__pycache__/utils.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/network/__pycache__/cache.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/network/__pycache__/lazy_wheel.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/network/__pycache__/auth.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/network/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/logging.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/misc.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/egg_link.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/compat.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/deprecation.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/subprocess.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/filesystem.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/direct_url_helpers.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/_jaraco_text.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/temp_dir.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/retry.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/appdirs.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/setuptools_build.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/packaging.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/entrypoints.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/filetypes.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/compatibility_tags.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/datetime.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/urls.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/hashes.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/virtualenv.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/_log.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/glibc.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/wheel.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/unpacking.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/__pycache__/temp_dir.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/__pycache__/_jaraco_text.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/__pycache__/glibc.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/__pycache__/urls.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/__pycache__/setuptools_build.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/__pycache__/unpacking.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/__pycache__/packaging.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/__pycache__/logging.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/__pycache__/appdirs.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/__pycache__/compat.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/__pycache__/deprecation.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/__pycache__/filetypes.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/__pycache__/misc.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/__pycache__/filesystem.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/__pycache__/wheel.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/__pycache__/compatibility_tags.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/__pycache__/hashes.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/__pycache__/direct_url_helpers.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/__pycache__/datetime.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/__pycache__/egg_link.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/__pycache__/entrypoints.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/__pycache__/virtualenv.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/__pycache__/_log.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/__pycache__/retry.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/utils/__pycache__/subprocess.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/models/link.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/models/selection_prefs.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/models/direct_url.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/models/index.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/models/target_python.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/models/pylock.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/models/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/models/search_scope.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/models/candidate.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/models/format_control.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/models/installation_report.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/models/scheme.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/models/wheel.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/models/__pycache__/target_python.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/models/__pycache__/link.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/models/__pycache__/candidate.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/models/__pycache__/pylock.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/models/__pycache__/wheel.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/models/__pycache__/selection_prefs.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/models/__pycache__/installation_report.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/models/__pycache__/format_control.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/models/__pycache__/search_scope.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/models/__pycache__/scheme.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/models/__pycache__/index.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/models/__pycache__/direct_url.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/models/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/__pycache__/build_env.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/__pycache__/main.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/__pycache__/pyproject.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/__pycache__/self_outdated_check.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/__pycache__/exceptions.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/__pycache__/cache.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/__pycache__/configuration.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/__pycache__/wheel_builder.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/cli/cmdoptions.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/cli/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/cli/index_command.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/cli/status_codes.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/cli/parser.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/cli/command_context.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/cli/spinners.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/cli/autocompletion.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/cli/base_command.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/cli/main_parser.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/cli/progress_bars.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/cli/main.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/cli/req_command.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/cli/__pycache__/main.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/cli/__pycache__/req_command.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/cli/__pycache__/autocompletion.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/cli/__pycache__/cmdoptions.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/cli/__pycache__/base_command.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/cli/__pycache__/main_parser.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/cli/__pycache__/status_codes.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/cli/__pycache__/progress_bars.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/cli/__pycache__/command_context.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/cli/__pycache__/index_command.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/cli/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/cli/__pycache__/spinners.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/cli/__pycache__/parser.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/check.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/freeze.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/prepare.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/install/editable_legacy.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/install/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/install/wheel.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/install/__pycache__/wheel.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/install/__pycache__/editable_legacy.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/install/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/__pycache__/check.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/__pycache__/freeze.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/__pycache__/prepare.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/build/wheel_legacy.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/build/metadata.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/build/metadata_editable.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/build/wheel_editable.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/build/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/build/metadata_legacy.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/build/wheel.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/build/build_tracker.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/build/__pycache__/wheel_legacy.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/build/__pycache__/wheel.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/build/__pycache__/metadata_legacy.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/build/__pycache__/wheel_editable.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/build/__pycache__/metadata.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/build/__pycache__/build_tracker.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/build/__pycache__/metadata_editable.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/operations/build/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/req/req_install.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/req/req_set.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/req/req_uninstall.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/req/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/req/req_dependency_group.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/req/req_file.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/req/constructors.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/req/__pycache__/constructors.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/req/__pycache__/req_install.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/req/__pycache__/req_dependency_group.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/req/__pycache__/req_set.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/req/__pycache__/req_uninstall.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/req/__pycache__/req_file.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/req/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/base.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/legacy/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/legacy/resolver.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/legacy/__pycache__/resolver.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/legacy/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/__pycache__/base.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/provider.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/found_candidates.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/reporter.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/factory.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/requirements.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/resolver.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/candidates.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/base.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/__pycache__/resolver.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/__pycache__/reporter.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/__pycache__/requirements.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/__pycache__/base.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/__pycache__/candidates.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/__pycache__/provider.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/__pycache__/factory.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/__pycache__/found_candidates.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/vcs/git.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/vcs/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/vcs/mercurial.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/vcs/bazaar.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/vcs/versioncontrol.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/vcs/subversion.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/vcs/__pycache__/versioncontrol.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/vcs/__pycache__/bazaar.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/vcs/__pycache__/subversion.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/vcs/__pycache__/git.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/vcs/__pycache__/mercurial.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/vcs/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/locations/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/locations/_sysconfig.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/locations/_distutils.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/locations/base.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/locations/__pycache__/_distutils.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/locations/__pycache__/base.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/locations/__pycache__/_sysconfig.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/locations/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/index/collector.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/index/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/index/sources.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/index/package_finder.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/index/__pycache__/sources.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/index/__pycache__/collector.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/index/__pycache__/package_finder.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/index/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/configuration.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/show.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/list.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/check.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/index.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/completion.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/download.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/cache.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/hash.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/inspect.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/debug.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/uninstall.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/lock.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/freeze.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/search.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/install.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/help.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/wheel.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/__pycache__/search.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/__pycache__/check.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/__pycache__/show.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/__pycache__/list.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/__pycache__/download.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/__pycache__/freeze.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/__pycache__/hash.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/__pycache__/debug.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/__pycache__/wheel.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/__pycache__/cache.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/__pycache__/help.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/__pycache__/install.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/__pycache__/configuration.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/__pycache__/uninstall.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/__pycache__/completion.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/__pycache__/index.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/__pycache__/lock.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/commands/__pycache__/inspect.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/metadata/_json.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/metadata/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/metadata/pkg_resources.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/metadata/base.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/metadata/__pycache__/base.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/metadata/__pycache__/pkg_resources.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/metadata/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/metadata/__pycache__/_json.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/metadata/importlib/_dists.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/metadata/importlib/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/metadata/importlib/_compat.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/metadata/importlib/_envs.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/metadata/importlib/__pycache__/_compat.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/metadata/importlib/__pycache__/_dists.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/metadata/importlib/__pycache__/_envs.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/metadata/importlib/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/distributions/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/distributions/sdist.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/distributions/installed.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/distributions/base.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/distributions/wheel.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/distributions/__pycache__/base.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/distributions/__pycache__/installed.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/distributions/__pycache__/wheel.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/distributions/__pycache__/sdist.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_internal/distributions/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/vendor.txt
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/tags.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/_musllinux.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/metadata.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/version.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/_parser.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/utils.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/requirements.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/_structures.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/markers.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/py.typed
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/_manylinux.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/_tokenizer.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/specifiers.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/_elffile.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/licenses/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/licenses/_spdx.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/licenses/__pycache__/_spdx.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/licenses/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/__pycache__/markers.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/__pycache__/requirements.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/__pycache__/_musllinux.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/__pycache__/utils.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/__pycache__/tags.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/__pycache__/metadata.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/__pycache__/_tokenizer.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/__pycache__/_manylinux.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/__pycache__/_structures.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/__pycache__/specifiers.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/__pycache__/version.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/__pycache__/_elffile.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/packaging/__pycache__/_parser.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/truststore/_openssl.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/truststore/_api.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/truststore/_macos.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/truststore/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/truststore/_ssl_constants.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/truststore/py.typed
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/truststore/_windows.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/truststore/__pycache__/_windows.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/truststore/__pycache__/_api.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/truststore/__pycache__/_macos.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/truststore/__pycache__/_openssl.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/truststore/__pycache__/_ssl_constants.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/truststore/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/msgpack/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/msgpack/exceptions.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/msgpack/fallback.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/msgpack/ext.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/msgpack/__pycache__/fallback.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/msgpack/__pycache__/exceptions.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/msgpack/__pycache__/ext.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/msgpack/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/dependency_groups/_lint_dependency_groups.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/dependency_groups/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/dependency_groups/_pip_wrapper.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/dependency_groups/_implementation.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/dependency_groups/py.typed
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/dependency_groups/_toml_compat.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/dependency_groups/__main__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/dependency_groups/__pycache__/_implementation.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/dependency_groups/__pycache__/_toml_compat.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/dependency_groups/__pycache__/_pip_wrapper.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/dependency_groups/__pycache__/_lint_dependency_groups.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/dependency_groups/__pycache__/__main__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/dependency_groups/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/modeline.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/console.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/scanner.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/formatter.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/token.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/style.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/util.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/sphinxext.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/unistring.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/lexer.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/regexopt.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/plugin.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/filter.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/__main__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/filters/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/filters/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/lexers/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/lexers/python.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/lexers/_mapping.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/lexers/__pycache__/_mapping.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/lexers/__pycache__/python.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/lexers/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/formatters/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/formatters/_mapping.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/formatters/__pycache__/_mapping.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/formatters/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/__pycache__/formatter.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/__pycache__/regexopt.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/__pycache__/scanner.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/__pycache__/lexer.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/__pycache__/plugin.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/__pycache__/style.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/__pycache__/token.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/__pycache__/unistring.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/__pycache__/modeline.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/__pycache__/util.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/__pycache__/sphinxext.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/__pycache__/filter.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/__pycache__/__main__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/__pycache__/console.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/styles/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/styles/_mapping.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/styles/__pycache__/_mapping.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pygments/styles/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/distlib/w64-arm.exe
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/distlib/w32.exe
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/distlib/compat.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/distlib/util.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/distlib/t32.exe
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/distlib/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/distlib/w64.exe
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/distlib/resources.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/distlib/t64-arm.exe
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/distlib/scripts.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/distlib/t64.exe
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/distlib/__pycache__/compat.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/distlib/__pycache__/resources.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/distlib/__pycache__/scripts.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/distlib/__pycache__/util.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/distlib/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/distro/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/distro/py.typed
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/distro/distro.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/distro/__main__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/distro/__pycache__/distro.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/distro/__pycache__/__main__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/distro/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/cachecontrol/serialize.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/cachecontrol/wrapper.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/cachecontrol/controller.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/cachecontrol/filewrapper.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/cachecontrol/heuristics.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/cachecontrol/adapter.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/cachecontrol/cache.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/cachecontrol/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/cachecontrol/py.typed
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/cachecontrol/_cmd.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/cachecontrol/__pycache__/serialize.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/cachecontrol/__pycache__/controller.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/cachecontrol/__pycache__/filewrapper.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/cachecontrol/__pycache__/_cmd.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/cachecontrol/__pycache__/cache.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/cachecontrol/__pycache__/adapter.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/cachecontrol/__pycache__/wrapper.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/cachecontrol/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/cachecontrol/__pycache__/heuristics.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/cachecontrol/caches/file_cache.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/cachecontrol/caches/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/cachecontrol/caches/redis_cache.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/cachecontrol/caches/__pycache__/file_cache.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/cachecontrol/caches/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/cachecontrol/caches/__pycache__/redis_cache.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/idna/intranges.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/idna/package_data.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/idna/compat.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/idna/idnadata.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/idna/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/idna/core.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/idna/py.typed
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/idna/codec.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/idna/uts46data.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/idna/__pycache__/codec.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/idna/__pycache__/core.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/idna/__pycache__/idnadata.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/idna/__pycache__/compat.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/idna/__pycache__/package_data.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/idna/__pycache__/uts46data.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/idna/__pycache__/intranges.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/idna/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/cookies.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/auth.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/sessions.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/hooks.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/compat.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/models.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/certs.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/status_codes.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/packages.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/__version__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/api.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/_internal_utils.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/utils.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/exceptions.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/structures.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/help.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/adapters.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/__pycache__/__version__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/__pycache__/api.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/__pycache__/adapters.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/__pycache__/_internal_utils.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/__pycache__/compat.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/__pycache__/sessions.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/__pycache__/hooks.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/__pycache__/utils.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/__pycache__/status_codes.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/__pycache__/cookies.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/__pycache__/exceptions.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/__pycache__/models.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/__pycache__/help.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/__pycache__/packages.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/__pycache__/auth.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/__pycache__/certs.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/requests/__pycache__/structures.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/tomli/_types.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/tomli/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/tomli/_parser.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/tomli/_re.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/tomli/py.typed
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/tomli/__pycache__/_types.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/tomli/__pycache__/_re.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/tomli/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/tomli/__pycache__/_parser.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/certifi/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/certifi/core.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/certifi/py.typed
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/certifi/cacert.pem
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/certifi/__main__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/certifi/__pycache__/core.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/certifi/__pycache__/__main__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/certifi/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pyproject_hooks/_impl.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pyproject_hooks/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pyproject_hooks/py.typed
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pyproject_hooks/__pycache__/_impl.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pyproject_hooks/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pyproject_hooks/_in_process/_in_process.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pyproject_hooks/_in_process/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pyproject_hooks/_in_process/__pycache__/_in_process.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pyproject_hooks/_in_process/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/themes.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/screen.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/logging.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/measure.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/tree.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/console.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/live_render.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/_emoji_codes.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/box.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/color.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/_timer.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/_fileno.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/align.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/theme.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/style.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/default_styles.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/_wrap.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/_log_render.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/emoji.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/layout.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/containers.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/_emoji_replace.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/traceback.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/region.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/protocol.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/_loop.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/control.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/filesize.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/_null_file.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/_palettes.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/_pick.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/file_proxy.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/palette.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/markup.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/_ratio.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/repr.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/constrain.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/pretty.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/diagnose.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/columns.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/rule.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/_inspect.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/pager.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/text.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/highlighter.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/_spinners.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/terminal_theme.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/bar.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/live.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/py.typed
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/syntax.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/table.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/_export_format.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/progress_bar.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/errors.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/prompt.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/segment.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/ansi.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/progress.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/_stack.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/_windows.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/_cell_widths.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/cells.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/_win32_console.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/panel.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/styled.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/spinner.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/_windows_renderer.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/json.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/padding.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__main__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/scope.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/_extension.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/status.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/abc.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/jupyter.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/color_triplet.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/highlighter.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/_emoji_replace.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/segment.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/color.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/theme.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/_windows.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/constrain.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/rule.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/containers.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/cells.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/ansi.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/file_proxy.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/_ratio.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/layout.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/_emoji_codes.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/scope.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/abc.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/pretty.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/_loop.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/logging.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/_cell_widths.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/terminal_theme.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/_palettes.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/style.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/_log_render.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/filesize.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/live_render.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/text.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/_fileno.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/prompt.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/progress.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/errors.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/bar.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/_spinners.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/default_styles.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/status.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/repr.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/tree.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/_extension.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/measure.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/screen.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/palette.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/region.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/themes.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/emoji.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/_stack.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/control.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/_inspect.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/syntax.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/panel.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/table.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/_wrap.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/live.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/align.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/jupyter.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/markup.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/_windows_renderer.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/protocol.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/_pick.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/_timer.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/spinner.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/styled.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/json.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/_export_format.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/pager.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/progress_bar.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/__main__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/box.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/columns.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/diagnose.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/traceback.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/_null_file.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/_win32_console.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/console.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/color_triplet.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/rich/__pycache__/padding.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/tomli_w/_writer.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/tomli_w/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/tomli_w/py.typed
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/tomli_w/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/tomli_w/__pycache__/_writer.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/filepost.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/fields.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/_version.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/request.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/poolmanager.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/response.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/connection.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/_collections.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/exceptions.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/connectionpool.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/util/queue.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/util/ssltransport.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/util/proxy.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/util/wait.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/util/request.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/util/timeout.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/util/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/util/response.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/util/ssl_.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/util/retry.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/util/url.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/util/connection.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/util/ssl_match_hostname.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/util/__pycache__/wait.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/util/__pycache__/ssltransport.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/util/__pycache__/queue.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/util/__pycache__/ssl_match_hostname.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/util/__pycache__/response.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/util/__pycache__/timeout.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/util/__pycache__/proxy.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/util/__pycache__/connection.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/util/__pycache__/ssl_.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/util/__pycache__/request.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/util/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/util/__pycache__/retry.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/util/__pycache__/url.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/__pycache__/poolmanager.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/__pycache__/connectionpool.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/__pycache__/fields.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/__pycache__/filepost.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/__pycache__/response.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/__pycache__/exceptions.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/__pycache__/_version.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/__pycache__/connection.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/__pycache__/request.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/__pycache__/_collections.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/contrib/securetransport.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/contrib/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/contrib/socks.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/contrib/_appengine_environ.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/contrib/pyopenssl.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/contrib/appengine.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/contrib/ntlmpool.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/contrib/__pycache__/securetransport.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/contrib/__pycache__/pyopenssl.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/contrib/__pycache__/appengine.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/contrib/__pycache__/ntlmpool.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/contrib/__pycache__/socks.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/contrib/__pycache__/_appengine_environ.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/contrib/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/contrib/_securetransport/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/contrib/_securetransport/low_level.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/contrib/_securetransport/bindings.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/contrib/_securetransport/__pycache__/bindings.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/contrib/_securetransport/__pycache__/low_level.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/contrib/_securetransport/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/packages/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/packages/six.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/packages/__pycache__/six.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/packages/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/packages/backports/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/packages/backports/makefile.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/packages/backports/weakref_finalize.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/packages/backports/__pycache__/weakref_finalize.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/packages/backports/__pycache__/makefile.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/urllib3/packages/backports/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pkg_resources/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/pkg_resources/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/resolvelib/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/resolvelib/providers.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/resolvelib/structs.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/resolvelib/reporters.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/resolvelib/py.typed
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/resolvelib/__pycache__/reporters.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/resolvelib/__pycache__/providers.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/resolvelib/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/resolvelib/__pycache__/structs.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/resolvelib/resolvers/abstract.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/resolvelib/resolvers/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/resolvelib/resolvers/exceptions.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/resolvelib/resolvers/criterion.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/resolvelib/resolvers/resolution.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/resolvelib/resolvers/__pycache__/exceptions.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/resolvelib/resolvers/__pycache__/criterion.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/resolvelib/resolvers/__pycache__/abstract.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/resolvelib/resolvers/__pycache__/resolution.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/resolvelib/resolvers/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/platformdirs/macos.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/platformdirs/unix.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/platformdirs/version.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/platformdirs/__init__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/platformdirs/api.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/platformdirs/android.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/platformdirs/py.typed
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/platformdirs/windows.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/platformdirs/__main__.py
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/platformdirs/__pycache__/api.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/platformdirs/__pycache__/android.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/platformdirs/__pycache__/windows.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/platformdirs/__pycache__/macos.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/platformdirs/__pycache__/__main__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/platformdirs/__pycache__/__init__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/platformdirs/__pycache__/version.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/_vendor/platformdirs/__pycache__/unix.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/__pycache__/__pip-runner__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/__pycache__/__main__.cpython-313.pyc
+  inflating: /workspace/.venv/lib/python3.13/site-packages/pip/__pycache__/__init__.cpython-313.pyc
+BUILD
+Already have image (with digest): gcr.io/cloud-builders/docker
+Sending build context to Docker daemon  380.4kB
+Step 1/12 : FROM python:3.11-slim
+3.11-slim: Pulling from library/python
+02d7611c4eae: Pulling fs layer
+1473863bb010: Pulling fs layer
+7cc13cb22d92: Pulling fs layer
+654a090213c0: Pulling fs layer
+654a090213c0: Verifying Checksum
+654a090213c0: Download complete
+1473863bb010: Verifying Checksum
+1473863bb010: Download complete
+7cc13cb22d92: Verifying Checksum
+7cc13cb22d92: Download complete
+02d7611c4eae: Verifying Checksum
+02d7611c4eae: Download complete
+02d7611c4eae: Pull complete
+1473863bb010: Pull complete
+7cc13cb22d92: Pull complete
+654a090213c0: Pull complete
+Digest: sha256:0b2cfd528ad7c43ba83de95e2788393cf545aae1ed738868e961454bd38a760a
+Status: Downloaded newer image for python:3.11-slim
+ ---> 955f4ccb5624
+Step 2/12 : WORKDIR /app
+ ---> Running in f15c3aeb52df
+Removing intermediate container f15c3aeb52df
+ ---> c1b5e55a9568
+Step 3/12 : RUN apt-get update && apt-get install -y     gcc     g++     portaudio19-dev     && rm -rf /var/lib/apt/lists/*
+ ---> Running in b9894df9846d
+Hit:1 http://deb.debian.org/debian trixie InRelease
+Get:2 http://deb.debian.org/debian trixie-updates InRelease [47.3 kB]
+Get:3 http://deb.debian.org/debian-security trixie-security InRelease [43.4 kB]
+Get:4 http://deb.debian.org/debian trixie/main amd64 Packages [9670 kB]
+Get:5 http://deb.debian.org/debian trixie-updates/main amd64 Packages [5412 B]
+Get:6 http://deb.debian.org/debian-security trixie-security/main amd64 Packages [93.7 kB]
+Fetched 9860 kB in 1s (7660 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  alsa-topology-conf alsa-ucm-conf binutils binutils-common
+  binutils-x86-64-linux-gnu cpp cpp-14 cpp-14-x86-64-linux-gnu
+  cpp-x86-64-linux-gnu g++-14 g++-14-x86-64-linux-gnu g++-x86-64-linux-gnu
+  gcc-14 gcc-14-x86-64-linux-gnu gcc-x86-64-linux-gnu libasan8 libasound2-data
+  libasound2-dev libasound2t64 libatomic1 libbinutils libc-dev-bin libc6-dev
+  libcc1-0 libcrypt-dev libctf-nobfd0 libctf0 libgcc-14-dev libgomp1
+  libgprofng0 libhwasan0 libisl23 libitm1 libjack-jackd2-0 libjack-jackd2-dev
+  libjansson4 liblsan0 libmpc3 libmpfr6 libopus0 libportaudio2
+  libportaudiocpp0 libquadmath0 libsamplerate0 libsframe1 libstdc++-14-dev
+  libtsan2 libubsan1 linux-libc-dev manpages manpages-dev rpcsvc-proto
+Suggested packages:
+  binutils-doc gprofng-gui binutils-gold cpp-doc gcc-14-locales cpp-14-doc
+  g++-multilib g++-14-multilib gcc-14-doc gcc-multilib make autoconf automake
+  libtool flex bison gdb gcc-doc gcc-14-multilib gdb-x86-64-linux-gnu
+  alsa-utils libasound2-doc libasound2-plugins libc-devtools glibc-doc jackd2
+  opus-tools libstdc++-14-doc man-browser portaudio19-doc
+The following NEW packages will be installed:
+  alsa-topology-conf alsa-ucm-conf binutils binutils-common
+  binutils-x86-64-linux-gnu cpp cpp-14 cpp-14-x86-64-linux-gnu
+  cpp-x86-64-linux-gnu g++ g++-14 g++-14-x86-64-linux-gnu g++-x86-64-linux-gnu
+  gcc gcc-14 gcc-14-x86-64-linux-gnu gcc-x86-64-linux-gnu libasan8
+  libasound2-data libasound2-dev libasound2t64 libatomic1 libbinutils
+  libc-dev-bin libc6-dev libcc1-0 libcrypt-dev libctf-nobfd0 libctf0
+  libgcc-14-dev libgomp1 libgprofng0 libhwasan0 libisl23 libitm1
+  libjack-jackd2-0 libjack-jackd2-dev libjansson4 liblsan0 libmpc3 libmpfr6
+  libopus0 libportaudio2 libportaudiocpp0 libquadmath0 libsamplerate0
+  libsframe1 libstdc++-14-dev libtsan2 libubsan1 linux-libc-dev manpages
+  manpages-dev portaudio19-dev rpcsvc-proto
+0 upgraded, 55 newly installed, 0 to remove and 0 not upgraded.
+Need to get 79.8 MB of archives.
+After this operation, 294 MB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian trixie/main amd64 manpages all 6.9.1-1 [1393 kB]
+Get:2 http://deb.debian.org/debian trixie/main amd64 alsa-topology-conf all 1.2.5.1-3 [15.3 kB]
+Get:3 http://deb.debian.org/debian trixie/main amd64 libasound2-data all 1.2.14-1 [21.1 kB]
+Get:4 http://deb.debian.org/debian trixie/main amd64 libasound2t64 amd64 1.2.14-1 [381 kB]
+Get:5 http://deb.debian.org/debian trixie/main amd64 alsa-ucm-conf all 1.2.14-1 [92.5 kB]
+Get:6 http://deb.debian.org/debian trixie/main amd64 libsframe1 amd64 2.44-3 [78.4 kB]
+Get:7 http://deb.debian.org/debian trixie/main amd64 binutils-common amd64 2.44-3 [2509 kB]
+Get:8 http://deb.debian.org/debian trixie/main amd64 libbinutils amd64 2.44-3 [534 kB]
+Get:9 http://deb.debian.org/debian trixie/main amd64 libgprofng0 amd64 2.44-3 [808 kB]
+Get:10 http://deb.debian.org/debian trixie/main amd64 libctf-nobfd0 amd64 2.44-3 [156 kB]
+Get:11 http://deb.debian.org/debian trixie/main amd64 libctf0 amd64 2.44-3 [88.6 kB]
+Get:12 http://deb.debian.org/debian trixie/main amd64 libjansson4 amd64 2.14-2+b3 [39.8 kB]
+Get:13 http://deb.debian.org/debian trixie/main amd64 binutils-x86-64-linux-gnu amd64 2.44-3 [1014 kB]
+Get:14 http://deb.debian.org/debian trixie/main amd64 binutils amd64 2.44-3 [265 kB]
+Get:15 http://deb.debian.org/debian trixie/main amd64 libisl23 amd64 0.27-1 [659 kB]
+Get:16 http://deb.debian.org/debian trixie/main amd64 libmpfr6 amd64 4.2.2-1 [729 kB]
+Get:17 http://deb.debian.org/debian trixie/main amd64 libmpc3 amd64 1.3.1-1+b3 [52.2 kB]
+Get:18 http://deb.debian.org/debian trixie/main amd64 cpp-14-x86-64-linux-gnu amd64 14.2.0-19 [11.0 MB]
+Get:19 http://deb.debian.org/debian trixie/main amd64 cpp-14 amd64 14.2.0-19 [1280 B]
+Get:20 http://deb.debian.org/debian trixie/main amd64 cpp-x86-64-linux-gnu amd64 4:14.2.0-1 [4840 B]
+Get:21 http://deb.debian.org/debian trixie/main amd64 cpp amd64 4:14.2.0-1 [1568 B]
+Get:22 http://deb.debian.org/debian trixie/main amd64 libcc1-0 amd64 14.2.0-19 [42.8 kB]
+Get:23 http://deb.debian.org/debian trixie/main amd64 libgomp1 amd64 14.2.0-19 [137 kB]
+Get:24 http://deb.debian.org/debian trixie/main amd64 libitm1 amd64 14.2.0-19 [26.0 kB]
+Get:25 http://deb.debian.org/debian trixie/main amd64 libatomic1 amd64 14.2.0-19 [9308 B]
+Get:26 http://deb.debian.org/debian trixie/main amd64 libasan8 amd64 14.2.0-19 [2725 kB]
+Get:27 http://deb.debian.org/debian trixie/main amd64 liblsan0 amd64 14.2.0-19 [1204 kB]
+Get:28 http://deb.debian.org/debian trixie/main amd64 libtsan2 amd64 14.2.0-19 [2460 kB]
+Get:29 http://deb.debian.org/debian trixie/main amd64 libubsan1 amd64 14.2.0-19 [1074 kB]
+Get:30 http://deb.debian.org/debian trixie/main amd64 libhwasan0 amd64 14.2.0-19 [1488 kB]
+Get:31 http://deb.debian.org/debian trixie/main amd64 libquadmath0 amd64 14.2.0-19 [145 kB]
+Get:32 http://deb.debian.org/debian trixie/main amd64 libgcc-14-dev amd64 14.2.0-19 [2672 kB]
+Get:33 http://deb.debian.org/debian trixie/main amd64 gcc-14-x86-64-linux-gnu amd64 14.2.0-19 [21.4 MB]
+Get:34 http://deb.debian.org/debian trixie/main amd64 gcc-14 amd64 14.2.0-19 [540 kB]
+Get:35 http://deb.debian.org/debian trixie/main amd64 gcc-x86-64-linux-gnu amd64 4:14.2.0-1 [1436 B]
+Get:36 http://deb.debian.org/debian trixie/main amd64 gcc amd64 4:14.2.0-1 [5136 B]
+Get:37 http://deb.debian.org/debian trixie/main amd64 libc-dev-bin amd64 2.41-12 [58.2 kB]
+Get:38 http://deb.debian.org/debian trixie/main amd64 linux-libc-dev all 6.12.57-1 [2692 kB]
+Get:39 http://deb.debian.org/debian trixie/main amd64 libcrypt-dev amd64 1:4.4.38-1 [119 kB]
+Get:40 http://deb.debian.org/debian trixie/main amd64 rpcsvc-proto amd64 1.4.3-1 [63.3 kB]
+Get:41 http://deb.debian.org/debian trixie/main amd64 libc6-dev amd64 2.41-12 [1991 kB]
+Get:42 http://deb.debian.org/debian trixie/main amd64 libstdc++-14-dev amd64 14.2.0-19 [2376 kB]
+Get:43 http://deb.debian.org/debian trixie/main amd64 g++-14-x86-64-linux-gnu amd64 14.2.0-19 [12.1 MB]
+Get:44 http://deb.debian.org/debian trixie/main amd64 g++-14 amd64 14.2.0-19 [22.5 kB]
+Get:45 http://deb.debian.org/debian trixie/main amd64 g++-x86-64-linux-gnu amd64 4:14.2.0-1 [1200 B]
+Get:46 http://deb.debian.org/debian trixie/main amd64 g++ amd64 4:14.2.0-1 [1344 B]
+Get:47 http://deb.debian.org/debian trixie/main amd64 libasound2-dev amd64 1.2.14-1 [120 kB]
+Get:48 http://deb.debian.org/debian trixie/main amd64 libopus0 amd64 1.5.2-2 [2852 kB]
+Get:49 http://deb.debian.org/debian trixie/main amd64 libsamplerate0 amd64 0.2.2-4+b2 [950 kB]
+Get:50 http://deb.debian.org/debian trixie/main amd64 libjack-jackd2-0 amd64 1.9.22~dfsg-4 [287 kB]
+Get:51 http://deb.debian.org/debian trixie/main amd64 libjack-jackd2-dev amd64 1.9.22~dfsg-4 [60.0 kB]
+Get:52 http://deb.debian.org/debian trixie/main amd64 libportaudio2 amd64 19.6.0-1.2+b3 [64.8 kB]
+Get:53 http://deb.debian.org/debian trixie/main amd64 libportaudiocpp0 amd64 19.6.0-1.2+b3 [17.6 kB]
+Get:54 http://deb.debian.org/debian trixie/main amd64 manpages-dev all 6.9.1-1 [2122 kB]
+Get:55 http://deb.debian.org/debian trixie/main amd64 portaudio19-dev amd64 19.6.0-1.2+b3 [106 kB]
+[91mdebconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+[0m[91mdebconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.40.1 /usr/local/share/perl/5.40.1 /usr/lib/x86_64-linux-gnu/perl5/5.40 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.40 /usr/share/perl/5.40 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 8, <STDIN> line 55.)
+debconf: falling back to frontend: Teletype
+[0m[91mdebconf: unable to initialize frontend: Teletype
+debconf: (This frontend requires a controlling tty.)
+debconf: falling back to frontend: Noninteractive
+[0mFetched 79.8 MB in 1s (104 MB/s)
+Selecting previously unselected package manpages.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 5644 files and directories currently installed.)
+Preparing to unpack .../00-manpages_6.9.1-1_all.deb ...
+Unpacking manpages (6.9.1-1) ...
+Selecting previously unselected package alsa-topology-conf.
+Preparing to unpack .../01-alsa-topology-conf_1.2.5.1-3_all.deb ...
+Unpacking alsa-topology-conf (1.2.5.1-3) ...
+Selecting previously unselected package libasound2-data.
+Preparing to unpack .../02-libasound2-data_1.2.14-1_all.deb ...
+Unpacking libasound2-data (1.2.14-1) ...
+Selecting previously unselected package libasound2t64:amd64.
+Preparing to unpack .../03-libasound2t64_1.2.14-1_amd64.deb ...
+Unpacking libasound2t64:amd64 (1.2.14-1) ...
+Selecting previously unselected package alsa-ucm-conf.
+Preparing to unpack .../04-alsa-ucm-conf_1.2.14-1_all.deb ...
+Unpacking alsa-ucm-conf (1.2.14-1) ...
+Selecting previously unselected package libsframe1:amd64.
+Preparing to unpack .../05-libsframe1_2.44-3_amd64.deb ...
+Unpacking libsframe1:amd64 (2.44-3) ...
+Selecting previously unselected package binutils-common:amd64.
+Preparing to unpack .../06-binutils-common_2.44-3_amd64.deb ...
+Unpacking binutils-common:amd64 (2.44-3) ...
+Selecting previously unselected package libbinutils:amd64.
+Preparing to unpack .../07-libbinutils_2.44-3_amd64.deb ...
+Unpacking libbinutils:amd64 (2.44-3) ...
+Selecting previously unselected package libgprofng0:amd64.
+Preparing to unpack .../08-libgprofng0_2.44-3_amd64.deb ...
+Unpacking libgprofng0:amd64 (2.44-3) ...
+Selecting previously unselected package libctf-nobfd0:amd64.
+Preparing to unpack .../09-libctf-nobfd0_2.44-3_amd64.deb ...
+Unpacking libctf-nobfd0:amd64 (2.44-3) ...
+Selecting previously unselected package libctf0:amd64.
+Preparing to unpack .../10-libctf0_2.44-3_amd64.deb ...
+Unpacking libctf0:amd64 (2.44-3) ...
+Selecting previously unselected package libjansson4:amd64.
+Preparing to unpack .../11-libjansson4_2.14-2+b3_amd64.deb ...
+Unpacking libjansson4:amd64 (2.14-2+b3) ...
+Selecting previously unselected package binutils-x86-64-linux-gnu.
+Preparing to unpack .../12-binutils-x86-64-linux-gnu_2.44-3_amd64.deb ...
+Unpacking binutils-x86-64-linux-gnu (2.44-3) ...
+Selecting previously unselected package binutils.
+Preparing to unpack .../13-binutils_2.44-3_amd64.deb ...
+Unpacking binutils (2.44-3) ...
+Selecting previously unselected package libisl23:amd64.
+Preparing to unpack .../14-libisl23_0.27-1_amd64.deb ...
+Unpacking libisl23:amd64 (0.27-1) ...
+Selecting previously unselected package libmpfr6:amd64.
+Preparing to unpack .../15-libmpfr6_4.2.2-1_amd64.deb ...
+Unpacking libmpfr6:amd64 (4.2.2-1) ...
+Selecting previously unselected package libmpc3:amd64.
+Preparing to unpack .../16-libmpc3_1.3.1-1+b3_amd64.deb ...
+Unpacking libmpc3:amd64 (1.3.1-1+b3) ...
+Selecting previously unselected package cpp-14-x86-64-linux-gnu.
+Preparing to unpack .../17-cpp-14-x86-64-linux-gnu_14.2.0-19_amd64.deb ...
+Unpacking cpp-14-x86-64-linux-gnu (14.2.0-19) ...
+Selecting previously unselected package cpp-14.
+Preparing to unpack .../18-cpp-14_14.2.0-19_amd64.deb ...
+Unpacking cpp-14 (14.2.0-19) ...
+Selecting previously unselected package cpp-x86-64-linux-gnu.
+Preparing to unpack .../19-cpp-x86-64-linux-gnu_4%3a14.2.0-1_amd64.deb ...
+Unpacking cpp-x86-64-linux-gnu (4:14.2.0-1) ...
+Selecting previously unselected package cpp.
+Preparing to unpack .../20-cpp_4%3a14.2.0-1_amd64.deb ...
+Unpacking cpp (4:14.2.0-1) ...
+Selecting previously unselected package libcc1-0:amd64.
+Preparing to unpack .../21-libcc1-0_14.2.0-19_amd64.deb ...
+Unpacking libcc1-0:amd64 (14.2.0-19) ...
+Selecting previously unselected package libgomp1:amd64.
+Preparing to unpack .../22-libgomp1_14.2.0-19_amd64.deb ...
+Unpacking libgomp1:amd64 (14.2.0-19) ...
+Selecting previously unselected package libitm1:amd64.
+Preparing to unpack .../23-libitm1_14.2.0-19_amd64.deb ...
+Unpacking libitm1:amd64 (14.2.0-19) ...
+Selecting previously unselected package libatomic1:amd64.
+Preparing to unpack .../24-libatomic1_14.2.0-19_amd64.deb ...
+Unpacking libatomic1:amd64 (14.2.0-19) ...
+Selecting previously unselected package libasan8:amd64.
+Preparing to unpack .../25-libasan8_14.2.0-19_amd64.deb ...
+Unpacking libasan8:amd64 (14.2.0-19) ...
+Selecting previously unselected package liblsan0:amd64.
+Preparing to unpack .../26-liblsan0_14.2.0-19_amd64.deb ...
+Unpacking liblsan0:amd64 (14.2.0-19) ...
+Selecting previously unselected package libtsan2:amd64.
+Preparing to unpack .../27-libtsan2_14.2.0-19_amd64.deb ...
+Unpacking libtsan2:amd64 (14.2.0-19) ...
+Selecting previously unselected package libubsan1:amd64.
+Preparing to unpack .../28-libubsan1_14.2.0-19_amd64.deb ...
+Unpacking libubsan1:amd64 (14.2.0-19) ...
+Selecting previously unselected package libhwasan0:amd64.
+Preparing to unpack .../29-libhwasan0_14.2.0-19_amd64.deb ...
+Unpacking libhwasan0:amd64 (14.2.0-19) ...
+Selecting previously unselected package libquadmath0:amd64.
+Preparing to unpack .../30-libquadmath0_14.2.0-19_amd64.deb ...
+Unpacking libquadmath0:amd64 (14.2.0-19) ...
+Selecting previously unselected package libgcc-14-dev:amd64.
+Preparing to unpack .../31-libgcc-14-dev_14.2.0-19_amd64.deb ...
+Unpacking libgcc-14-dev:amd64 (14.2.0-19) ...
+Selecting previously unselected package gcc-14-x86-64-linux-gnu.
+Preparing to unpack .../32-gcc-14-x86-64-linux-gnu_14.2.0-19_amd64.deb ...
+Unpacking gcc-14-x86-64-linux-gnu (14.2.0-19) ...
+Selecting previously unselected package gcc-14.
+Preparing to unpack .../33-gcc-14_14.2.0-19_amd64.deb ...
+Unpacking gcc-14 (14.2.0-19) ...
+Selecting previously unselected package gcc-x86-64-linux-gnu.
+Preparing to unpack .../34-gcc-x86-64-linux-gnu_4%3a14.2.0-1_amd64.deb ...
+Unpacking gcc-x86-64-linux-gnu (4:14.2.0-1) ...
+Selecting previously unselected package gcc.
+Preparing to unpack .../35-gcc_4%3a14.2.0-1_amd64.deb ...
+Unpacking gcc (4:14.2.0-1) ...
+Selecting previously unselected package libc-dev-bin.
+Preparing to unpack .../36-libc-dev-bin_2.41-12_amd64.deb ...
+Unpacking libc-dev-bin (2.41-12) ...
+Selecting previously unselected package linux-libc-dev.
+Preparing to unpack .../37-linux-libc-dev_6.12.57-1_all.deb ...
+Unpacking linux-libc-dev (6.12.57-1) ...
+Selecting previously unselected package libcrypt-dev:amd64.
+Preparing to unpack .../38-libcrypt-dev_1%3a4.4.38-1_amd64.deb ...
+Unpacking libcrypt-dev:amd64 (1:4.4.38-1) ...
+Selecting previously unselected package rpcsvc-proto.
+Preparing to unpack .../39-rpcsvc-proto_1.4.3-1_amd64.deb ...
+Unpacking rpcsvc-proto (1.4.3-1) ...
+Selecting previously unselected package libc6-dev:amd64.
+Preparing to unpack .../40-libc6-dev_2.41-12_amd64.deb ...
+Unpacking libc6-dev:amd64 (2.41-12) ...
+Selecting previously unselected package libstdc++-14-dev:amd64.
+Preparing to unpack .../41-libstdc++-14-dev_14.2.0-19_amd64.deb ...
+Unpacking libstdc++-14-dev:amd64 (14.2.0-19) ...
+Selecting previously unselected package g++-14-x86-64-linux-gnu.
+Preparing to unpack .../42-g++-14-x86-64-linux-gnu_14.2.0-19_amd64.deb ...
+Unpacking g++-14-x86-64-linux-gnu (14.2.0-19) ...
+Selecting previously unselected package g++-14.
+Preparing to unpack .../43-g++-14_14.2.0-19_amd64.deb ...
+Unpacking g++-14 (14.2.0-19) ...
+Selecting previously unselected package g++-x86-64-linux-gnu.
+Preparing to unpack .../44-g++-x86-64-linux-gnu_4%3a14.2.0-1_amd64.deb ...
+Unpacking g++-x86-64-linux-gnu (4:14.2.0-1) ...
+Selecting previously unselected package g++.
+Preparing to unpack .../45-g++_4%3a14.2.0-1_amd64.deb ...
+Unpacking g++ (4:14.2.0-1) ...
+Selecting previously unselected package libasound2-dev:amd64.
+Preparing to unpack .../46-libasound2-dev_1.2.14-1_amd64.deb ...
+Unpacking libasound2-dev:amd64 (1.2.14-1) ...
+Selecting previously unselected package libopus0:amd64.
+Preparing to unpack .../47-libopus0_1.5.2-2_amd64.deb ...
+Unpacking libopus0:amd64 (1.5.2-2) ...
+Selecting previously unselected package libsamplerate0:amd64.
+Preparing to unpack .../48-libsamplerate0_0.2.2-4+b2_amd64.deb ...
+Unpacking libsamplerate0:amd64 (0.2.2-4+b2) ...
+Selecting previously unselected package libjack-jackd2-0:amd64.
+Preparing to unpack .../49-libjack-jackd2-0_1.9.22~dfsg-4_amd64.deb ...
+Unpacking libjack-jackd2-0:amd64 (1.9.22~dfsg-4) ...
+Selecting previously unselected package libjack-jackd2-dev:amd64.
+Preparing to unpack .../50-libjack-jackd2-dev_1.9.22~dfsg-4_amd64.deb ...
+Unpacking libjack-jackd2-dev:amd64 (1.9.22~dfsg-4) ...
+Selecting previously unselected package libportaudio2:amd64.
+Preparing to unpack .../51-libportaudio2_19.6.0-1.2+b3_amd64.deb ...
+Unpacking libportaudio2:amd64 (19.6.0-1.2+b3) ...
+Selecting previously unselected package libportaudiocpp0:amd64.
+Preparing to unpack .../52-libportaudiocpp0_19.6.0-1.2+b3_amd64.deb ...
+Unpacking libportaudiocpp0:amd64 (19.6.0-1.2+b3) ...
+Selecting previously unselected package manpages-dev.
+Preparing to unpack .../53-manpages-dev_6.9.1-1_all.deb ...
+Unpacking manpages-dev (6.9.1-1) ...
+Selecting previously unselected package portaudio19-dev:amd64.
+Preparing to unpack .../54-portaudio19-dev_19.6.0-1.2+b3_amd64.deb ...
+Unpacking portaudio19-dev:amd64 (19.6.0-1.2+b3) ...
+Setting up manpages (6.9.1-1) ...
+Setting up binutils-common:amd64 (2.44-3) ...
+Setting up linux-libc-dev (6.12.57-1) ...
+Setting up libctf-nobfd0:amd64 (2.44-3) ...
+Setting up libgomp1:amd64 (14.2.0-19) ...
+Setting up libsframe1:amd64 (2.44-3) ...
+Setting up libjansson4:amd64 (2.14-2+b3) ...
+Setting up libasound2-data (1.2.14-1) ...
+Setting up rpcsvc-proto (1.4.3-1) ...
+Setting up libasound2t64:amd64 (1.2.14-1) ...
+Setting up libmpfr6:amd64 (4.2.2-1) ...
+Setting up libopus0:amd64 (1.5.2-2) ...
+Setting up libquadmath0:amd64 (14.2.0-19) ...
+Setting up libmpc3:amd64 (1.3.1-1+b3) ...
+Setting up libatomic1:amd64 (14.2.0-19) ...
+Setting up libubsan1:amd64 (14.2.0-19) ...
+Setting up alsa-topology-conf (1.2.5.1-3) ...
+Setting up libhwasan0:amd64 (14.2.0-19) ...
+Setting up libcrypt-dev:amd64 (1:4.4.38-1) ...
+Setting up libasan8:amd64 (14.2.0-19) ...
+Setting up libtsan2:amd64 (14.2.0-19) ...
+Setting up libbinutils:amd64 (2.44-3) ...
+Setting up libisl23:amd64 (0.27-1) ...
+Setting up libasound2-dev:amd64 (1.2.14-1) ...
+Setting up libc-dev-bin (2.41-12) ...
+Setting up libsamplerate0:amd64 (0.2.2-4+b2) ...
+Setting up libcc1-0:amd64 (14.2.0-19) ...
+Setting up liblsan0:amd64 (14.2.0-19) ...
+Setting up libitm1:amd64 (14.2.0-19) ...
+Setting up libctf0:amd64 (2.44-3) ...
+Setting up manpages-dev (6.9.1-1) ...
+Setting up alsa-ucm-conf (1.2.14-1) ...
+Setting up libgprofng0:amd64 (2.44-3) ...
+Setting up cpp-14-x86-64-linux-gnu (14.2.0-19) ...
+Setting up cpp-14 (14.2.0-19) ...
+Setting up libjack-jackd2-0:amd64 (1.9.22~dfsg-4) ...
+Setting up libc6-dev:amd64 (2.41-12) ...
+Setting up libgcc-14-dev:amd64 (14.2.0-19) ...
+Setting up libstdc++-14-dev:amd64 (14.2.0-19) ...
+Setting up binutils-x86-64-linux-gnu (2.44-3) ...
+Setting up cpp-x86-64-linux-gnu (4:14.2.0-1) ...
+Setting up libportaudio2:amd64 (19.6.0-1.2+b3) ...
+Setting up binutils (2.44-3) ...
+Setting up libjack-jackd2-dev:amd64 (1.9.22~dfsg-4) ...
+Setting up libportaudiocpp0:amd64 (19.6.0-1.2+b3) ...
+Setting up portaudio19-dev:amd64 (19.6.0-1.2+b3) ...
+Setting up cpp (4:14.2.0-1) ...
+Setting up gcc-14-x86-64-linux-gnu (14.2.0-19) ...
+Setting up gcc-x86-64-linux-gnu (4:14.2.0-1) ...
+Setting up gcc-14 (14.2.0-19) ...
+Setting up g++-14-x86-64-linux-gnu (14.2.0-19) ...
+Setting up g++-x86-64-linux-gnu (4:14.2.0-1) ...
+Setting up g++-14 (14.2.0-19) ...
+Setting up gcc (4:14.2.0-1) ...
+Setting up g++ (4:14.2.0-1) ...
+update-alternatives: using /usr/bin/g++ to provide /usr/bin/c++ (c++) in auto mode
+Processing triggers for libc-bin (2.41-12) ...
+Removing intermediate container b9894df9846d
+ ---> 4bfeb44dc4a1
+Step 4/12 : COPY requirements.txt .
+ ---> 01fa0d7e0239
+Step 5/12 : RUN pip install --no-cache-dir -r requirements.txt
+ ---> Running in 073df9a33ed3
+Collecting fastapi==0.109.0 (from -r requirements.txt (line 4))
+  Downloading fastapi-0.109.0-py3-none-any.whl.metadata (24 kB)
+Collecting uvicorn==0.27.0 (from uvicorn[standard]==0.27.0->-r requirements.txt (line 5))
+  Downloading uvicorn-0.27.0-py3-none-any.whl.metadata (6.4 kB)
+Collecting python-multipart==0.0.6 (from -r requirements.txt (line 6))
+  Downloading python_multipart-0.0.6-py3-none-any.whl.metadata (2.5 kB)
+Collecting google-cloud-aiplatform==1.42.0 (from -r requirements.txt (line 9))
+  Downloading google_cloud_aiplatform-1.42.0-py2.py3-none-any.whl.metadata (27 kB)
+Collecting google-cloud-storage==2.14.0 (from -r requirements.txt (line 10))
+  Downloading google_cloud_storage-2.14.0-py2.py3-none-any.whl.metadata (6.1 kB)
+Collecting vertexai==0.0.1 (from -r requirements.txt (line 11))
+  Downloading vertexai-0.0.1-py3-none-any.whl.metadata (615 bytes)
+Collecting elevenlabs==0.2.27 (from -r requirements.txt (line 14))
+  Downloading elevenlabs-0.2.27-py3-none-any.whl.metadata (827 bytes)
+Collecting websockets==12.0 (from -r requirements.txt (line 15))
+  Downloading websockets-12.0-cp311-cp311-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.6 kB)
+Collecting twilio==8.11.0 (from -r requirements.txt (line 18))
+  Downloading twilio-8.11.0-py2.py3-none-any.whl.metadata (12 kB)
+Collecting supabase==2.3.1 (from -r requirements.txt (line 21))
+  Downloading supabase-2.3.1-py3-none-any.whl.metadata (11 kB)
+Collecting postgrest==0.13.0 (from -r requirements.txt (line 22))
+  Downloading postgrest-0.13.0-py3-none-any.whl.metadata (5.1 kB)
+Collecting httpx==0.26.0 (from -r requirements.txt (line 25))
+  Downloading httpx-0.26.0-py3-none-any.whl.metadata (7.6 kB)
+Collecting aiohttp==3.9.1 (from -r requirements.txt (line 26))
+  Downloading aiohttp-3.9.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.4 kB)
+Collecting pydantic==2.5.3 (from -r requirements.txt (line 27))
+  Downloading pydantic-2.5.3-py3-none-any.whl.metadata (65 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 65.6/65.6 kB 6.2 MB/s eta 0:00:00
+Collecting pydantic-settings==2.1.0 (from -r requirements.txt (line 28))
+  Downloading pydantic_settings-2.1.0-py3-none-any.whl.metadata (2.9 kB)
+Collecting pyaudio==0.2.14 (from -r requirements.txt (line 31))
+  Downloading PyAudio-0.2.14.tar.gz (47 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 47.1/47.1 kB 216.7 MB/s eta 0:00:00
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+[91mERROR: Could not find a version that satisfies the requirement audioop==0.1.0 (from versions: none)
+[0m[91mERROR: No matching distribution found for audioop==0.1.0
+[0m[91m
+[notice] A new release of pip is available: 24.0 -> 25.3
+[notice] To update, run: pip install --upgrade pip
+The command '/bin/sh -c pip install --no-cache-dir -r requirements.txt' returned a non-zero code: 1
+ERROR
+ERROR: build step 0 "gcr.io/cloud-builders/docker" failed: step exited with non-zero status: 1
+[0m
+---------------------------------------------------------------------

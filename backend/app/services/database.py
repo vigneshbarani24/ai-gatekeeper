@@ -30,6 +30,16 @@ class DatabaseService:
     async def init(self) -> None:
         """Initialize Supabase client"""
         try:
+            # Check for valid keys or Demo Mode
+            # If keys are placeholders ("demo_"), and DEMO_MODE is True, use mock.
+            # If keys are REAL, connect even if DEMO_MODE is True (Partial Live Mode).
+            is_demo_key = "demo_" in settings.SUPABASE_URL or "demo_" in settings.SUPABASE_SERVICE_ROLE_KEY
+            
+            if settings.DEMO_MODE and is_demo_key:
+                logger.warning("⚠️  Using Mock Database (Demo Mode + Placeholder Keys)")
+                self.client = None
+                return
+
             self.client = create_client(
                 settings.SUPABASE_URL,
                 settings.SUPABASE_SERVICE_ROLE_KEY
@@ -38,6 +48,10 @@ class DatabaseService:
 
         except Exception as e:
             logger.error(f"❌ Failed to initialize database: {e}")
+            # Don't raise in development/demo to allow startup
+            if settings.is_development():
+                self.client = None
+                return
             raise
 
     # ========================
@@ -46,6 +60,9 @@ class DatabaseService:
 
     async def get_user_by_id(self, user_id: str) -> Optional[Dict]:
         """Get user by ID"""
+        if not self.client:
+            return {"id": user_id, "name": "Demo User"} if settings.DEMO_MODE else None
+
         try:
             response = self.client.table("users").select("*").eq("id", user_id).single().execute()
             return response.data
@@ -55,6 +72,10 @@ class DatabaseService:
 
     async def get_user_by_twilio_number(self, twilio_number: str) -> Optional[Dict]:
         """Get user by their Twilio phone number"""
+        if not self.client:
+             # Return demo user for ANY number in demo mode
+             return {"id": "demo_user", "name": "Demo User"} if settings.DEMO_MODE else None
+
         try:
             response = self.client.table("users").select("*").eq("twilio_phone_number", twilio_number).single().execute()
             return response.data
@@ -68,6 +89,9 @@ class DatabaseService:
 
     async def get_contact_by_phone(self, user_id: str, phone_number: str) -> Optional[Dict]:
         """Check if phone number is in user's whitelist"""
+        if not self.client:
+            return None
+
         try:
             response = (
                 self.client.table("contacts")
@@ -94,6 +118,9 @@ class DatabaseService:
         status: str
     ) -> Dict:
         """Create new call record"""
+        if not self.client:
+            return {"id": "demo_call_id", "status": status}
+
         try:
             response = (
                 self.client.table("calls")
@@ -112,6 +139,9 @@ class DatabaseService:
 
     async def get_call_by_sid(self, call_sid: str) -> Optional[Dict]:
         """Get call record by Twilio SID"""
+        if not self.client:
+            return {"id": "demo_call_id", "call_sid": call_sid} if settings.DEMO_MODE else None
+
         try:
             response = (
                 self.client.table("calls")
@@ -135,6 +165,9 @@ class DatabaseService:
         transcript: Optional[str] = None
     ) -> None:
         """Update call record"""
+        if not self.client:
+            return
+
         try:
             update_data = {}
             if status:

@@ -22,14 +22,14 @@ supabase==2.3.1
 postgrest==0.13.0
 
 # Async & Data
-httpx==0.26.0
+httpx==0.24.1
 aiohttp==3.9.1
 pydantic==2.5.3
 pydantic-settings==2.1.0
 
 # Audio Processing
 pyaudio==0.2.14
-audioop==0.1.0  # Built-in, but listed for clarity
+# audioop is built-in, do not list here
 
 # Utilities
 python-dotenv==1.0.0
