@@ -168,27 +168,27 @@ export default function LandingPage() {
             {/* Trust Signals Bar */}
             <section className="py-16 px-6 border-y border-white/5">
                 <div className="max-w-6xl mx-auto">
-                    <p className="text-center text-gray-500 text-sm font-bold uppercase tracking-wider mb-10">Trusted by innovators</p>
+                    <p className="text-center text-gray-400 text-sm font-bold uppercase tracking-wider mb-10">Trusted by innovators</p>
                     <div className="grid grid-cols-2 md:grid-cols-5 gap-8 text-center">
                         <div className="space-y-2">
                             <div className="text-5xl font-black text-transparent bg-clip-text accent-gradient">473M</div>
-                            <div className="text-sm text-gray-500 font-semibold">Deaf users empowered</div>
+                            <div className="text-sm text-gray-300 font-semibold">Deaf users empowered</div>
                         </div>
                         <div className="space-y-2">
                             <div className="text-5xl font-black text-white">0.16ms</div>
-                            <div className="text-sm text-gray-500 font-semibold">Scam detection</div>
+                            <div className="text-sm text-gray-300 font-semibold">Scam detection</div>
                         </div>
                         <div className="space-y-2">
                             <div className="text-5xl font-black text-white">$40B</div>
-                            <div className="text-sm text-gray-500 font-semibold">Market size</div>
+                            <div className="text-sm text-gray-300 font-semibold">Market size</div>
                         </div>
                         <div className="space-y-2">
                             <div className="text-5xl font-black text-white">29+</div>
-                            <div className="text-sm text-gray-500 font-semibold">Languages</div>
+                            <div className="text-sm text-gray-300 font-semibold">Languages</div>
                         </div>
                         <div className="space-y-2">
                             <div className="text-5xl font-black text-transparent bg-clip-text accent-gradient">4/4</div>
-                            <div className="text-sm text-gray-500 font-semibold">ElevenLabs features</div>
+                            <div className="text-sm text-gray-300 font-semibold">ElevenLabs features</div>
                         </div>
                     </div>
                 </div>
