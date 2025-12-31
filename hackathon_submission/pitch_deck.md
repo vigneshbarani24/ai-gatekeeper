@@ -222,7 +222,7 @@ Full-Stack Engineer + Product Designer
 <br/>
 
 **Demo:** [ai-gatekeeper.app](https://ai-gatekeeper.app)
-**Code:** [github.com/vigneshbarani24/Storytopia](https://github.com/vigneshbarani24/Storytopia)
+**Code:** [github.com/vigneshbarani24/Storytopia](https://github.com/vigneshbarani24/ai-gatekeeper)
 **Contact:** [your-email@example.com](mailto:your-email@example.com)
 
 <br/>

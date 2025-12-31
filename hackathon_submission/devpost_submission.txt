@@ -10,7 +10,7 @@ AI Partner Catalyst 2025 (Google + ElevenLabs)
 ## 🔗 PROJECT LINKS
 
 **Live Landing Page:** https://ai-gatekeeper.vercel.app (or Netlify deploy URL)
-**GitHub Repository:** https://github.com/vigneshbarani24/Storytopia/tree/main/ai-gatekeeper
+**GitHub Repository:** https://github.com/vigneshbarani24/ai-gatekeeper
 **Demo Video:** [Upload to YouTube and add link]
 
 ---
@@ -532,7 +532,7 @@ Our `test_complete_system.py` caught 15 bugs before demo day:
 ## 🔗 LINKS
 
 **GitHub Repository:**
-https://github.com/vigneshbarani24/Storytopia/tree/main/ai-gatekeeper
+https://github.com/vigneshbarani24/ai-gatekeeper
 
 **Demo Video:**
 [Upload to YouTube and add link]
@@ -541,7 +541,7 @@ https://github.com/vigneshbarani24/Storytopia/tree/main/ai-gatekeeper
 [Deploy to Cloud Run and add link]
 
 **Deployment Guide:**
-https://github.com/vigneshbarani24/Storytopia/blob/main/ai-gatekeeper/DEPLOYMENT_GUIDE.md
+https://github.com/vigneshbarani24/ai-gatekeeper/blob/main/DEPLOYMENT_GUIDE.md
 
 ---
 

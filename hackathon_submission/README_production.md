@@ -157,8 +157,8 @@ AI Gatekeeper is a **dual-mode AI phone assistant** powered by ElevenLabs Conver
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/vigneshbarani24/Storytopia
-cd Storytopia/ai-gatekeeper
+git clone https://github.com/vigneshbarani24/ai-gatekeeper
+cd ai-gatekeeper
 
 # 2. Backend setup
 cd backend
@@ -482,7 +482,7 @@ We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guid
 ```bash
 # Fork the repository
 git clone https://github.com/YOUR-USERNAME/Storytopia
-cd Storytopia/ai-gatekeeper
+cd ai-gatekeeper
 
 # Create feature branch
 git checkout -b feature/your-feature-name
@@ -556,6 +556,6 @@ copies or substantial portions of the Software.
 
 *Giving 473 million people their voice back, one call at a time.*
 
-[🎥 Watch Demo](#) • [🚀 Deploy Now](DEPLOYMENT_GUIDE.md) • [📖 Documentation](docs/) • [🐛 Report Bug](https://github.com/vigneshbarani24/Storytopia/issues)
+[🎥 Watch Demo](#) • [🚀 Deploy Now](DEPLOYMENT_GUIDE.md) • [📖 Documentation](docs/) • [🐛 Report Bug](https://github.com/vigneshbarani24/ai-gatekeeper/issues)
 
 </div>

@@ -31,7 +31,7 @@ export default function LandingPage() {
                             <a href="#pricing" className="text-sm font-semibold text-gray-400 hover:text-white transition-colors">Pricing</a>
                             <a href="#faq" className="text-sm font-semibold text-gray-400 hover:text-white transition-colors">FAQ</a>
                             <a
-                                href="https://github.com/vigneshbarani24/Storytopia/tree/main/ai-gatekeeper"
+                                href="https://github.com/vigneshbarani24/ai-gatekeeper"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-sm font-semibold text-gray-400 hover:text-white transition-colors"
@@ -494,7 +494,7 @@ export default function LandingPage() {
                             <h3 className="font-bold mb-4 text-sm uppercase tracking-wider">{col.title}</h3>
                             <div className="space-y-3 text-sm">
                                 {col.links.map((link) => (
-                                    <a key={link} href={link === 'GitHub' ? "https://github.com/vigneshbarani24/Storytopia/tree/main/ai-gatekeeper" : "#"} className="block text-gray-500 hover:text-white transition-colors font-medium">
+                                    <a key={link} href={link === 'GitHub' ? "https://github.com/vigneshbarani24/ai-gatekeeper" : "#"} className="block text-gray-500 hover:text-white transition-colors font-medium">
                                         {link}
                                     </a>
                                 ))}
@@ -509,7 +509,7 @@ export default function LandingPage() {
                     </p>
                     <div className="flex gap-6 text-sm">
                         <a href="#" className="text-gray-600 hover:text-white transition-colors font-medium">Twitter</a>
-                        <a href="https://github.com/vigneshbarani24/Storytopia" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-white transition-colors font-medium">GitHub</a>
+                        <a href="https://github.com/vigneshbarani24/ai-gatekeeper" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-white transition-colors font-medium">GitHub</a>
                     </div>
                 </div>
             </div>

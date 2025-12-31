@@ -40,8 +40,8 @@ Before starting, create accounts and get API keys:
 ### Step 1: Clone Repository
 
 ```bash
-git clone https://github.com/vigneshbarani24/Storytopia
-cd Storytopia/ai-gatekeeper/backend
+git clone https://github.com/vigneshbarani24/ai-gatekeeper
+cd ai-gatekeeper/backend
 ```
 
 ### Step 2: Configure Environment
@@ -417,7 +417,7 @@ Before going to production:
 
 ## Support
 
-**Issues**: Open GitHub issue at https://github.com/vigneshbarani24/Storytopia/issues
+**Issues**: Open GitHub issue at https://github.com/vigneshbarani24/ai-gatekeeper/issues
 
 **Logs**: Always include Cloud Run logs when reporting bugs
 
