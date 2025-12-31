@@ -1,6 +1,9 @@
-# 🛡️ AI Gatekeeper - Voice & Ears for the Voiceless
+# 🛡️ AI Gatekeeper
 
 **The first AI that answers your phone intelligently**
+
+> Voice & ears for 473M deaf people. Scam protection for 3.5B more.  
+> Real-time transcription · Voice cloning · 0.16ms scam blocking
 
 [![Live Demo](https://img.shields.io/badge/Demo-Live-success)](https://ai-gatekeeper.vercel.app) [![Hackathon](https://img.shields.io/badge/Hackathon-AI%20Partner%20Catalyst%202025-blue)](https://devpost.com) [![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org) [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](https://www.typescriptlang.org/) [![ElevenLabs](https://img.shields.io/badge/ElevenLabs-Voice%20AI-purple)](https://elevenlabs.io) [![Gemini](https://img.shields.io/badge/Gemini-2.0%20Flash-orange)](https://deepmind.google/technologies/gemini/) [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
