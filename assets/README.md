@@ -102,4 +102,26 @@ All images are also available in the web app at:
 
 ---
 
+## 🎯 Proof of Working
+
+Located in `proofs/`:
+
+### ElevenLabs Integration Evidence
+![Tool Check Contact](proofs/elevenlabs-tool-check-contact.png)
+*Server tool `check_contact` successfully executing - 524ms LLM, 74ms result*
+
+![Contact Response](proofs/elevenlabs-contact-response.png)
+*Structured JSON response from backend showing contact lookup results*
+
+![Conversation Transcript](proofs/elevenlabs-conversation-transcript.png)
+*Live conversation with performance metrics - 418ms LLM, 192ms TTS, 119ms ASR*
+
+![Tool Block Scam](proofs/elevenlabs-tool-block-scam.png)
+*Server tool `block_scam` successfully executing - 471ms LLM, 150ms result*
+
+![Scam Detection](proofs/elevenlabs-scam-detection.png)
+*Scam detection details - IRS scam identified with 90% confidence*
+
+---
+
 Built for **AI Partner Catalyst 2025** 🚀
