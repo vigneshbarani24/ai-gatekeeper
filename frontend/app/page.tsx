@@ -166,11 +166,10 @@ export default function Home() {
         <div className="glass-card rounded-full px-4 py-3 flex justify-around items-center shadow-card-hover">
           <button
             onClick={() => setView('dashboard')}
-            className={`flex flex-col items-center gap-1 px-4 py-2 rounded-2xl transition-all ${
-              view === 'dashboard'
+            className={`flex flex-col items-center gap-1 px-4 py-2 rounded-2xl transition-all ${view === 'dashboard'
                 ? 'text-primary bg-primary/10'
                 : 'text-gray-400 hover:text-white'
-            }`}
+              }`}
           >
             <Shield size={24} />
             <span className="text-xs font-bold">Dashboard</span>
@@ -178,11 +177,10 @@ export default function Home() {
 
           <button
             onClick={() => setView('history')}
-            className={`flex flex-col items-center gap-1 px-4 py-2 rounded-2xl transition-all ${
-              view === 'history'
+            className={`flex flex-col items-center gap-1 px-4 py-2 rounded-2xl transition-all ${view === 'history'
                 ? 'text-primary bg-primary/10'
                 : 'text-gray-400 hover:text-white'
-            }`}
+              }`}
           >
             <History size={24} />
             <span className="text-xs font-bold">History</span>
@@ -190,11 +188,10 @@ export default function Home() {
 
           <button
             onClick={() => setView('settings')}
-            className={`flex flex-col items-center gap-1 px-4 py-2 rounded-2xl transition-all ${
-              view === 'settings'
+            className={`flex flex-col items-center gap-1 px-4 py-2 rounded-2xl transition-all ${view === 'settings'
                 ? 'text-primary bg-primary/10'
                 : 'text-gray-400 hover:text-white'
-            }`}
+              }`}
           >
             <Settings size={24} />
             <span className="text-xs font-bold">Settings</span>

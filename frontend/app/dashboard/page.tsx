@@ -30,7 +30,7 @@ export default function DashboardPage() {
     total_calls: 0,
     scams_blocked: 0,
     time_saved_minutes: 0,
-    calls_today: 0,
+    today_calls: 0,
   });
   const [recentCalls, setRecentCalls] = useState<Call[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -113,8 +113,8 @@ export default function DashboardPage() {
             {greeting}, {userName}
           </h1>
           <p className="text-sm text-gray-600">
-            {stats.calls_today > 0
-              ? `${stats.calls_today} calls handled when you were busy`
+            {stats.today_calls > 0
+              ? `${stats.today_calls} calls handled when you were busy`
               : 'Standing by for calls you can\'t take'}
           </p>
         </motion.div>
@@ -344,20 +344,20 @@ function OrbModal({
     total_calls: number;
     scams_blocked: number;
     time_saved_minutes: number;
-    calls_today: number;
+    today_calls: number;
   };
   recentCalls: Call[];
   onClose: () => void;
 }) {
-  const [loading, setLoading] = React.useState(true);
-  const [aiData, setAiData] = React.useState<{
+  const [loading, setLoading] = useState(true);
+  const [aiData, setAiData] = useState<{
     summary: string;
     insights: { icon: string; text: string; color: string }[];
     tip: { icon: string; title: string; description: string; action: string; action_link: string };
   } | null>(null);
 
   // Fetch AI summary from backend
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchSummary = async () => {
       try {
         setLoading(true);
@@ -382,9 +382,9 @@ function OrbModal({
         console.error('Error fetching AI summary:', error);
 
         // Fallback to client-side generation on error
-        const fallbackSummary = stats.calls_today === 0
+        const fallbackSummary = stats.today_calls === 0
           ? "It's been quiet today. I'm standing by, ready to catch any calls you can't take."
-          : `Hi ${userName}! I handled ${stats.calls_today} calls while you were busy. You never missed an opportunity.`;
+          : `Hi ${userName}! I handled ${stats.today_calls} calls while you were busy. You never missed an opportunity.`;
 
         setAiData({
           summary: fallbackSummary,
@@ -409,7 +409,7 @@ function OrbModal({
     };
 
     fetchSummary();
-  }, [stats.calls_today, userName]);
+  }, [stats.today_calls, userName]);
 
   const summary = aiData?.summary || 'Loading your personalized summary...';
   const insights = aiData?.insights || [];
@@ -633,13 +633,12 @@ function CallCard({ call, delay }: { call: Call; delay: number }) {
     >
       <div className="flex items-center gap-4">
         <div
-          className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-            isScam
-              ? 'bg-red-100'
-              : isPassed
+          className={`w-12 h-12 rounded-xl flex items-center justify-center ${isScam
+            ? 'bg-red-100'
+            : isPassed
               ? 'bg-green-100'
               : 'bg-gray-100'
-          }`}
+            }`}
         >
           {isScam ? (
             <AlertTriangle size={24} className="text-red-500" />
@@ -703,11 +702,10 @@ function NavButton({
 }) {
   return (
     <button
-      className={`flex flex-col items-center gap-1 px-4 py-2 rounded-xl transition-all ${
-        active
-          ? 'text-blue-500 bg-blue-50'
-          : 'text-gray-500 hover:text-gray-700'
-      }`}
+      className={`flex flex-col items-center gap-1 px-4 py-2 rounded-xl transition-all ${active
+        ? 'text-blue-500 bg-blue-50'
+        : 'text-gray-500 hover:text-gray-700'
+        }`}
     >
       <Icon size={24} />
       <span className="text-xs font-medium">{label}</span>

@@ -34,12 +34,6 @@ export default function WelcomePage() {
   const [isAnimating, setIsAnimating] = useState(true);
 
   useEffect(() => {
-    // Check if user already onboarded
-    const hasOnboarded = localStorage.getItem('hasOnboarded');
-    if (hasOnboarded === 'true') {
-      router.push('/dashboard');
-    }
-
     // Load user name from storage or use smart default
     const savedName = localStorage.getItem('userName') || 'Friend';
     setUserName(savedName);
@@ -63,22 +57,22 @@ export default function WelcomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-background">
       {/* Progress Indicator */}
       <div className="fixed top-0 left-0 right-0 z-50">
-        <div className="h-1 bg-gray-200">
+        <div className="h-1 bg-surface">
           <motion.div
-            className="h-full bg-gradient-to-r from-blue-500 to-purple-500"
+            className="h-full bg-gradient-to-r from-primary to-primary-hover"
             initial={{ width: '0%' }}
             animate={{
               width:
                 step === 'welcome'
                   ? '25%'
                   : step === 'value'
-                  ? '50%'
-                  : step === 'features'
-                  ? '75%'
-                  : '100%',
+                    ? '50%'
+                    : step === 'features'
+                      ? '75%'
+                      : '100%',
             }}
             transition={{ duration: 0.3 }}
           />
@@ -115,7 +109,7 @@ function WelcomeStep({ userName, onNext, onSkip }: { userName: string; onNext: (
       {/* Skip Button - Top Right */}
       <motion.button
         onClick={onSkip}
-        className="absolute top-8 right-8 text-gray-400 hover:text-gray-600 transition-colors text-sm font-medium"
+        className="absolute top-8 right-8 text-gray-400 hover:text-white transition-colors text-sm font-medium"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1 }}
@@ -199,13 +193,13 @@ function WelcomeStep({ userName, onNext, onSkip }: { userName: string; onNext: (
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.6, duration: 0.6 }}
       >
-        <h1 className="text-4xl font-bold text-gray-900 mb-3">
+        <h1 className="text-4xl font-bold text-white mb-3">
           Hi {userName},
         </h1>
-        <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6">
+        <h2 className="text-3xl font-bold bg-gradient-to-r from-primary to-primary-hover bg-clip-text text-transparent mb-6">
           Your Voice. Your Ears. Your Independence.
         </h2>
-        <p className="text-lg text-gray-600 leading-relaxed">
+        <p className="text-lg text-gray-400 leading-relaxed">
           The first AI that gives deaf and speech-impaired people FULL phone independence—speaking in YOUR cloned voice.
         </p>
       </motion.div>
@@ -282,10 +276,10 @@ function ValueStep({ onNext, onSkip }: { onNext: () => void; onSkip: () => void 
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.2 }}
       >
-        <h2 className="text-4xl font-bold text-gray-900 mb-4">
+        <h2 className="text-4xl font-bold text-white mb-4">
           Two Life-Changing Modes
         </h2>
-        <p className="text-xl text-gray-600 mb-12">
+        <p className="text-xl text-gray-400 mb-12">
           Accessibility for those who need it. Assistance for everyone else.
         </p>
       </motion.div>
@@ -295,9 +289,8 @@ function ValueStep({ onNext, onSkip }: { onNext: () => void; onSkip: () => void 
         {modes.map((mode, index) => (
           <motion.div
             key={mode.title}
-            className={`bg-white rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all relative overflow-hidden ${
-              mode.highlight ? 'ring-2 ring-blue-500' : ''
-            }`}
+            className={`glass-card rounded-3xl p-6 hover:shadow-card-hover transition-all relative overflow-hidden ${mode.highlight ? 'ring-2 ring-primary' : ''
+              }`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 + index * 0.2 }}
@@ -312,8 +305,8 @@ function ValueStep({ onNext, onSkip }: { onNext: () => void; onSkip: () => void 
 
             {/* Header */}
             <div className="mb-4">
-              <h3 className="text-2xl font-bold text-gray-900 mb-1">{mode.title}</h3>
-              <p className="text-sm text-gray-600 mb-2">{mode.subtitle}</p>
+              <h3 className="text-2xl font-bold text-white mb-1">{mode.title}</h3>
+              <p className="text-sm text-gray-400 mb-2">{mode.subtitle}</p>
               <div className={`inline-block px-3 py-1 bg-gradient-to-r ${mode.color} text-white text-xs font-bold rounded-full`}>
                 TAM: {mode.tam}
               </div>
@@ -324,12 +317,12 @@ function ValueStep({ onNext, onSkip }: { onNext: () => void; onSkip: () => void 
               {mode.features.map((feature, i) => (
                 <motion.li
                   key={i}
-                  className="flex items-start gap-2 text-sm text-gray-700"
+                  className="flex items-start gap-2 text-sm text-gray-300"
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.5 + index * 0.2 + i * 0.1 }}
                 >
-                  <CheckCircle2 size={16} className="text-green-500 flex-shrink-0 mt-0.5" />
+                  <CheckCircle2 size={16} className="text-success flex-shrink-0 mt-0.5" />
                   <span>{feature}</span>
                 </motion.li>
               ))}
@@ -416,10 +409,10 @@ function FeaturesStep({ onNext, onSkip }: { onNext: () => void; onSkip: () => vo
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.2 }}
       >
-        <h2 className="text-4xl font-bold text-gray-900 mb-4">
+        <h2 className="text-4xl font-bold text-white mb-4">
           Your Protection Journey
         </h2>
-        <p className="text-xl text-gray-600">
+        <p className="text-xl text-gray-400">
           Start with essentials, unlock more as you go
         </p>
       </motion.div>
@@ -429,11 +422,10 @@ function FeaturesStep({ onNext, onSkip }: { onNext: () => void; onSkip: () => vo
         {features.map((feature, index) => (
           <motion.div
             key={feature.title}
-            className={`bg-white rounded-3xl p-6 shadow-lg transition-all ${
-              feature.unlocked
-                ? 'hover:shadow-xl'
-                : 'opacity-75'
-            }`}
+            className={`glass-card rounded-3xl p-6 transition-all ${feature.unlocked
+              ? 'hover:shadow-card-hover'
+              : 'opacity-75'
+              }`}
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 + index * 0.1 }}
@@ -446,21 +438,21 @@ function FeaturesStep({ onNext, onSkip }: { onNext: () => void; onSkip: () => vo
               {/* Content */}
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-2">
-                  <h3 className="text-xl font-bold text-gray-900">
+                  <h3 className="text-xl font-bold text-white">
                     {feature.title}
                   </h3>
                   {feature.unlocked ? (
-                    <CheckCircle2 size={20} className="text-green-500" />
+                    <CheckCircle2 size={20} className="text-success" />
                   ) : (
-                    <Lock size={20} className="text-gray-400" />
+                    <Lock size={20} className="text-gray-500" />
                   )}
                   {feature.comingSoon && (
-                    <span className="px-2 py-1 bg-orange-100 text-orange-600 text-xs font-semibold rounded-full">
+                    <span className="px-2 py-1 bg-warning/20 text-warning text-xs font-semibold rounded-full">
                       SOON
                     </span>
                   )}
                 </div>
-                <p className="text-gray-600">{feature.description}</p>
+                <p className="text-gray-400">{feature.description}</p>
               </div>
             </div>
           </motion.div>
@@ -519,19 +511,19 @@ function SetupStep({ onComplete, onSkip }: { onComplete: () => void; onSkip: () 
       </button>
 
       <motion.div
-        className="bg-white rounded-3xl p-8 shadow-2xl max-w-md w-full"
+        className="glass-card rounded-3xl p-8 shadow-2xl max-w-md w-full"
         initial={{ y: 30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.2 }}
       >
         <div className="text-center mb-8">
-          <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center">
+          <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-primary to-primary-hover rounded-2xl flex items-center justify-center">
             <Sparkles size={32} className="text-white" />
           </div>
-          <h2 className="text-3xl font-bold text-gray-900 mb-2">
+          <h2 className="text-3xl font-bold text-white mb-2">
             Personalize Your Guardian
           </h2>
-          <p className="text-gray-600">
+          <p className="text-gray-400">
             We've set smart defaults - just tap Continue or customize
           </p>
         </div>
@@ -541,7 +533,7 @@ function SetupStep({ onComplete, onSkip }: { onComplete: () => void; onSkip: () 
           <div>
             <label
               htmlFor="name"
-              className="block text-sm font-semibold text-gray-700 mb-2"
+              className="block text-sm font-semibold text-gray-300 mb-2"
             >
               What should we call you?
             </label>
@@ -551,16 +543,16 @@ function SetupStep({ onComplete, onSkip }: { onComplete: () => void; onSkip: () 
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Friend"
-              className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none transition-colors text-gray-900"
+              className="w-full px-4 py-3 bg-surface border-2 border-surface-light rounded-xl focus:border-primary focus:outline-none transition-colors text-white"
             />
           </div>
 
           <div>
             <label
               htmlFor="phone"
-              className="block text-sm font-semibold text-gray-700 mb-2"
+              className="block text-sm font-semibold text-gray-300 mb-2"
             >
-              Your phone number <span className="text-gray-400 font-normal">(optional)</span>
+              Your phone number <span className="text-gray-500 font-normal">(optional)</span>
             </label>
             <input
               id="phone"
@@ -568,7 +560,7 @@ function SetupStep({ onComplete, onSkip }: { onComplete: () => void; onSkip: () 
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               placeholder="+1 (555) 123-4567"
-              className="w-full px-4 py-3 bg-gray-50 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none transition-colors text-gray-900"
+              className="w-full px-4 py-3 bg-surface border-2 border-surface-light rounded-xl focus:border-primary focus:outline-none transition-colors text-white"
             />
             <p className="mt-2 text-xs text-gray-500">
               For forwarding legitimate calls

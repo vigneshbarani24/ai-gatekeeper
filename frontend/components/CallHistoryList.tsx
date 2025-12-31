@@ -9,9 +9,9 @@ interface Call {
   caller_number: string;
   intent: string;
   scam_score: number;
-  timestamp: string;
+  created_at: string;
   duration: number;
-  action_taken: 'blocked' | 'passed' | 'screened';
+  outcome: 'blocked' | 'passed' | 'screened';
 }
 
 interface CallHistoryListProps {
@@ -85,7 +85,7 @@ export default function CallHistoryList({ calls }: CallHistoryListProps) {
                       border: `1px solid ${color}40`,
                     }}
                   >
-                    {call.action_taken}
+                    {call.outcome}
                   </span>
                 </div>
 
@@ -96,7 +96,7 @@ export default function CallHistoryList({ calls }: CallHistoryListProps) {
                 <div className="flex items-center gap-4 text-xs text-gray-500">
                   <span className="flex items-center gap-1">
                     <Clock size={12} />
-                    {formatDistanceToNow(new Date(call.timestamp), { addSuffix: true })}
+                    {formatDistanceToNow(new Date(call.created_at), { addSuffix: true })}
                   </span>
                   <span>{call.duration}s</span>
                 </div>

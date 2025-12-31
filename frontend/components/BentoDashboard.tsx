@@ -1,16 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Shield, Clock, Phone, Ban, TrendingUp, CheckCircle } from "lucide-react";
-
-/**
- * Bento Grid Analytics Dashboard
- * Gentler Streak-inspired design:
- * - No borders, elevation only
- * - Thick progress rings
- * - Vitamin orange accents
- * - Mobile-first responsive grid
- */
+import { Shield, Clock, Phone, Ban, TrendingUp, CheckCircle, ArrowUpRight } from "lucide-react";
 
 interface BentoDashboardProps {
   stats: {
@@ -24,178 +15,109 @@ interface BentoDashboardProps {
 }
 
 export default function BentoDashboard({ stats }: BentoDashboardProps) {
-  // Calculate block rate percentage
   const blockRatePercent = Math.round(stats.block_rate * 100);
 
   return (
-    <div className="w-full max-w-7xl mx-auto p-4">
-      {/* Bento Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="w-full max-w-7xl mx-auto space-y-6">
+      {/* Grid Layout */}
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
 
-        {/* Card 1: Total Calls (Large - spans 2 columns on desktop) */}
+        {/* Main Stats Card */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0 }}
-          className="bento-card md:col-span-2 group"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="md:col-span-8 premium-card p-8 group relative"
         >
-          <div className="flex items-start justify-between mb-6">
-            <div>
-              <div className="text-sm font-bold text-muted uppercase tracking-wider mb-2">
-                Total Calls
+          <div className="relative z-10 flex flex-col h-full">
+            <div className="flex justify-between items-start">
+              <div className="space-y-1">
+                <span className="text-[10px] font-bold text-primary-start uppercase tracking-[0.2em]">Total Coverage</span>
+                <h3 className="text-6xl font-black title-premium leading-none">
+                  {stats.total_calls.toLocaleString()}
+                </h3>
+                <p className="text-gray-500 text-sm font-medium pt-2">Total calls analyzed by Gatekeeper AI</p>
               </div>
-              <div className="text-6xl font-black tracking-tight">
-                {stats.total_calls.toLocaleString()}
-              </div>
-              <div className="text-sm text-text-secondary font-medium mt-2">
-                All time
+              <div className="w-16 h-16 rounded-2xl bg-primary-start/5 border border-primary-start/10 flex items-center justify-center text-primary-start shadow-[0_0_20px_rgba(255,140,104,0.1)]">
+                <Phone size={32} />
               </div>
             </div>
-            <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center glow-orange">
-              <Phone size={28} className="text-primary" />
+
+            <div className="mt-auto grid grid-cols-3 gap-8 pt-12">
+              <div className="space-y-1 border-l border-white/5 pl-4">
+                <div className="text-2xl font-black text-white">{stats.today_calls}</div>
+                <div className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Today</div>
+              </div>
+              <div className="space-y-1 border-l border-white/5 pl-4">
+                <div className="text-2xl font-black text-white">{stats.avg_call_duration}s</div>
+                <div className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Avg Dur</div>
+              </div>
+              <div className="space-y-1 border-l border-white/5 pl-4">
+                <div className="text-2xl font-black text-success">{blockRatePercent}%</div>
+                <div className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Accuracy</div>
+              </div>
             </div>
           </div>
 
-          {/* Mini stats row */}
-          <div className="grid grid-cols-2 gap-4 mt-6 pt-6 border-t border-white/5">
-            <div>
-              <div className="text-2xl font-black">{stats.today_calls}</div>
-              <div className="text-xs text-muted font-semibold uppercase tracking-wider">Today</div>
-            </div>
-            <div>
-              <div className="text-2xl font-black text-success">{stats.avg_call_duration}s</div>
-              <div className="text-xs text-muted font-semibold uppercase tracking-wider">Avg Duration</div>
-            </div>
-          </div>
+          {/* Subtle Background Decoration */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-primary-start/5 blur-[100px] rounded-full pointer-events-none" />
         </motion.div>
 
-        {/* Card 2: Scams Blocked */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="bento-card group"
-        >
-          <div className="flex items-start justify-between mb-4">
-            <div className="w-14 h-14 rounded-2xl bg-danger/10 flex items-center justify-center">
-              <Ban size={28} className="text-danger" />
+        {/* Secondary Metrics Column */}
+        <div className="md:col-span-4 grid grid-cols-1 gap-6">
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="glass-card p-6 rounded-3xl relative overflow-hidden group"
+          >
+            <div className="flex justify-between items-start mb-4">
+              <div className="w-12 h-12 rounded-xl bg-error/10 flex items-center justify-center text-error">
+                <Ban size={24} />
+              </div>
+              <ArrowUpRight size={20} className="text-gray-600 group-hover:text-error transition-colors" />
             </div>
-          </div>
-          <div className="text-5xl font-black tracking-tight mb-2">
-            {stats.scams_blocked}
-          </div>
-          <div className="text-sm font-bold text-muted uppercase tracking-wider">
-            Scams Blocked
-          </div>
+            <div className="text-3xl font-black text-white">{stats.scams_blocked}</div>
+            <div className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mt-1">Spam Blocked</div>
+          </motion.div>
 
-          {/* Progress indicator */}
-          <div className="mt-4 flex items-center gap-2 text-xs text-success font-bold">
-            <TrendingUp size={14} />
-            <span>98.7% accuracy</span>
-          </div>
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.1 }}
+            className="glass-card p-6 rounded-3xl relative overflow-hidden group"
+          >
+            <div className="flex justify-between items-start mb-4">
+              <div className="w-12 h-12 rounded-xl bg-warning/10 flex items-center justify-center text-warning">
+                <Clock size={24} />
+              </div>
+              <ArrowUpRight size={20} className="text-gray-600 group-hover:text-warning transition-colors" />
+            </div>
+            <div className="text-3xl font-black text-white">{Math.round(stats.time_saved_minutes / 60)}h {stats.time_saved_minutes % 60}m</div>
+            <div className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mt-1">Focus Time Reclaimed</div>
+          </motion.div>
+        </div>
 
-        {/* Card 3: Time Saved */}
+        {/* Status Banner */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bento-card group"
-        >
-          <div className="flex items-start justify-between mb-4">
-            <div className="w-14 h-14 rounded-2xl bg-warning/10 flex items-center justify-center">
-              <Clock size={28} className="text-warning" />
-            </div>
-          </div>
-          <div className="text-5xl font-black tracking-tight mb-2">
-            {Math.round(stats.time_saved_minutes / 60)}h
-          </div>
-          <div className="text-sm font-bold text-muted uppercase tracking-wider">
-            Time Saved
-          </div>
-
-          {/* Mini stat */}
-          <div className="mt-4 text-xs text-text-secondary font-medium">
-            {stats.time_saved_minutes.toLocaleString()} minutes total
-          </div>
-        </motion.div>
-
-        {/* Card 4: Block Rate (Large with circular progress) */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="bento-card md:col-span-2 lg:col-span-1 group relative overflow-hidden"
-        >
-          <div className="flex flex-col items-center justify-center h-full py-8">
-            {/* Circular Progress Ring (Thick - Gentler Streak style) */}
-            <svg className="w-32 h-32 -rotate-90">
-              {/* Background ring */}
-              <circle
-                cx="64"
-                cy="64"
-                r="56"
-                fill="none"
-                stroke="#252525"
-                strokeWidth="12"
-              />
-              {/* Progress ring */}
-              <circle
-                cx="64"
-                cy="64"
-                r="56"
-                fill="none"
-                stroke="#FF8C68"
-                strokeWidth="12"
-                strokeLinecap="round"
-                strokeDasharray={`${blockRatePercent * 3.52} 352`}
-                className="glow-orange"
-              />
-            </svg>
-
-            {/* Center text */}
-            <div className="absolute text-center">
-              <div className="text-4xl font-black">{blockRatePercent}%</div>
-              <div className="text-xs text-muted font-bold uppercase tracking-wider">Block Rate</div>
-            </div>
-
-            {/* Bottom label */}
-            <div className="mt-6 text-center">
-              <div className="text-sm font-bold text-text-secondary">
-                Protection Status
-              </div>
-              <div className="flex items-center justify-center gap-2 mt-2 text-xs text-success font-bold">
-                <CheckCircle size={14} />
-                <span>Active</span>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Card 5: Status Banner (Full width) */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="bento-card md:col-span-2 lg:col-span-3 bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20"
+          className="md:col-span-12 glass-card p-6 rounded-full flex items-center justify-between px-10 border border-white/5"
         >
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-primary/20 flex items-center justify-center glow-orange">
-              <Shield size={24} className="text-primary" />
+            <div className="w-3 h-3 bg-success rounded-full shadow-[0_0_12px_rgba(52,199,89,0.5)] animate-pulse" />
+            <span className="text-xs font-bold text-gray-300 tracking-wider">GATEKEEPER ENGINE STANDING BY</span>
+          </div>
+          <div className="hidden md:flex gap-8">
+            <div className="flex items-center gap-2">
+              <Shield size={16} className="text-primary-start" />
+              <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Encrypted</span>
             </div>
-            <div className="flex-1">
-              <div className="text-lg font-black mb-1">AI Gatekeeper Active</div>
-              <div className="text-sm text-text-secondary font-medium">
-                Protecting your phone 24/7 with Google ADK multi-agent system
-              </div>
-            </div>
-            <div className="flex items-center gap-2 px-4 py-2 bg-success/10 rounded-full">
-              <div className="w-2 h-2 bg-success rounded-full animate-pulse"></div>
-              <span className="text-sm font-bold text-success">LIVE</span>
+            <div className="flex items-center gap-2">
+              <CheckCircle size={16} className="text-primary-start" />
+              <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Verified</span>
             </div>
           </div>
         </motion.div>
-
       </div>
     </div>
   );
