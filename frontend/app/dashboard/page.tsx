@@ -12,13 +12,14 @@ export default function DashboardPage() {
 
   const conversation = useConversation({
     onConnect: () => setErrorMsg(null),
-    onError: (error) => setErrorMsg(error.message || 'Connection error'),
+    onError: (error: any) => setErrorMsg(typeof error === 'string' ? error : error?.message || 'Connection error'),
   });
 
   const startConversation = useCallback(async () => {
     try {
       setErrorMsg(null);
       await navigator.mediaDevices.getUserMedia({ audio: true });
+      // @ts-expect-error - SDK types mismatch
       await conversation.startSession({ agentId: AGENT_ID });
     } catch (error) {
       setErrorMsg('Failed to start voice session');
@@ -36,7 +37,7 @@ export default function DashboardPage() {
     <div style={{ minHeight: '100vh', backgroundColor: '#0a0a0f', color: 'white', paddingBottom: '100px' }}>
       {/* Header */}
       <header style={{ padding: '20px 24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-        <Link href="/">
+        <Link href="/home">
           <div style={{
             width: '44px',
             height: '44px',
@@ -190,7 +191,7 @@ export default function DashboardPage() {
         justifyContent: 'space-around',
         padding: '0 20px'
       }}>
-        <Link href="/" style={{ textDecoration: 'none' }}>
+        <Link href="/home" style={{ textDecoration: 'none' }}>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
             <Heart size={22} color="#6b7280" />
             <span style={{ fontSize: '11px', color: '#6b7280' }}>Home</span>

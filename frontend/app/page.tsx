@@ -1,675 +1,508 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import {
-    Shield,
-    Phone,
-    Ear,
-    MessageSquare,
-    Zap,
-    Globe,
-    Lock,
-    Clock,
-    Users,
-    ChevronRight,
-    Play,
-    Star,
-    Award,
-    Heart,
-    CheckCircle,
-    ArrowRight,
-    Mic,
-    Volume2,
-    Brain,
-    Sparkles,
-} from 'lucide-react';
+import { useState } from 'react';
 import Link from 'next/link';
 
-// Animation variants
-const fadeInUp = {
-    hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const } },
-};
-
-const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: { staggerChildren: 0.1, delayChildren: 0.2 },
-    },
-};
-
-const scaleIn = {
-    hidden: { opacity: 0, scale: 0.9 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
-};
-
 export default function LandingPage() {
-    const [isVisible, setIsVisible] = useState(false);
+    const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-    useEffect(() => {
-        setIsVisible(true);
-    }, []);
+    const toggleFaq = (index: number) => {
+        setOpenFaq(openFaq === index ? null : index);
+    };
 
     return (
-        <div className="min-h-screen bg-[#020408] text-white overflow-x-hidden">
-            {/* Animated Background */}
-            <div className="fixed inset-0 pointer-events-none">
-                <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-gradient-to-br from-indigo-600/10 via-purple-600/5 to-transparent rounded-full blur-3xl" />
-                <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-gradient-to-tl from-orange-500/10 via-pink-500/5 to-transparent rounded-full blur-3xl" />
-            </div>
-
-            {/* Navigation */}
-            <nav className="relative z-50 px-6 py-6 md:px-12">
-                <div className="max-w-7xl mx-auto flex items-center justify-between">
-                    <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        className="flex items-center gap-3"
-                    >
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
-                            <Shield size={22} className="text-white" />
+        <div className="text-white">
+            {/* Glass Morphism Navigation */}
+            <nav className="glass-nav fixed top-0 w-full z-50">
+                <div className="max-w-7xl mx-auto px-6 py-4">
+                    <div className="flex justify-between items-center">
+                        {/* Logo */}
+                        <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-2xl accent-gradient flex items-center justify-center text-2xl">
+                                🛡️
+                            </div>
+                            <span className="font-black text-xl tracking-tight">AI Gatekeeper</span>
                         </div>
-                        <span className="text-xl font-bold">AI Gatekeeper</span>
-                    </motion.div>
 
-                    <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        className="flex items-center gap-4"
-                    >
-                        <Link
-                            href="/home"
-                            className="hidden md:block px-4 py-2 text-gray-400 hover:text-white transition-colors"
-                        >
-                            Dashboard
-                        </Link>
-                        <Link
-                            href="/home"
-                            className="px-6 py-2.5 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl font-semibold hover:opacity-90 transition-opacity flex items-center gap-2"
-                        >
-                            Get Started <ArrowRight size={16} />
-                        </Link>
-                    </motion.div>
-                </div>
-            </nav>
-
-            {/* Hero Section */}
-            <section className="relative z-10 px-6 pt-12 pb-24 md:px-12 md:pt-20 md:pb-32">
-                <div className="max-w-7xl mx-auto">
-                    <motion.div
-                        variants={staggerContainer}
-                        initial="hidden"
-                        animate="visible"
-                        className="text-center max-w-4xl mx-auto"
-                    >
-                        {/* Badge */}
-                        <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-500/10 border border-indigo-500/20 rounded-full mb-8">
-                            <Sparkles size={16} className="text-indigo-400" />
-                            <span className="text-sm text-indigo-300">ElevenLabs AI Agents Hackathon</span>
-                        </motion.div>
-
-                        {/* Main Headline */}
-                        <motion.h1
-                            variants={fadeInUp}
-                            className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6"
-                        >
-                            <span className="bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
-                                Voice & Ears for the
-                            </span>
-                            <br />
-                            <span className="bg-gradient-to-r from-orange-400 via-pink-500 to-purple-600 bg-clip-text text-transparent">
-                                Voiceless
-                            </span>
-                        </motion.h1>
-
-                        {/* Subheadline */}
-                        <motion.p
-                            variants={fadeInUp}
-                            className="text-lg md:text-xl text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed"
-                        >
-                            Full phone independence for{' '}
-                            <span className="text-white font-semibold">473 million</span> deaf and
-                            speech-impaired people worldwide. AI answers calls, transcribes in real-time,
-                            and speaks with <span className="text-orange-400 font-semibold">your cloned voice</span>.
-                        </motion.p>
-
-                        {/* CTA Buttons */}
-                        <motion.div
-                            variants={fadeInUp}
-                            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
-                        >
-                            <Link
-                                href="/home"
-                                className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-orange-500 to-pink-600 rounded-2xl font-bold text-lg hover:opacity-90 transition-all hover:scale-105 flex items-center justify-center gap-2 shadow-lg shadow-orange-500/25"
-                            >
-                                <Play size={20} /> Try Live Demo
-                            </Link>
+                        {/* Desktop Navigation */}
+                        <div className="hidden md:flex items-center gap-8">
+                            <a href="#features" className="text-sm font-semibold text-gray-400 hover:text-white transition-colors">Features</a>
+                            <a href="#how-it-works" className="text-sm font-semibold text-gray-400 hover:text-white transition-colors">How it works</a>
+                            <a href="#pricing" className="text-sm font-semibold text-gray-400 hover:text-white transition-colors">Pricing</a>
+                            <a href="#faq" className="text-sm font-semibold text-gray-400 hover:text-white transition-colors">FAQ</a>
                             <a
                                 href="https://github.com/vigneshbarani24/Storytopia/tree/main/ai-gatekeeper"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="w-full sm:w-auto px-8 py-4 bg-white/5 border border-white/10 rounded-2xl font-semibold text-lg hover:bg-white/10 transition-all flex items-center justify-center gap-2"
+                                className="text-sm font-semibold text-gray-400 hover:text-white transition-colors"
                             >
-                                View on GitHub <ChevronRight size={18} />
+                                GitHub
                             </a>
-                        </motion.div>
-
-                        {/* Stats Row */}
-                        <motion.div
-                            variants={fadeInUp}
-                            className="grid grid-cols-3 gap-4 md:gap-8 max-w-xl mx-auto"
-                        >
-                            <div className="text-center">
-                                <div className="text-2xl md:text-3xl font-bold text-white">0.16ms</div>
-                                <div className="text-xs md:text-sm text-gray-500">Scam Detection</div>
-                            </div>
-                            <div className="text-center">
-                                <div className="text-2xl md:text-3xl font-bold text-white">99.7%</div>
-                                <div className="text-xs md:text-sm text-gray-500">Accuracy</div>
-                            </div>
-                            <div className="text-center">
-                                <div className="text-2xl md:text-3xl font-bold text-white">&lt;2min</div>
-                                <div className="text-xs md:text-sm text-gray-500">Setup Time</div>
-                            </div>
-                        </motion.div>
-                    </motion.div>
-
-                    {/* Hero Visual - Animated Orb */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 60 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4, duration: 0.8 }}
-                        className="mt-16 md:mt-24 relative"
-                    >
-                        <div className="relative w-[280px] md:w-[400px] h-[280px] md:h-[400px] mx-auto">
-                            {/* Outer Glow Rings */}
-                            <motion.div
-                                animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
-                                transition={{ duration: 3, repeat: Infinity }}
-                                className="absolute inset-[-60px] rounded-full bg-gradient-to-br from-orange-500/20 via-pink-500/10 to-purple-600/20 blur-2xl"
-                            />
-                            <motion.div
-                                animate={{ scale: [1.1, 1, 1.1], opacity: [0.2, 0.4, 0.2] }}
-                                transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
-                                className="absolute inset-[-30px] rounded-full bg-gradient-to-tr from-indigo-500/20 via-transparent to-orange-500/20 blur-xl"
-                            />
-
-                            {/* Main Orb */}
-                            <motion.div
-                                animate={{ y: [0, -10, 0] }}
-                                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                                className="relative w-full h-full rounded-full bg-gradient-to-br from-orange-400 via-pink-500 to-purple-600 flex items-center justify-center shadow-2xl shadow-orange-500/30"
-                            >
-                                {/* Inner Glow */}
-                                <div className="absolute inset-4 rounded-full bg-gradient-to-br from-white/20 via-transparent to-transparent" />
-
-                                {/* Icon Grid */}
-                                <div className="relative z-10 flex flex-col items-center gap-3">
-                                    <Shield size={48} className="text-white drop-shadow-lg" />
-                                    <div className="flex items-center gap-2">
-                                        <Ear size={28} className="text-white/80" />
-                                        <Heart size={28} className="text-white" />
-                                        <Mic size={28} className="text-white/80" />
-                                    </div>
-                                    <span className="text-white font-bold text-lg md:text-xl">AI Gatekeeper</span>
-                                </div>
-                            </motion.div>
+                            <Link href="/home" className="btn-primary inline-flex">
+                                Get Started
+                            </Link>
                         </div>
-                    </motion.div>
+                    </div>
                 </div>
-            </section>
+            </nav>
 
-            {/* Problem Section */}
-            <section className="relative z-10 px-6 py-20 md:px-12 bg-gradient-to-b from-transparent via-indigo-950/20 to-transparent">
-                <div className="max-w-6xl mx-auto">
-                    <motion.div
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, amount: 0.3 }}
-                        variants={staggerContainer}
-                        className="text-center mb-16"
-                    >
-                        <motion.h2
-                            variants={fadeInUp}
-                            className="text-3xl md:text-5xl font-bold mb-6"
+            {/* Hero Section */}
+            <section className="pt-32 pb-20 px-6 relative overflow-hidden">
+                {/* Background gradient orbs */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full accent-gradient opacity-10 blur-3xl"></div>
+
+                <div className="max-w-6xl mx-auto text-center relative z-10 fade-in-up">
+                    {/* Status Badge */}
+                    <div className="mb-8">
+                        <span className="inline-flex items-center gap-3 px-6 py-3 bg-[#1A1A1A] rounded-full text-sm font-bold shadow-lg">
+                            <span className="w-2.5 h-2.5 rounded-full accent-gradient animate-pulse glow-orange"></span>
+                            <span className="text-gray-300">Built for AI Partner Catalyst 2025</span>
+                            <span className="text-[#FF8C68]">·</span>
+                            <span className="text-gray-400">Private Beta</span>
+                        </span>
+                    </div>
+
+                    {/* Hero Headline */}
+                    <h1 className="text-6xl md:text-8xl font-black mb-8 leading-[0.95] tracking-tight">
+                        The first AI that<br />
+                        <span className="text-transparent bg-clip-text accent-gradient">answers your phone</span><br />
+                        intelligently
+                    </h1>
+
+                    <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed font-medium">
+                        Voice & ears for <span className="text-white font-bold">473M</span> deaf people. Scam protection for <span className="text-white font-bold">3.5B</span> more.<br />
+                        <span className="text-[#FF8C68]">Real-time transcription · Voice cloning · 0.16ms scam blocking</span>
+                    </p>
+
+                    {/* CTAs */}
+                    <div className="flex flex-col sm:flex-row gap-5 justify-center mb-20">
+                        <Link href="/home" className="btn-primary inline-flex text-lg">
+                            Get Started →
+                        </Link>
+                        <Link
+                            href="/home"
+                            className="px-10 py-4 bg-[#1A1A1A] text-white rounded-full font-bold text-lg hover:bg-[#252525] transition-all shadow-xl inline-flex items-center justify-center"
                         >
-                            The Problem We're Solving
-                        </motion.h2>
-                        <motion.p variants={fadeInUp} className="text-gray-400 max-w-2xl mx-auto text-lg">
-                            Every day, millions face the same frustrating reality
-                        </motion.p>
-                    </motion.div>
+                            Watch Demo
+                        </Link>
+                    </div>
 
-                    <motion.div
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={staggerContainer}
-                        className="grid md:grid-cols-2 gap-6"
-                    >
-                        {/* Deaf Users Problem */}
-                        <motion.div
-                            variants={scaleIn}
-                            className="p-8 rounded-3xl bg-gradient-to-br from-red-950/30 to-transparent border border-red-500/20"
-                        >
-                            <div className="w-12 h-12 rounded-2xl bg-red-500/20 flex items-center justify-center mb-6">
-                                <Ear size={24} className="text-red-400" />
-                            </div>
-                            <h3 className="text-xl font-bold mb-4">473M Deaf & Speech-Impaired</h3>
-                            <ul className="space-y-3 text-gray-400">
-                                <li className="flex items-start gap-2">
-                                    <span className="text-red-400 mt-1">✗</span>
-                                    Can't make independent phone calls
-                                </li>
-                                <li className="flex items-start gap-2">
-                                    <span className="text-red-400 mt-1">✗</span>
-                                    Miss job opportunities, medical appointments
-                                </li>
-                                <li className="flex items-start gap-2">
-                                    <span className="text-red-400 mt-1">✗</span>
-                                    Rely on family members for basic tasks
-                                </li>
-                                <li className="flex items-start gap-2">
-                                    <span className="text-red-400 mt-1">✗</span>
-                                    VRS services are slow, expensive, not private
-                                </li>
-                            </ul>
-                        </motion.div>
-
-                        {/* Everyone Else Problem */}
-                        <motion.div
-                            variants={scaleIn}
-                            className="p-8 rounded-3xl bg-gradient-to-br from-amber-950/30 to-transparent border border-amber-500/20"
-                        >
-                            <div className="w-12 h-12 rounded-2xl bg-amber-500/20 flex items-center justify-center mb-6">
-                                <Phone size={24} className="text-amber-400" />
-                            </div>
-                            <h3 className="text-xl font-bold mb-4">3.5B Smartphone Users</h3>
-                            <ul className="space-y-3 text-gray-400">
-                                <li className="flex items-start gap-2">
-                                    <span className="text-amber-400 mt-1">✗</span>
-                                    $3.4B lost to phone scams annually
-                                </li>
-                                <li className="flex items-start gap-2">
-                                    <span className="text-amber-400 mt-1">✗</span>
-                                    Miss important calls when busy/driving
-                                </li>
-                                <li className="flex items-start gap-2">
-                                    <span className="text-amber-400 mt-1">✗</span>
-                                    Spam calls interrupt work and life
-                                </li>
-                                <li className="flex items-start gap-2">
-                                    <span className="text-amber-400 mt-1">✗</span>
-                                    No intelligent call screening exists
-                                </li>
-                            </ul>
-                        </motion.div>
-                    </motion.div>
-
-                    {/* Emotional Quote */}
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.4 }}
-                        className="mt-12 text-center"
-                    >
-                        <blockquote className="text-xl md:text-2xl text-gray-300 italic max-w-3xl mx-auto">
-                            "I cried the first time I scheduled my own dentist appointment without help.{' '}
-                            <span className="text-white font-semibold">I was 31 years old.</span>"
-                        </blockquote>
-                        <p className="mt-4 text-gray-500">— Maria, deaf since birth</p>
-                    </motion.div>
-                </div>
-            </section>
-
-            {/* Solution Section */}
-            <section className="relative z-10 px-6 py-20 md:px-12">
-                <div className="max-w-6xl mx-auto">
-                    <motion.div
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={staggerContainer}
-                        className="text-center mb-16"
-                    >
-                        <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 bg-green-500/10 border border-green-500/20 rounded-full mb-6">
-                            <CheckCircle size={16} className="text-green-400" />
-                            <span className="text-sm text-green-300">The Solution</span>
-                        </motion.div>
-                        <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-bold mb-6">
-                            Two Modes. One Powerful AI.
-                        </motion.h2>
-                    </motion.div>
-
-                    <div className="grid lg:grid-cols-2 gap-8">
-                        {/* Accessibility Mode */}
-                        <motion.div
-                            initial={{ opacity: 0, x: -40 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            className="relative p-8 rounded-3xl bg-gradient-to-br from-indigo-950/50 to-purple-950/30 border border-indigo-500/20 overflow-hidden"
-                        >
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-full blur-3xl" />
-                            <div className="relative z-10">
-                                <div className="flex items-center gap-4 mb-6">
-                                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
-                                        <Heart size={28} className="text-white" />
+                    {/* Product Screenshot */}
+                    <div className="max-w-5xl mx-auto">
+                        <div className="surface p-8">
+                            {/* Mock Dashboard */}
+                            <div className="bg-[#0A0A0A] rounded-3xl overflow-hidden">
+                                {/* Header */}
+                                <div className="surface-light p-6 flex items-center justify-between">
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-12 h-12 rounded-2xl accent-gradient flex items-center justify-center text-2xl glow-orange">
+                                            🛡️
+                                        </div>
+                                        <div className="text-left">
+                                            <div className="font-black text-lg">Live Call Dashboard</div>
+                                            <div className="text-sm text-gray-500 font-medium">AI Gatekeeper Active</div>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <h3 className="text-2xl font-bold">Accessibility Mode</h3>
-                                        <p className="text-indigo-300">For deaf & speech-impaired users</p>
+                                    <div className="flex items-center gap-3">
+                                        <span className="flex items-center gap-2 px-4 py-2 bg-green-500/10 rounded-full text-sm font-bold text-green-400">
+                                            <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                                            LIVE
+                                        </span>
                                     </div>
                                 </div>
 
-                                <div className="space-y-6">
-                                    <div className="flex items-start gap-4">
-                                        <div className="w-8 h-8 rounded-lg bg-indigo-500/20 flex items-center justify-center shrink-0 mt-1">
-                                            <Phone size={16} className="text-indigo-400" />
+                                {/* Live Transcript */}
+                                <div className="p-6 grid md:grid-cols-2 gap-6">
+                                    {/* Incoming Call Card */}
+                                    <div className="bento-card bg-[#1A1A1A]">
+                                        <div className="flex items-center gap-3 mb-6">
+                                            <div className="w-12 h-12 bg-red-500/10 rounded-2xl flex items-center justify-center text-2xl">📞</div>
+                                            <div className="text-left">
+                                                <div className="font-bold text-white">Incoming Call</div>
+                                                <div className="text-sm text-gray-500 font-mono">+1 (555) 892-1347</div>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <h4 className="font-semibold mb-1">AI Answers Your Calls</h4>
-                                            <p className="text-gray-400 text-sm">Never miss a call again. AI picks up immediately.</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-start gap-4">
-                                        <div className="w-8 h-8 rounded-lg bg-indigo-500/20 flex items-center justify-center shrink-0 mt-1">
-                                            <MessageSquare size={16} className="text-indigo-400" />
-                                        </div>
-                                        <div>
-                                            <h4 className="font-semibold mb-1">Real-Time Transcription</h4>
-                                            <p className="text-gray-400 text-sm">See exactly what callers say, word by word.</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-start gap-4">
-                                        <div className="w-8 h-8 rounded-lg bg-indigo-500/20 flex items-center justify-center shrink-0 mt-1">
-                                            <Mic size={16} className="text-indigo-400" />
-                                        </div>
-                                        <div>
-                                            <h4 className="font-semibold mb-1">Your Cloned Voice Speaks</h4>
-                                            <p className="text-gray-400 text-sm">Type your response, AI speaks in YOUR voice.</p>
+                                        <div className="space-y-4 text-sm">
+                                            <div className="flex gap-4">
+                                                <span className="text-gray-600 font-mono font-bold">00:01</span>
+                                                <span className="text-gray-300">"This is the IRS calling..."</span>
+                                            </div>
+                                            <div className="flex gap-4">
+                                                <span className="text-gray-600 font-mono font-bold">00:04</span>
+                                                <span className="text-gray-300">"You owe $5,000 in taxes..."</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div className="mt-8 p-4 rounded-2xl bg-indigo-500/10 border border-indigo-500/20">
-                                    <p className="text-sm text-indigo-200">
-                                        <span className="font-bold">Result:</span> Schedule appointments, call businesses, handle emergencies—all independently.
-                                    </p>
+                                    {/* AI Analysis Card */}
+                                    <div className="bento-card bg-gradient-to-br from-[#1A1A1A] to-[#252525]">
+                                        <div className="flex items-center gap-3 mb-6">
+                                            <div className="w-12 h-12 rounded-2xl accent-gradient flex items-center justify-center text-2xl glow-orange">🤖</div>
+                                            <div className="text-left">
+                                                <div className="font-bold text-white">AI Analysis</div>
+                                                <div className="text-sm text-[#FF8C68] font-bold">Processing...</div>
+                                            </div>
+                                        </div>
+                                        <div className="space-y-4">
+                                            {/* Scam Alert */}
+                                            <div className="px-5 py-4 bg-red-500/10 rounded-2xl shadow-lg">
+                                                <div className="flex items-center gap-3 mb-2">
+                                                    <span className="text-xs font-black text-red-400 uppercase tracking-wider">⚠️ Scam Detected</span>
+                                                    <span className="text-xs text-red-500 font-mono font-bold">0.16ms</span>
+                                                </div>
+                                                <div className="text-sm text-gray-300 space-y-1">
+                                                    <div><span className="font-bold text-white">Threat:</span> IRS impersonation</div>
+                                                    <div><span className="font-bold text-white">Confidence:</span> 98.7%</div>
+                                                </div>
+                                            </div>
+                                            {/* Success */}
+                                            <div className="px-5 py-4 bg-green-500/10 rounded-2xl shadow-lg">
+                                                <div className="text-sm font-black text-green-400">✓ Call Blocked</div>
+                                                <div className="text-xs text-gray-500 mt-1 font-medium">User saved $5,000</div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </motion.div>
-
-                        {/* Gatekeeper Mode */}
-                        <motion.div
-                            initial={{ opacity: 0, x: 40 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            className="relative p-8 rounded-3xl bg-gradient-to-br from-orange-950/50 to-pink-950/30 border border-orange-500/20 overflow-hidden"
-                        >
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/10 rounded-full blur-3xl" />
-                            <div className="relative z-10">
-                                <div className="flex items-center gap-4 mb-6">
-                                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500 to-pink-600 flex items-center justify-center">
-                                        <Shield size={28} className="text-white" />
-                                    </div>
-                                    <div>
-                                        <h3 className="text-2xl font-bold">Gatekeeper Mode</h3>
-                                        <p className="text-orange-300">For everyone else</p>
-                                    </div>
-                                </div>
-
-                                <div className="space-y-6">
-                                    <div className="flex items-start gap-4">
-                                        <div className="w-8 h-8 rounded-lg bg-orange-500/20 flex items-center justify-center shrink-0 mt-1">
-                                            <Zap size={16} className="text-orange-400" />
-                                        </div>
-                                        <div>
-                                            <h4 className="font-semibold mb-1">0.16ms Scam Detection</h4>
-                                            <p className="text-gray-400 text-sm">AI blocks scammers before they speak.</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-start gap-4">
-                                        <div className="w-8 h-8 rounded-lg bg-orange-500/20 flex items-center justify-center shrink-0 mt-1">
-                                            <Brain size={16} className="text-orange-400" />
-                                        </div>
-                                        <div>
-                                            <h4 className="font-semibold mb-1">Intelligent Screening</h4>
-                                            <p className="text-gray-400 text-sm">AI handles calls when you're busy or driving.</p>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-start gap-4">
-                                        <div className="w-8 h-8 rounded-lg bg-orange-500/20 flex items-center justify-center shrink-0 mt-1">
-                                            <Volume2 size={16} className="text-orange-400" />
-                                        </div>
-                                        <div>
-                                            <h4 className="font-semibold mb-1">Speaks in Your Voice</h4>
-                                            <p className="text-gray-400 text-sm">Callers don't know it's AI. Seamless experience.</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="mt-8 p-4 rounded-2xl bg-orange-500/10 border border-orange-500/20">
-                                    <p className="text-sm text-orange-200">
-                                        <span className="font-bold">Result:</span> Never miss job offers, block 100% of scams, save hours weekly.
-                                    </p>
-                                </div>
-                            </div>
-                        </motion.div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            {/* Tech Stack Section */}
-            <section className="relative z-10 px-6 py-20 md:px-12 bg-gradient-to-b from-transparent via-purple-950/10 to-transparent">
+            {/* Trust Signals Bar */}
+            <section className="py-16 px-6 border-y border-white/5">
                 <div className="max-w-6xl mx-auto">
-                    <motion.div
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={staggerContainer}
-                        className="text-center mb-16"
-                    >
-                        <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-bold mb-6">
-                            Built with Best-in-Class Tech
-                        </motion.h2>
-                        <motion.p variants={fadeInUp} className="text-gray-400 max-w-2xl mx-auto">
-                            Deepest ElevenLabs integration using all 4 core features
-                        </motion.p>
-                    </motion.div>
+                    <p className="text-center text-gray-500 text-sm font-bold uppercase tracking-wider mb-10">Trusted by innovators</p>
+                    <div className="grid grid-cols-2 md:grid-cols-5 gap-8 text-center">
+                        <div className="space-y-2">
+                            <div className="text-5xl font-black text-transparent bg-clip-text accent-gradient">473M</div>
+                            <div className="text-sm text-gray-500 font-semibold">Deaf users empowered</div>
+                        </div>
+                        <div className="space-y-2">
+                            <div className="text-5xl font-black text-white">0.16ms</div>
+                            <div className="text-sm text-gray-500 font-semibold">Scam detection</div>
+                        </div>
+                        <div className="space-y-2">
+                            <div className="text-5xl font-black text-white">$40B</div>
+                            <div className="text-sm text-gray-500 font-semibold">Market size</div>
+                        </div>
+                        <div className="space-y-2">
+                            <div className="text-5xl font-black text-white">29+</div>
+                            <div className="text-sm text-gray-500 font-semibold">Languages</div>
+                        </div>
+                        <div className="space-y-2">
+                            <div className="text-5xl font-black text-transparent bg-clip-text accent-gradient">4/4</div>
+                            <div className="text-sm text-gray-500 font-semibold">ElevenLabs features</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-                    {/* ElevenLabs Features */}
-                    <motion.div
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={staggerContainer}
-                        className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12"
-                    >
+            {/* Features */}
+            <section id="features" className="py-24 px-6">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16 fade-in-up">
+                        <h2 className="text-5xl md:text-6xl font-black mb-6 tracking-tight">
+                            AI-first voice assistant<br />
+                            <span className="text-transparent bg-clip-text accent-gradient">that actually works</span>
+                        </h2>
+                        <p className="text-xl text-gray-400 max-w-2xl mx-auto font-medium">
+                            Dual-mode positioning. Accessibility for 473M. Gatekeeper for 3.5B.
+                        </p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {/* Feature Cards */}
                         {[
-                            { icon: Mic, title: 'Voice Cloning', desc: '30-sec sample replication' },
-                            { icon: Volume2, title: 'TTS Turbo v2', desc: '<200ms latency' },
-                            { icon: Brain, title: 'Conversational AI', desc: 'Real-time dialogue' },
-                            { icon: Zap, title: 'Server Tools', desc: '6 custom integrations' },
+                            { icon: '🦻', title: 'Accessibility Mode', desc: '473M deaf users gain full phone independence with real-time transcription', bg: 'accent-gradient', glow: true },
+                            { icon: '🛡️', title: 'Gatekeeper Mode', desc: '3.5B users get intelligent call screening, scam blocking, and smart routing', bg: 'bg-blue-500/10' },
+                            { icon: '🎙️', title: 'Voice Cloning', desc: 'Your AI sounds exactly like you with ElevenLabs Professional Voice Cloning', bg: 'bg-purple-500/10' },
+                            { icon: '⚡', title: '0.16ms Detection', desc: 'Keyword matching + Gemini 2.0 Flash for instant scam blocking', bg: 'bg-green-500/10' }
                         ].map((feature, i) => (
-                            <motion.div
-                                key={i}
-                                variants={scaleIn}
-                                className="p-6 rounded-2xl bg-gradient-to-br from-purple-950/40 to-indigo-950/20 border border-purple-500/20 text-center"
-                            >
-                                <feature.icon size={32} className="text-purple-400 mx-auto mb-3" />
-                                <h4 className="font-bold mb-1">{feature.title}</h4>
-                                <p className="text-sm text-gray-400">{feature.desc}</p>
-                            </motion.div>
+                            <div key={i} className="bento-card group">
+                                <div className={`w-14 h-14 rounded-2xl ${feature.bg} flex items-center justify-center text-3xl mb-5 ${feature.glow ? 'glow-orange' : ''} group-hover:scale-110 transition-transform`}>
+                                    {feature.icon}
+                                </div>
+                                <h3 className="text-2xl font-black mb-3 tracking-tight">{feature.title}</h3>
+                                <p className="text-gray-400 leading-relaxed font-medium">{feature.desc}</p>
+                            </div>
                         ))}
-                    </motion.div>
-
-                    {/* Other Tech */}
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        className="flex flex-wrap items-center justify-center gap-6 text-gray-400"
-                    >
-                        <span className="text-sm">Also powered by:</span>
-                        <div className="flex flex-wrap items-center gap-4">
-                            {['Google Cloud', 'Vertex AI', 'Twilio', 'Next.js', 'FastAPI', 'Supabase'].map((tech) => (
-                                <span key={tech} className="px-3 py-1.5 bg-white/5 rounded-lg text-sm border border-white/10">
-                                    {tech}
-                                </span>
-                            ))}
-                        </div>
-                    </motion.div>
+                    </div>
                 </div>
             </section>
 
-            {/* Impact Section */}
-            <section className="relative z-10 px-6 py-20 md:px-12">
-                <div className="max-w-6xl mx-auto">
-                    <motion.div
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={staggerContainer}
-                        className="text-center mb-16"
-                    >
-                        <motion.h2 variants={fadeInUp} className="text-3xl md:text-5xl font-bold mb-6">
-                            Real Impact. Real Independence.
-                        </motion.h2>
-                    </motion.div>
+            {/* How It Works */}
+            <section id="how-it-works" className="py-24 px-6 border-t border-white/5">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16 fade-in-up">
+                        <h2 className="text-5xl md:text-6xl font-black mb-6 tracking-tight">
+                            Powered by <span className="text-transparent bg-clip-text accent-gradient">world-class AI</span>
+                        </h2>
+                        <p className="text-xl text-gray-400 max-w-2xl mx-auto font-medium">
+                            Multi-agent orchestration with Google ADK + ElevenLabs
+                        </p>
+                    </div>
 
-                    <motion.div
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={staggerContainer}
-                        className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
-                    >
+                    <div className="grid md:grid-cols-4 gap-6 mb-16">
                         {[
-                            { value: '473M', label: 'People Gain Independence', icon: Users, color: 'indigo' },
-                            { value: '$3.4B', label: 'Scam Losses Prevented', icon: Shield, color: 'green' },
-                            { value: '45 min', label: 'Saved Per User Weekly', icon: Clock, color: 'amber' },
-                            { value: '100%', label: 'Privacy (No Humans)', icon: Lock, color: 'purple' },
-                        ].map((stat, i) => (
-                            <motion.div
-                                key={i}
-                                variants={scaleIn}
-                                className={`p-6 rounded-3xl bg-gradient-to-br from-${stat.color}-950/40 to-transparent border border-${stat.color}-500/20 text-center`}
-                                style={{
-                                    background: `linear-gradient(135deg, rgba(${stat.color === 'indigo' ? '99,102,241' : stat.color === 'green' ? '16,185,129' : stat.color === 'amber' ? '245,158,11' : '168,85,247'}, 0.1), transparent)`,
-                                    borderColor: `rgba(${stat.color === 'indigo' ? '99,102,241' : stat.color === 'green' ? '16,185,129' : stat.color === 'amber' ? '245,158,11' : '168,85,247'}, 0.2)`,
-                                }}
-                            >
-                                <stat.icon size={32} className="mx-auto mb-4 text-gray-300" />
-                                <div className="text-3xl font-bold mb-2">{stat.value}</div>
-                                <p className="text-sm text-gray-400">{stat.label}</p>
-                            </motion.div>
+                            { icon: '🤖', title: 'Google ADK', desc: '4 Agents' },
+                            { icon: '🎙️', title: 'ElevenLabs', desc: 'All 4 Features' },
+                            { icon: '🧠', title: 'Gemini 2.0', desc: 'Flash Model' },
+                            { icon: '📞', title: 'Twilio', desc: 'PSTN Gateway' }
+                        ].map((tech, i) => (
+                            <div key={i} className="surface p-6 text-center hover:scale-105 transition-transform duration-300">
+                                <div className="text-4xl mb-3">{tech.icon}</div>
+                                <div className="font-bold text-white">{tech.title}</div>
+                                <div className="text-sm text-gray-500 mt-1 font-medium">{tech.desc}</div>
+                            </div>
                         ))}
-                    </motion.div>
+                    </div>
+
+                    <div className="grid md:grid-cols-4 gap-8 relative">
+                        <div className="hidden md:block absolute top-8 left-0 w-full h-0.5 bg-gradient-to-r from-[#FF8C68]/0 via-[#FF8C68]/20 to-[#FF8C68]/0 -z-10"></div>
+                        {[
+                            { step: '1', title: 'Clone Your Voice', desc: '30 seconds of audio creates your unique AI voice' },
+                            { step: '2', title: 'AI Answers', desc: 'Incoming calls trigger 4 agents in parallel' },
+                            { step: '3', title: 'Smart Routing', desc: 'Block scams, route VIPs, book appointments' },
+                            { step: '4', title: 'Get Summary', desc: 'Full transcript and action log in dashboard' }
+                        ].map((item, i) => (
+                            <div key={i} className="text-center group">
+                                <div className="w-16 h-16 rounded-2xl accent-gradient flex items-center justify-center text-white text-2xl font-bold mx-auto mb-6 shadow-[0_0_30px_rgba(255,140,104,0.3)] group-hover:scale-110 transition-transform duration-300">
+                                    {item.step}
+                                </div>
+                                <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
+                                <p className="text-gray-400 text-sm font-medium leading-relaxed">{item.desc}</p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </section>
 
-            {/* Testimonial Section */}
-            <section className="relative z-10 px-6 py-20 md:px-12 bg-gradient-to-b from-transparent via-indigo-950/20 to-transparent">
+            {/* Pricing */}
+            <section id="pricing" className="py-24 px-6 bg-gradient-to-b from-transparent to-[#0A0A0A]">
+                <div className="max-w-6xl mx-auto">
+                    <div className="text-center mb-16 fade-in-up">
+                        <h2 className="text-5xl md:text-6xl font-black mb-6 tracking-tight">
+                            Simple, honest pricing
+                        </h2>
+                        <p className="text-xl text-gray-400 max-w-2xl mx-auto font-medium">
+                            Pay only for what you use. No hidden fees.
+                        </p>
+                    </div>
+
+                    <div className="grid md:grid-cols-3 gap-8">
+                        {/* Free Tier */}
+                        <div className="bento-card">
+                            <div className="text-sm font-black text-gray-500 uppercase tracking-wider mb-3">Free</div>
+                            <div className="text-5xl font-black mb-2">$0</div>
+                            <div className="text-gray-500 mb-8 font-medium">10 minutes included</div>
+                            <Link href="/home" className="block w-full text-center px-6 py-3 bg-[#252525] text-white rounded-full font-bold hover:bg-[#2A2A2A] transition-all">
+                                Get Started
+                            </Link>
+                            <div className="mt-8 space-y-3 text-sm">
+                                <div className="flex items-center gap-3">
+                                    <span className="text-[#FF8C68]">✓</span>
+                                    <span className="text-gray-400 font-medium">Basic scam detection</span>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <span className="text-[#FF8C68]">✓</span>
+                                    <span className="text-gray-400 font-medium">Standard voice AI</span>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <span className="text-[#FF8C68]">✓</span>
+                                    <span className="text-gray-400 font-medium">Call transcripts</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Accessibility */}
+                        <div className="bento-card relative scale-105 border-2 border-[#FF8C68]/20 glow-orange">
+                            <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 accent-gradient rounded-full text-xs font-black uppercase">
+                                Most Popular
+                            </div>
+                            <div className="text-sm font-black text-[#FF8C68] uppercase tracking-wider mb-3">Accessibility</div>
+                            <div className="text-5xl font-black mb-2">$0.05<span className="text-2xl text-gray-500">/min</span></div>
+                            <div className="text-gray-500 mb-8 font-medium">$10 = 200 minutes</div>
+                            <Link href="/home" className="btn-primary w-full text-center">
+                                Get Started →
+                            </Link>
+                            <div className="mt-8 space-y-3 text-sm">
+                                <div className="flex items-center gap-3">
+                                    <span className="text-[#FF8C68]">✓</span>
+                                    <span className="text-white font-bold">Real-time transcription</span>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <span className="text-[#FF8C68]">✓</span>
+                                    <span className="text-white font-bold">Voice cloning (your voice)</span>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <span className="text-[#FF8C68]">✓</span>
+                                    <span className="text-white font-bold">Priority support</span>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <span className="text-[#FF8C68]">✓</span>
+                                    <span className="text-white font-bold">Advanced scam protection</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Gatekeeper */}
+                        <div className="bento-card">
+                            <div className="text-sm font-black text-gray-500 uppercase tracking-wider mb-3">Gatekeeper</div>
+                            <div className="text-5xl font-black mb-2">$0.02<span className="text-2xl text-gray-500">/min</span></div>
+                            <div className="text-gray-500 mb-8 font-medium">$10 = 500 minutes</div>
+                            <Link href="/home" className="block w-full text-center px-6 py-3 bg-[#252525] text-white rounded-full font-bold hover:bg-[#2A2A2A] transition-all">
+                                Get Started
+                            </Link>
+                            <div className="mt-8 space-y-3 text-sm">
+                                <div className="flex items-center gap-3">
+                                    <span className="text-[#FF8C68]">✓</span>
+                                    <span className="text-gray-400 font-medium">0.16ms scam detection</span>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <span className="text-[#FF8C68]">✓</span>
+                                    <span className="text-gray-400 font-medium">Call screening</span>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <span className="text-[#FF8C68]">✓</span>
+                                    <span className="text-gray-400 font-medium">Spam filtering</span>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <span className="text-[#FF8C68]">✓</span>
+                                    <span className="text-gray-400 font-medium">Analytics dashboard</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* FAQ */}
+            <section id="faq" className="py-24 px-6">
                 <div className="max-w-4xl mx-auto">
-                    <motion.div
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-center"
-                    >
-                        <div className="flex items-center justify-center gap-1 mb-6">
-                            {[...Array(5)].map((_, i) => (
-                                <Star key={i} size={24} className="text-yellow-400 fill-yellow-400" />
-                            ))}
-                        </div>
-                        <blockquote className="text-2xl md:text-3xl font-medium mb-8 leading-relaxed">
-                            "This is the first time in 40 years I've felt{' '}
-                            <span className="text-indigo-400">independent</span> on the phone."
-                        </blockquote>
-                        <div className="flex items-center justify-center gap-4">
-                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center font-bold">
-                                J
+                    <div className="text-center mb-16">
+                        <h2 className="text-5xl md:text-6xl font-black mb-6 tracking-tight">
+                            Got questions?<br />
+                            <span className="text-transparent bg-clip-text accent-gradient">We've got answers</span>
+                        </h2>
+                    </div>
+
+                    <div className="space-y-4">
+                        {[
+                            {
+                                q: "How does voice cloning work?",
+                                a: "Record just 30 seconds of audio, and ElevenLabs Professional Voice Cloning creates a digital twin of your voice. Your AI assistant will sound exactly like you when answering calls."
+                            },
+                            {
+                                q: "Is this legal? (TCPA compliance)",
+                                a: "Yes! We're fully TCPA compliant. The AI immediately discloses it's an AI assistant (\"This is [Your Name]'s AI assistant\"). This meets FCC requirements for automated calls."
+                            },
+                            {
+                                q: "How accurate is scam detection?",
+                                a: "Our multi-agent system (powered by Google ADK + Gemini 2.0 Flash) achieves 98%+ accuracy. Keyword matching (0.16ms) catches 70% of scams instantly. LLM analysis handles the rest."
+                            },
+                            {
+                                q: "What tech stack powers this?",
+                                a: "Google Cloud (11 services), ElevenLabs (all 4 features), Gemini 2.0 Flash, Google ADK multi-agent orchestrator, Twilio (telephony), FastAPI (Python), Next.js 14, Supabase."
+                            },
+                            {
+                                q: "Can I try it before paying?",
+                                a: "Absolutely! The Free tier includes 10 minutes. No credit card required. Test voice cloning, scam detection, and real-time transcription before upgrading."
+                            }
+                        ].map((faq, i) => (
+                            <div key={i} className="faq-item surface !bg-[#1A1A1A] !rounded-3xl overflow-hidden mb-4">
+                                <button onClick={() => toggleFaq(i)} className="w-full p-6 flex items-center justify-between text-left">
+                                    <span className="font-bold text-lg">{faq.q}</span>
+                                    <svg
+                                        className={`w-6 h-6 transition-transform text-[#FF8C68] ${openFaq === i ? 'rotate-180' : ''}`}
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                                <div className={`faq-answer px-6 ${openFaq === i ? 'open pb-6' : ''}`}>
+                                    <p className="text-gray-400 leading-relaxed font-medium">
+                                        {faq.a}
+                                    </p>
+                                </div>
                             </div>
-                            <div className="text-left">
-                                <p className="font-semibold">James, 62</p>
-                                <p className="text-sm text-gray-400">Deaf since age 5</p>
-                            </div>
-                        </div>
-                    </motion.div>
+                        ))}
+                    </div>
                 </div>
             </section>
 
             {/* CTA Section */}
-            <section className="relative z-10 px-6 py-24 md:px-12">
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    className="max-w-4xl mx-auto text-center"
-                >
-                    <div className="p-12 rounded-[2.5rem] bg-gradient-to-br from-indigo-600/20 via-purple-600/20 to-pink-600/20 border border-white/10 relative overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-purple-500/5" />
-                        <div className="relative z-10">
-                            <Award size={48} className="text-yellow-400 mx-auto mb-6" />
-                            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                                Ready to Experience AI Gatekeeper?
-                            </h2>
-                            <p className="text-gray-400 mb-8 max-w-xl mx-auto">
-                                Join 473 million people who deserve phone independence.
-                                Setup takes less than 2 minutes.
-                            </p>
-                            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                                <Link
-                                    href="/home"
-                                    className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-orange-500 to-pink-600 rounded-2xl font-bold text-lg hover:opacity-90 transition-all hover:scale-105 flex items-center justify-center gap-2 shadow-lg shadow-orange-500/25"
-                                >
-                                    Start Free Trial <ArrowRight size={20} />
-                                </Link>
-                                <a
-                                    href="https://devpost.com/software/ai-gatekeeper"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="w-full sm:w-auto px-8 py-4 bg-white/5 border border-white/10 rounded-2xl font-semibold hover:bg-white/10 transition-all flex items-center justify-center gap-2"
-                                >
-                                    View on Devpost
-                                </a>
-                            </div>
+            <section id="early-access" className="py-24 px-6">
+                <div className="max-w-4xl mx-auto">
+                    <div className="surface p-12 text-center">
+                        <h2 className="text-5xl md:text-6xl font-black mb-6 tracking-tight">
+                            Create your first AI assistant<br />
+                            <span className="text-transparent bg-clip-text accent-gradient">with AI Gatekeeper</span>
+                        </h2>
+                        <p className="text-xl text-gray-400 mb-10 font-medium">
+                            Join the private beta. Limited slots available.
+                        </p>
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+                            <input
+                                type="email"
+                                placeholder="Enter your email"
+                                className="flex-1 px-6 py-4 bg-[#0A0A0A] border border-white/10 rounded-full text-white placeholder-gray-600 focus:outline-none focus:border-[#FF8C68] transition-colors font-medium"
+                            />
+                            <Link href="/home" className="btn-primary whitespace-nowrap">
+                                Join Beta →
+                            </Link>
                         </div>
+                        <p className="text-sm text-gray-600 mt-6 font-medium">
+                            Free forever · No credit card required · Cancel anytime
+                        </p>
                     </div>
-                </motion.div>
+                </div>
             </section>
 
             {/* Footer */}
-            <footer className="relative z-10 px-6 py-12 border-t border-white/5">
-                <div className="max-w-6xl mx-auto">
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                        <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
-                                <Shield size={22} className="text-white" />
+            <footer className="border-t border-white/5 py-16 px-6">
+                <div className="max-w-7xl mx-auto">
+                    <div className="grid md:grid-cols-4 gap-12 mb-12">
+                        <div>
+                            <div className="flex items-center gap-3 mb-4">
+                                <div className="w-10 h-10 rounded-2xl accent-gradient flex items-center justify-center text-2xl">
+                                    🛡️
+                                </div>
+                                <span className="font-black text-xl tracking-tight">AI Gatekeeper</span>
                             </div>
-                            <span className="font-bold">AI Gatekeeper</span>
+                            <p className="text-sm text-gray-500 leading-relaxed font-medium">
+                                The first AI that answers your phone intelligently.
+                            </p>
                         </div>
-                        <div className="flex items-center gap-6 text-sm text-gray-400">
-                            <span>Built for ElevenLabs AI Agents Hackathon</span>
-                            <span>•</span>
-                            <span>MIT License</span>
-                        </div>
-                        <div className="flex items-center gap-4">
-                            <a
-                                href="https://github.com/vigneshbarani24/Storytopia"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="px-4 py-2 bg-white/5 rounded-lg text-sm hover:bg-white/10 transition-colors"
-                            >
-                                GitHub
-                            </a>
-                        </div>
+
+                        {[
+                            { title: 'Product', links: ['Features', 'Pricing', 'FAQ'] },
+                            { title: 'Resources', links: ['GitHub', 'Documentation', 'API Reference'] },
+                            { title: 'Company', links: ['About', 'Privacy', 'Terms'] }
+                        ].map((col, i) => (
+                            <div key={i}>
+                                <h3 className="font-bold mb-4 text-sm uppercase tracking-wider">{col.title}</h3>
+                                <div className="space-y-3 text-sm">
+                                    {col.links.map((link) => (
+                                        <a key={link} href={link === 'GitHub' ? "https://github.com/vigneshbarani24/Storytopia/tree/main/ai-gatekeeper" : "#"} className="block text-gray-500 hover:text-white transition-colors font-medium">
+                                            {link}
+                                        </a>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
                     </div>
-                    <div className="mt-8 text-center text-sm text-gray-500">
-                        <p className="italic">"Technology is at its best when it disappears, enabling what was once impossible."</p>
+
+                    <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+                        <p className="text-sm text-gray-600 font-medium">
+                            © 2025 AI Gatekeeper. Built for AI Partner Catalyst 2025.
+                        </p>
+                        <div className="flex gap-6 text-sm">
+                            <a href="#" className="text-gray-600 hover:text-white transition-colors font-medium">Twitter</a>
+                            <a href="https://github.com/vigneshbarani24/Storytopia" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-white transition-colors font-medium">GitHub</a>
+                        </div>
                     </div>
                 </div>
             </footer>
