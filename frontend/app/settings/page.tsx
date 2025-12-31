@@ -1,127 +1,162 @@
 'use client';
 
-/**
- * AI Gatekeeper Settings Page
- * Professional settings and configuration
- */
-
-import { motion } from 'framer-motion';
-import { Shield, ArrowLeft, Bell, Lock, Mic, Phone, User } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
-import { Card } from '@/components/ui/Card';
+import { ArrowLeft, User, Mic, Bell, Lock, ChevronRight, Heart, Activity, Shield, Settings } from 'lucide-react';
 import Link from 'next/link';
 
 export default function SettingsPage() {
+  const settings = [
+    { icon: User, title: 'Profile', desc: 'Account settings', color: '#f97316' },
+    { icon: Mic, title: 'AI Voice', desc: 'Voice preferences', color: '#a855f7', link: '/dashboard' },
+    { icon: Bell, title: 'Notifications', desc: 'Alert preferences', color: '#10b981' },
+    { icon: Lock, title: 'Privacy', desc: 'Security settings', color: '#3b82f6' },
+  ];
+
   return (
-    <div className="min-h-screen bg-background">
+    <div style={{ minHeight: '100vh', backgroundColor: '#0a0a0f', color: 'white', paddingBottom: '100px' }}>
       {/* Header */}
-      <header className="border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
-          <Link href="/">
-            <Button variant="ghost" size="sm" icon={<ArrowLeft size={18} />}>
-              Back
-            </Button>
-          </Link>
-
-          <h1 className="text-2xl font-black text-white">Settings</h1>
-
-          <div className="w-20" />
-        </div>
+      <header style={{ padding: '20px 24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <Link href="/">
+          <div style={{
+            width: '44px',
+            height: '44px',
+            borderRadius: '50%',
+            backgroundColor: 'rgba(255,255,255,0.05)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <ArrowLeft size={20} color="white" />
+          </div>
+        </Link>
+        <h1 style={{ fontSize: '28px', fontWeight: 800 }}>Settings</h1>
       </header>
 
-      {/* Content */}
-      <main className="max-w-3xl mx-auto px-8 py-12">
-        <div className="space-y-6">
-          {/* Profile */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <Card variant="glass" padding="md">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-16 h-16 rounded-full bg-indigo-500/10 flex items-center justify-center text-indigo-400 border border-indigo-500/10">
-                  <User size={32} />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-white">Profile</h3>
-                  <p className="text-sm text-gray-500">Manage your account settings</p>
-                </div>
-              </div>
-              <Button variant="secondary" fullWidth>
-                Edit Profile
-              </Button>
-            </Card>
-          </motion.div>
-
-          {/* AI Settings */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-          >
-            <Card variant="glass" padding="md">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-16 h-16 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-400 border border-purple-500/10">
-                  <Mic size={32} />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-white">AI Voice</h3>
-                  <p className="text-sm text-gray-500">Customize your AI assistant's voice and personality</p>
-                </div>
-              </div>
-              <Link href="/dashboard">
-                <Button variant="primary" fullWidth>
-                  Configure AI
-                </Button>
-              </Link>
-            </Card>
-          </motion.div>
-
-          {/* Notifications */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
-            <Card variant="glass" padding="md">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-16 h-16 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-400 border border-emerald-500/10">
-                  <Bell size={32} />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-white">Notifications</h3>
-                  <p className="text-sm text-gray-500">Control how you receive alerts</p>
-                </div>
-              </div>
-              <Button variant="secondary" fullWidth>
-                Manage Notifications
-              </Button>
-            </Card>
-          </motion.div>
-
-          {/* Privacy */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-          >
-            <Card variant="glass" padding="md">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-16 h-16 rounded-full bg-rose-500/10 flex items-center justify-center text-rose-400 border border-rose-500/10">
-                  <Lock size={32} />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-white">Privacy & Security</h3>
-                  <p className="text-sm text-gray-500">Manage your data and security preferences</p>
-                </div>
-              </div>
-              <Button variant="secondary" fullWidth>
-                Privacy Settings
-              </Button>
-            </Card>
-          </motion.div>
+      {/* Profile Card */}
+      <section style={{ padding: '0 24px 32px' }}>
+        <div style={{
+          padding: '24px',
+          borderRadius: '24px',
+          background: 'linear-gradient(135deg, rgba(249, 115, 22, 0.2), rgba(249, 115, 22, 0.05))',
+          border: '1px solid rgba(249, 115, 22, 0.2)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '16px'
+        }}>
+          <div style={{
+            width: '64px',
+            height: '64px',
+            borderRadius: '50%',
+            backgroundColor: '#f97316',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <User size={32} color="white" />
+          </div>
+          <div>
+            <h2 style={{ fontSize: '20px', fontWeight: 700, marginBottom: '4px' }}>User</h2>
+            <p style={{ fontSize: '14px', color: '#9ca3af' }}>Free Plan</p>
+          </div>
         </div>
-      </main>
+      </section>
+
+      {/* Settings List */}
+      <section style={{ padding: '0 24px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          {settings.map((item) => (
+            <Link key={item.title} href={item.link || '#'} style={{ textDecoration: 'none', color: 'inherit' }}>
+              <div style={{
+                padding: '20px',
+                borderRadius: '20px',
+                backgroundColor: 'rgba(255,255,255,0.03)',
+                border: '1px solid rgba(255,255,255,0.05)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '16px'
+              }}>
+                <div style={{
+                  width: '48px',
+                  height: '48px',
+                  borderRadius: '16px',
+                  backgroundColor: `${item.color}20`,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  <item.icon size={24} color={item.color} />
+                </div>
+
+                <div style={{ flex: 1 }}>
+                  <div style={{ fontWeight: 600, marginBottom: '4px' }}>{item.title}</div>
+                  <div style={{ fontSize: '13px', color: '#6b7280' }}>{item.desc}</div>
+                </div>
+
+                <ChevronRight size={20} color="#6b7280" />
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* App Info */}
+      <section style={{ padding: '32px 24px', textAlign: 'center' }}>
+        <p style={{ fontSize: '13px', color: '#4b5563' }}>AI Gatekeeper v1.0.0</p>
+        <p style={{ fontSize: '12px', color: '#374151', marginTop: '4px' }}>© 2025</p>
+      </section>
+
+      {/* Bottom Navigation */}
+      <nav style={{
+        position: 'fixed',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: '80px',
+        backgroundColor: 'rgba(20, 20, 25, 0.95)',
+        backdropFilter: 'blur(20px)',
+        borderTop: '1px solid rgba(255,255,255,0.05)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        padding: '0 20px'
+      }}>
+        <Link href="/" style={{ textDecoration: 'none' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
+            <Heart size={22} color="#6b7280" />
+            <span style={{ fontSize: '11px', color: '#6b7280' }}>Home</span>
+          </div>
+        </Link>
+
+        <Link href="/calls" style={{ textDecoration: 'none' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
+            <Activity size={22} color="#6b7280" />
+            <span style={{ fontSize: '11px', color: '#6b7280' }}>Calls</span>
+          </div>
+        </Link>
+
+        <Link href="/dashboard" style={{ textDecoration: 'none' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
+            <Shield size={22} color="#6b7280" />
+            <span style={{ fontSize: '11px', color: '#6b7280' }}>Voice</span>
+          </div>
+        </Link>
+
+        <Link href="/settings" style={{ textDecoration: 'none' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
+            <div style={{
+              width: '48px',
+              height: '32px',
+              borderRadius: '16px',
+              backgroundColor: '#f97316',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}>
+              <Settings size={18} color="white" />
+            </div>
+            <span style={{ fontSize: '11px', color: 'white', fontWeight: 600 }}>Settings</span>
+          </div>
+        </Link>
+      </nav>
     </div>
   );
 }

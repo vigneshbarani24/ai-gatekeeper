@@ -58,34 +58,35 @@ async def incoming_call(request: Request, background_tasks: BackgroundTasks):
 
         user_id = user["id"]
 
+        # DISABLED: Whitelist check - all calls go to AI agent
         # Check if caller is whitelisted
-        contact = await db_service.get_contact_by_phone(user_id, caller_number)
+        # contact = await db_service.get_contact_by_phone(user_id, caller_number)
 
-        if contact and contact.get("auto_pass"):
-            # FAST PATH: Transfer immediately (no AI screening)
-            logger.info(f"✅ Whitelisted contact: {contact.get('name')}")
+        # if contact and contact.get("auto_pass"):
+        #     # FAST PATH: Transfer immediately (no AI screening)
+        #     logger.info(f"✅ Whitelisted contact: {contact.get('name')}")
 
-            # Log call
-            background_tasks.add_task(
-                db_service.create_call,
-                user_id=user_id,
-                call_sid=call_sid,
-                caller_number=caller_number,
-                intent="friend",
-                scam_score=0.0,
-                action_taken="passed"
-            )
+        #     # Log call
+        #     background_tasks.add_task(
+        #         db_service.create_call,
+        #         user_id=user_id,
+        #         call_sid=call_sid,
+        #         caller_number=caller_number,
+        #         intent="friend",
+        #         scam_score=0.0,
+        #         action_taken="passed"
+        #     )
 
-            return PlainTextResponse(
-                content=f"""<?xml version="1.0" encoding="UTF-8"?>
-<Response>
-    <Say>Connecting you now.</Say>
-    <Dial>{user.get('phone_number')}</Dial>
-</Response>""",
-                media_type="application/xml"
-            )
+        #     return PlainTextResponse(
+        #         content=f"""<?xml version="1.0" encoding="UTF-8"?>
+        # <Response>
+        #     <Say>Connecting you now.</Say>
+        #     <Dial>{user.get('phone_number')}</Dial>
+        # </Response>""",
+        #         media_type="application/xml"
+        #     )
 
-        # NOT WHITELISTED → Connect to ElevenLabs with user's cloned voice
+        # ALL CALLS → Connect to ElevenLabs with user's cloned voice
 
         # Get user's voice profile (their cloned voice - CRITICAL for both modes)
         voice_profile = await db_service.get_voice_profile(user_id)
