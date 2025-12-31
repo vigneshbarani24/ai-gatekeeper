@@ -1,0 +1,38 @@
+# General
+.DS_Store
+*.log
+tmp/
+.temp/
+*.swp
+
+# Environment Variables (CRITICAL)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+backend/.env
+frontend/.env
+
+# Dependencies
+node_modules/
+.pnpm-store/
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Build Outputs
+dist/
+build/
+.next/
+out/
+coverage/
+
+# IDEs
+.vscode/
+.idea/
+
+# System
+thumbs.db
