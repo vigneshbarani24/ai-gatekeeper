@@ -1,5 +1,16 @@
 import type { Metadata } from 'next';
+import { Plus_Jakarta_Sans, Outfit } from 'next/font/google';
 import './globals.css';
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  variable: '--font-jakarta',
+});
+
+const outfit = Outfit({
+  subsets: ['latin'],
+  variable: '--font-outfit',
+});
 
 export const metadata: Metadata = {
   title: 'AI Gatekeeper - Voice-Powered Call Screening',
@@ -12,8 +23,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" className={`${jakarta.variable} ${outfit.variable}`}>
+      <body className="font-sans">{children}</body>
     </html>
   );
 }

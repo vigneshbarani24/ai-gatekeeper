@@ -115,21 +115,28 @@ class DatabaseService:
         user_id: str,
         caller_number: str,
         call_sid: str,
-        status: str
+        status: str = "ringing",
+        **kwargs
     ) -> Dict:
         """Create new call record"""
         if not self.client:
             return {"id": "demo_call_id", "status": status}
 
         try:
+            data = {
+                "user_id": user_id,
+                "caller_number": caller_number,
+                "call_sid": call_sid,
+                "status": status
+            }
+            # Add extra fields if provided
+            for key in ["intent", "scam_score", "action_taken"]:
+                if key in kwargs:
+                    data[key] = kwargs[key]
+
             response = (
                 self.client.table("calls")
-                .insert({
-                    "user_id": user_id,
-                    "caller_number": caller_number,
-                    "call_sid": call_sid,
-                    "status": status
-                })
+                .insert(data)
                 .execute()
             )
             return response.data[0] if response.data else {}
@@ -162,14 +169,18 @@ class DatabaseService:
         intent: Optional[str] = None,
         scam_score: Optional[float] = None,
         passed_through: Optional[bool] = None,
-        transcript: Optional[str] = None
+        transcript: Optional[str] = None,
+        updates: Optional[Dict] = None,
+        **kwargs
     ) -> None:
         """Update call record"""
         if not self.client:
             return
 
         try:
-            update_data = {}
+            update_data = updates or {}
+            
+            # Add explicit args if provided
             if status:
                 update_data["status"] = status
             if intent:
@@ -178,8 +189,13 @@ class DatabaseService:
                 update_data["scam_score"] = scam_score
             if passed_through is not None:
                 update_data["passed_through"] = passed_through
+                
+            # Add kwargs
+            for key, value in kwargs.items():
+                update_data[key] = value
 
-            self.client.table("calls").update(update_data).eq("call_sid", call_sid).execute()
+            if update_data:
+                self.client.table("calls").update(update_data).eq("call_sid", call_sid).execute()
 
             # Update transcript separately if provided
             if transcript:

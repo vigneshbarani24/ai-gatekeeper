@@ -70,7 +70,7 @@ class TwilioService:
 
         return str(response)
 
-    def dial_user(self, user_phone_number: str, call_sid: str) -> None:
+    async def dial_user(self, user_phone_number: str, call_sid: str) -> None:
         """
         Dial the user to pass through a legitimate call
 
@@ -80,6 +80,9 @@ class TwilioService:
         """
         try:
             # Update the call to dial the user
+            # twilio-python is typically synchronous, but we wrap it in a thread or 
+            # just use it as is if it doesn't block too much. 
+            # However, for consistency with the orchestrator, we mark it async.
             call = self.client.calls(call_sid).update(
                 twiml=f'<Response><Dial>{user_phone_number}</Dial></Response>'
             )
@@ -88,7 +91,14 @@ class TwilioService:
             logger.error(f"❌ Failed to dial user: {e}")
             raise
 
-    def hangup_call(self, call_sid: str) -> None:
+    async def end_call(self, call_sid: str) -> None:
+        """
+        Terminate a call (used when scam detected)
+        Alias for hangup_call to match optimized router
+        """
+        await self.hangup_call(call_sid)
+
+    async def hangup_call(self, call_sid: str) -> None:
         """
         Terminate a call (used when scam detected)
 

@@ -58,7 +58,21 @@ cd backend
 if [ -f .env ]; then
     # Read .env file, ignore comments and empty lines, replace newlines with commas
     # We use python to safely parse it to avoid issues with special logic
-    ENV_VARS=$(python3 -c "import os; print(','.join([f'{line.split('=', 1)[0]}={line.split('=', 1)[1].strip()}' for line in open('.env').read().splitlines() if line.strip() and not line.startswith('#')]))")
+    ENV_VARS=$(python3 -c '
+import os
+def parse_env():
+    items = []
+    with open(".env") as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            parts = line.split("=", 1)
+            if len(parts) == 2:
+                items.append(f"{parts[0]}={parts[1].strip()}")
+    return ",".join(items)
+print(parse_env())
+')
     echo -e "${GREEN}✅ Loaded environment variables from backend/.env${NC}"
 else
     echo -e "${YELLOW}⚠️  backend/.env file not found! Deployment might fail execution if keys are missing.${NC}"
