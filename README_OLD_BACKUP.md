@@ -949,7 +949,7 @@ vercel --prod
 
 **Expected URLs:**
 - Backend: `https://ai-gatekeeper-xxxxx-uc.a.run.app`
-- Frontend: `https://ai-gatekeeper.vercel.app`
+- Frontend: `https://gatekeeper-beryl.vercel.app`
 
 ---
 

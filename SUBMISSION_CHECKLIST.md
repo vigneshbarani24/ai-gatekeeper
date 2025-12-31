@@ -142,7 +142,7 @@ Three impact categories:
 ## 🔗 Links to Include in DevPost
 
 ### Live Demo
-- **Frontend:** https://ai-gatekeeper.vercel.app
+- **Frontend:** https://gatekeeper-beryl.vercel.app
 - **Backend API:** https://ai-gatekeeper-backend-xxxxx-uc.a.run.app
 
 ### Repository
@@ -246,7 +246,7 @@ Three impact categories:
 
 ### What to Submit
 1. **GitHub Repository Link** - https://github.com/vigneshbarani24/Storytopia
-2. **Live Demo Link** - https://ai-gatekeeper.vercel.app
+2. **Live Demo Link** - https://gatekeeper-beryl.vercel.app
 3. **Demo Video** - Upload to YouTube/Vimeo
 4. **Architecture Diagrams** - Upload as images to DevPost
 5. **README** - Already in repo

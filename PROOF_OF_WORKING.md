@@ -363,7 +363,7 @@ With this proven foundation, we're ready to:
 
 ## 🔗 Live Links
 
-- **Frontend**: [ai-gatekeeper.vercel.app](https://ai-gatekeeper.vercel.app)
+- **Frontend**: [ai-gatekeeper.vercel.app](https://gatekeeper-beryl.vercel.app)
 - **Backend**: `https://ai-gatekeeper-backend-i65wrni36q-uc.a.run.app`
 - **ElevenLabs Agent**: `conv_1201kdtcmr8qfmmrsb9bmdpqj4b8`
 - **GitHub**: [github.com/vigneshbarani24/ai-gatekeeper](https://github.com/vigneshbarani24/ai-gatekeeper)

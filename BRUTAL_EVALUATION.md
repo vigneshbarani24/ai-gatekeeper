@@ -298,7 +298,7 @@
 ```
 
 **Success Criteria**:
-- [ ] Frontend live at https://ai-gatekeeper.vercel.app
+- [ ] Frontend live at https://gatekeeper-beryl.vercel.app
 - [ ] Welcome flow works
 - [ ] Dashboard loads data
 - [ ] Mobile responsive

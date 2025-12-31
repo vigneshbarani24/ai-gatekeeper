@@ -862,7 +862,7 @@ ai-gatekeeper-standalone/
 
 ## 🔗 LINKS
 
-- **Live Demo:** https://ai-gatekeeper.vercel.app
+- **Live Demo:** https://gatekeeper-beryl.vercel.app
 - **GitHub:** https://github.com/vigneshbarani24/ai-gatekeeper
 - **Backend API:** https://ai-gatekeeper-backend-xxxxx-uc.a.run.app
 - **Demo Video:** [Coming Soon]

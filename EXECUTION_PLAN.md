@@ -321,7 +321,7 @@ NEXT_PUBLIC_ENVIRONMENT=production
 # Vercel auto-deploys on push
 
 # 4. Get URL
-# https://ai-gatekeeper.vercel.app
+# https://gatekeeper-beryl.vercel.app
 ```
 
 **Success Criteria**:

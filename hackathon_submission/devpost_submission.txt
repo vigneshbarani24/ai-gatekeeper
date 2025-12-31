@@ -9,7 +9,7 @@ AI Partner Catalyst 2025 (Google + ElevenLabs)
 
 ## 🔗 PROJECT LINKS
 
-**Live Landing Page:** https://ai-gatekeeper.vercel.app (or Netlify deploy URL)
+**Live Landing Page:** https://gatekeeper-beryl.vercel.app (or Netlify deploy URL)
 **GitHub Repository:** https://github.com/vigneshbarani24/ai-gatekeeper
 **Demo Video:** [Upload to YouTube and add link]
 
