@@ -62,7 +62,7 @@ TWILIO_AUTH_TOKEN=xxxxx
 TWILIO_PHONE_NUMBER=+15551234567  # Your purchased number
 
 # ElevenLabs
-ELEVENLABS_API_KEY=sk_xxxxx
+ELEVENLABS_API_KEY=<YOUR_ELEVENLABS_API_KEY>
 ELEVENLABS_AGENT_ID=xxxxx  # From Conversational AI dashboard
 ELEVENLABS_VOICE_ID=xxxxx  # Your cloned voice ID
 

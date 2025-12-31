@@ -212,8 +212,8 @@ Click **Run** → Should see "Database schema created successfully!"
 2. **Copy these values:**
    ```
    SUPABASE_URL=https://xxxxx.supabase.co
-   SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9... (for frontend)
-   SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9... (for backend - KEEP SECRET!)
+   SUPABASE_ANON_KEY=<YOUR_SUPABASE_ANON_KEY> (for frontend)
+   SUPABASE_SERVICE_ROLE_KEY=<YOUR_SUPABASE_SERVICE_ROLE_KEY> (for backend - KEEP SECRET!)
    ```
 
 ✅ **Database ready!**
@@ -459,7 +459,7 @@ Click **Tools** → **Add Custom Tool** for each:
 2. **Create New Key**
 3. **Copy:**
    ```
-   ELEVENLABS_API_KEY=sk_xxxxxxxxxxxxx
+   ELEVENLABS_API_KEY=<YOUR_ELEVENLABS_API_KEY>
    ELEVENLABS_AGENT_ID=[from agent URL or settings]
    ELEVENLABS_VOICE_ID=[from step 3.2]
    ```

@@ -36,7 +36,7 @@ h6 {
 
 /* Premium Components */
 .surface {
-  background: var(--surface);
+  background-color: var(--surface);
   border-radius: 2.5rem;
   box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.02),
@@ -44,7 +44,7 @@ h6 {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--accent-start) 0%, var(--accent-end) 100%);
+  background-image: linear-gradient(135deg, var(--accent-start) 0%, var(--accent-end) 100%);
   color: #000;
   font-weight: 800;
   border-radius: 2rem;
@@ -56,6 +56,7 @@ h6 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: fit-content;
 }
 
 .btn-primary:hover {
@@ -66,14 +67,14 @@ h6 {
 }
 
 .glass-nav {
-  background: rgba(26, 26, 26, 0.7);
+  background-color: rgba(26, 26, 26, 0.7);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .bento-card {
-  background: var(--surface);
+  background-color: var(--surface);
   border-radius: 2rem;
   padding: 2rem;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -90,7 +91,15 @@ h6 {
 }
 
 .accent-gradient {
-  background: linear-gradient(135deg, var(--accent-start) 0%, var(--accent-end) 100%);
+  background-image: linear-gradient(135deg, var(--accent-start) 0%, var(--accent-end) 100%);
+}
+
+.text-gradient-clip {
+  background-image: linear-gradient(135deg, var(--accent-start) 0%, var(--accent-end) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
 }
 
 .glow-orange {
@@ -132,14 +141,14 @@ h6 {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--background);
+  background-color: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--surface-light);
+  background-color: var(--surface-light);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #333;
+  background-color: #333;
 }

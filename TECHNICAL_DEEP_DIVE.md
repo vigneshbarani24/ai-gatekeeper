@@ -567,7 +567,7 @@ TWILIO_AUTH_TOKEN=xxxxx
 TWILIO_PHONE_NUMBER=+15551234567               # Your AI Gatekeeper's phone number
 
 # ElevenLabs
-ELEVENLABS_API_KEY=sk_xxxxx                    # From elevenlabs.io
+ELEVENLABS_API_KEY=<YOUR_ELEVENLABS_API_KEY>                    # From elevenlabs.io
 ELEVENLABS_AGENT_ID=agent_xxxxx                # Create in ElevenLabs dashboard
 ELEVENLABS_VOICE_ID=voice_xxxxx                # Clone your voice first
 

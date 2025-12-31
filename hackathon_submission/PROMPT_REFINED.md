@@ -441,7 +441,7 @@ python test_complete_system.py
 ### Backend `.env`
 ```bash
 # Required
-ELEVENLABS_API_KEY=sk_xxxxx
+ELEVENLABS_API_KEY=<YOUR_ELEVENLABS_API_KEY>
 TWILIO_ACCOUNT_SID=ACxxxxx
 TWILIO_AUTH_TOKEN=xxxxx
 SUPABASE_URL=https://xxxxx.supabase.co
