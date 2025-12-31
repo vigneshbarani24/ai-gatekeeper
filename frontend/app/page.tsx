@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
 
 export default function LandingPage() {
     const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -38,9 +37,9 @@ export default function LandingPage() {
                             >
                                 GitHub
                             </a>
-                            <Link href="/home" className="btn-primary inline-flex">
+                            <a href="/home" className="btn-primary inline-block">
                                 Get Started
-                            </Link>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -76,15 +75,12 @@ export default function LandingPage() {
 
                     {/* CTAs */}
                     <div className="flex flex-col sm:flex-row gap-5 justify-center mb-20">
-                        <Link href="/home" className="btn-primary inline-flex text-lg">
+                        <a href="/home" className="btn-primary inline-block text-lg">
                             Get Started →
-                        </Link>
-                        <Link
-                            href="/home"
-                            className="px-10 py-4 bg-[#1A1A1A] text-white rounded-full font-bold text-lg hover:bg-[#252525] transition-all shadow-xl inline-flex items-center justify-center"
-                        >
+                        </a>
+                        <a href="/home" className="px-10 py-4 bg-[#1A1A1A] text-white rounded-full font-bold text-lg hover:bg-[#252525] transition-all shadow-xl inline-block">
                             Watch Demo
-                        </Link>
+                        </a>
                     </div>
 
                     {/* Product Screenshot */}
@@ -125,11 +121,11 @@ export default function LandingPage() {
                                         <div className="space-y-4 text-sm">
                                             <div className="flex gap-4">
                                                 <span className="text-gray-600 font-mono font-bold">00:01</span>
-                                                <span className="text-gray-300">"This is the IRS calling..."</span>
+                                                <span className="text-gray-300">&quot;This is the IRS calling...&quot;</span>
                                             </div>
                                             <div className="flex gap-4">
                                                 <span className="text-gray-600 font-mono font-bold">00:04</span>
-                                                <span className="text-gray-300">"You owe $5,000 in taxes..."</span>
+                                                <span className="text-gray-300">&quot;You owe $5,000 in taxes...&quot;</span>
                                             </div>
                                         </div>
                                     </div>
@@ -231,6 +227,53 @@ export default function LandingPage() {
                 </div>
             </section>
 
+            {/* How It Works */}
+            <section id="how-it-works" className="py-24 px-6 border-t border-white/5">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16 fade-in-up">
+                        <h2 className="text-5xl md:text-6xl font-black mb-6 tracking-tight">
+                            Powered by <span className="text-transparent bg-clip-text accent-gradient">world-class AI</span>
+                        </h2>
+                        <p className="text-xl text-gray-400 max-w-2xl mx-auto font-medium">
+                            Multi-agent orchestration with Google ADK + ElevenLabs
+                        </p>
+                    </div>
+
+                    <div className="grid md:grid-cols-4 gap-6 mb-16">
+                        {[
+                            { icon: '🤖', title: 'Google ADK', desc: '4 Agents' },
+                            { icon: '🎙️', title: 'ElevenLabs', desc: 'All 4 Features' },
+                            { icon: '🧠', title: 'Gemini 2.0', desc: 'Flash Model' },
+                            { icon: '📞', title: 'Twilio', desc: 'PSTN Gateway' }
+                        ].map((tech, i) => (
+                            <div key={i} className="surface p-6 text-center hover:scale-105 transition-transform duration-300">
+                                <div className="text-4xl mb-3">{tech.icon}</div>
+                                <div className="font-bold text-white">{tech.title}</div>
+                                <div className="text-sm text-gray-500 mt-1 font-medium">{tech.desc}</div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="grid md:grid-cols-4 gap-8 relative">
+                        <div className="hidden md:block absolute top-8 left-0 w-full h-0.5 bg-gradient-to-r from-[#FF8C68]/0 via-[#FF8C68]/20 to-[#FF8C68]/0 -z-10"></div>
+                        {[
+                            { step: '1', title: 'Clone Your Voice', desc: '30 seconds of audio creates your unique AI voice' },
+                            { step: '2', title: 'AI Answers', desc: 'Incoming calls trigger 4 agents in parallel' },
+                            { step: '3', title: 'Smart Routing', desc: 'Block scams, route VIPs, book appointments' },
+                            { step: '4', title: 'Get Summary', desc: 'Full transcript and action log in dashboard' }
+                        ].map((item, i) => (
+                            <div key={i} className="text-center group">
+                                <div className="w-16 h-16 rounded-2xl accent-gradient flex items-center justify-center text-white text-2xl font-bold mx-auto mb-6 shadow-[0_0_30px_rgba(255,140,104,0.3)] group-hover:scale-110 transition-transform duration-300">
+                                    {item.step}
+                                </div>
+                                <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
+                                <p className="text-gray-400 text-sm font-medium leading-relaxed">{item.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
             {/* Pricing */}
             <section id="pricing" className="py-24 px-6 bg-gradient-to-b from-transparent to-[#0A0A0A]">
                 <div className="max-w-6xl mx-auto">
@@ -249,9 +292,9 @@ export default function LandingPage() {
                             <div className="text-sm font-black text-gray-500 uppercase tracking-wider mb-3">Free</div>
                             <div className="text-5xl font-black mb-2">$0</div>
                             <div className="text-gray-500 mb-8 font-medium">10 minutes included</div>
-                            <Link href="/home" className="block w-full text-center px-6 py-3 bg-[#252525] text-white rounded-full font-bold hover:bg-[#2A2A2A] transition-all">
+                            <a href="/home" className="block w-full text-center px-6 py-3 bg-[#252525] text-white rounded-full font-bold hover:bg-[#2A2A2A] transition-all">
                                 Get Started
-                            </Link>
+                            </a>
                             <div className="mt-8 space-y-3 text-sm">
                                 <div className="flex items-center gap-3">
                                     <span className="text-[#FF8C68]">✓</span>
@@ -276,9 +319,9 @@ export default function LandingPage() {
                             <div className="text-sm font-black text-[#FF8C68] uppercase tracking-wider mb-3">Accessibility</div>
                             <div className="text-5xl font-black mb-2">$0.05<span className="text-2xl text-gray-500">/min</span></div>
                             <div className="text-gray-500 mb-8 font-medium">$10 = 200 minutes</div>
-                            <Link href="/home" className="btn-primary w-full text-center">
+                            <a href="/home" className="btn-primary w-full text-center block">
                                 Get Started →
-                            </Link>
+                            </a>
                             <div className="mt-8 space-y-3 text-sm">
                                 <div className="flex items-center gap-3">
                                     <span className="text-[#FF8C68]">✓</span>
@@ -304,9 +347,9 @@ export default function LandingPage() {
                             <div className="text-sm font-black text-gray-500 uppercase tracking-wider mb-3">Gatekeeper</div>
                             <div className="text-5xl font-black mb-2">$0.02<span className="text-2xl text-gray-500">/min</span></div>
                             <div className="text-gray-500 mb-8 font-medium">$10 = 500 minutes</div>
-                            <Link href="/home" className="block w-full text-center px-6 py-3 bg-[#252525] text-white rounded-full font-bold hover:bg-[#2A2A2A] transition-all">
+                            <a href="/home" className="block w-full text-center px-6 py-3 bg-[#252525] text-white rounded-full font-bold hover:bg-[#2A2A2A] transition-all">
                                 Get Started
-                            </Link>
+                            </a>
                             <div className="mt-8 space-y-3 text-sm">
                                 <div className="flex items-center gap-3">
                                     <span className="text-[#FF8C68]">✓</span>
@@ -336,7 +379,7 @@ export default function LandingPage() {
                     <div className="text-center mb-16">
                         <h2 className="text-5xl md:text-6xl font-black mb-6 tracking-tight">
                             Got questions?<br />
-                            <span className="text-transparent bg-clip-text accent-gradient">We've got answers</span>
+                            <span className="text-transparent bg-clip-text accent-gradient">We&apos;ve got answers</span>
                         </h2>
                     </div>
 
@@ -403,9 +446,9 @@ export default function LandingPage() {
                                 placeholder="Enter your email"
                                 className="flex-1 px-6 py-4 bg-[#0A0A0A] border border-white/10 rounded-full text-white placeholder-gray-600 focus:outline-none focus:border-[#FF8C68] transition-colors font-medium"
                             />
-                            <Link href="/home" className="btn-primary whitespace-nowrap">
+                            <a href="/home" className="btn-primary whitespace-nowrap">
                                 Join Beta →
-                            </Link>
+                            </a>
                         </div>
                         <p className="text-sm text-gray-600 mt-6 font-medium">
                             Free forever · No credit card required · Cancel anytime
@@ -452,9 +495,10 @@ export default function LandingPage() {
                         <p className="text-sm text-gray-600 font-medium">
                             © 2025 AI Gatekeeper. Built for AI Partner Catalyst 2025.
                         </p>
-                        <div className="flex gap-6 text-sm">
-                            <a href="#" className="text-gray-600 hover:text-white transition-colors font-medium">Twitter</a>
-                            <a href="https://github.com/vigneshbarani24/Storytopia" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-white transition-colors font-medium">GitHub</a>
+                        <div className="flex gap-6">
+                            <a href="https://github.com/vigneshbarani24/Storytopia/tree/main/ai-gatekeeper" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors">
+                                <span className="text-2xl">⚡</span>
+                            </a>
                         </div>
                     </div>
                 </div>
