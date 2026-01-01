@@ -3,6 +3,7 @@ Twilio Service: Handles telephony operations and Media Streams
 """
 
 import logging
+import asyncio
 from typing import Optional
 from twilio.rest import Client
 from twilio.twiml.voice_response import VoiceResponse, Connect, Stream
@@ -79,12 +80,11 @@ class TwilioService:
             call_sid: Original call SID to bridge
         """
         try:
-            # Update the call to dial the user
-            # twilio-python is typically synchronous, but we wrap it in a thread or 
-            # just use it as is if it doesn't block too much. 
-            # However, for consistency with the orchestrator, we mark it async.
-            call = self.client.calls(call_sid).update(
-                twiml=f'<Response><Dial>{user_phone_number}</Dial></Response>'
+            # Run sync Twilio call in thread pool to avoid blocking
+            await asyncio.to_thread(
+                lambda: self.client.calls(call_sid).update(
+                    twiml=f'<Response><Dial>{user_phone_number}</Dial></Response>'
+                )
             )
             logger.info(f"✅ Dialing user {user_phone_number} for call {call_sid}")
         except Exception as e:
@@ -106,7 +106,10 @@ class TwilioService:
             call_sid: Twilio Call SID
         """
         try:
-            call = self.client.calls(call_sid).update(status="completed")
+            # Run sync Twilio call in thread pool to avoid blocking
+            await asyncio.to_thread(
+                lambda: self.client.calls(call_sid).update(status="completed")
+            )
             logger.info(f"✅ Hung up call {call_sid}")
         except Exception as e:
             logger.error(f"❌ Failed to hang up call: {e}")

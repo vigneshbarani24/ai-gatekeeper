@@ -6,9 +6,10 @@ it calls these webhooks and gets structured responses.
 """
 
 import logging
-from fastapi import APIRouter, Request, HTTPException
-from typing import Dict, Any, List
+from fastapi import APIRouter, Request, HTTPException, Header
+from typing import Dict, Any, List, Optional
 from datetime import datetime, timedelta
+from pydantic import BaseModel, Field, validator
 
 from app.services.database import db_service
 from app.core.config import settings
@@ -16,6 +17,89 @@ from app.core.config import settings
 logger = logging.getLogger(__name__)
 
 router = APIRouter()
+
+
+# ======================
+# REQUEST MODELS
+# ======================
+
+class ToolRequestBase(BaseModel):
+    """Base model for all tool requests from ElevenLabs"""
+    conversation_id: Optional[str] = None
+    call_sid: str
+    user_id: str
+
+class CheckCalendarParams(BaseModel):
+    """Parameters for check_calendar tool"""
+    date: str = Field(..., description="Date in YYYY-MM-DD format")
+    time: str = Field(..., description="Time in HH:MM format")
+    duration_minutes: int = Field(default=60, ge=15, le=480)
+
+class BookCalendarParams(BaseModel):
+    """Parameters for book_calendar tool"""
+    title: str = Field(..., min_length=1, max_length=200)
+    date: str
+    time: str
+    duration_minutes: int = Field(default=60, ge=15, le=480)
+    attendees: Optional[List[str]] = None
+
+class CheckContactParams(BaseModel):
+    """Parameters for check_contact tool"""
+    phone_number: str = Field(..., min_length=10)
+    caller_name: Optional[str] = None
+
+class TransferCallParams(BaseModel):
+    """Parameters for transfer_call tool"""
+    reason: str = Field(..., min_length=1)
+
+class LogCallParams(BaseModel):
+    """Parameters for log_call tool"""
+    intent: str
+    summary: str = Field(..., min_length=1)
+    action_taken: str
+    sentiment: Optional[str] = None
+
+class BlockScamParams(BaseModel):
+    """Parameters for block_scam tool"""
+    scam_type: str
+    confidence: float = Field(..., ge=0.0, le=1.0)
+    red_flags: List[str] = Field(default_factory=list)
+
+
+# ======================
+# RESPONSE MODELS
+# ======================
+
+class ToolResponse(BaseModel):
+    """Standard tool response format"""
+    success: bool
+    message: Optional[str] = None
+    data: Optional[Dict[str, Any]] = None
+    error: Optional[str] = None
+
+
+def validate_tool_request(data: dict, user_id_required: bool = True) -> tuple[str, str, dict]:
+    """
+    Validate and extract common tool request fields
+
+    Args:
+        data: Raw request data
+        user_id_required: Whether user_id is required
+
+    Returns:
+        Tuple of (call_sid, user_id, parameters)
+    """
+    call_sid = data.get("call_sid")
+    if not call_sid:
+        raise HTTPException(status_code=400, detail="Missing call_sid")
+
+    user_id = data.get("user_id")
+    if user_id_required and not user_id:
+        raise HTTPException(status_code=400, detail="Missing user_id")
+
+    params = data.get("parameters", {})
+
+    return call_sid, user_id, params
 
 
 # ======================
@@ -34,7 +118,7 @@ async def check_calendar(request: Request):
     {
         "conversation_id": "conv_123",
         "call_sid": "CA123",
-        "user_id": "user_123",  # From conversation_initiation_client_data
+        "user_id": "user_123",
         "parameters": {
             "date": "2025-01-03",
             "time": "19:00",
@@ -44,42 +128,56 @@ async def check_calendar(request: Request):
 
     Response to agent:
     {
+        "success": true,
         "available": true,
         "conflicts": [],
-        "suggested_times": ["19:00", "20:00"]
+        "suggested_times": ["19:00", "20:00", "21:00"],
+        "message": "Calendar is available at 19:00"
     }
     """
     try:
         data = await request.json()
+        call_sid, user_id, params = validate_tool_request(data)
 
-        user_id = data.get("user_id")
-        params = data.get("parameters", {})
+        # Validate parameters
+        try:
+            calendar_params = CheckCalendarParams(**params)
+        except Exception as e:
+            raise HTTPException(status_code=400, detail=f"Invalid parameters: {e}")
 
-        date = params.get("date")  # "2025-01-03"
-        time = params.get("time")  # "19:00"
-        duration = params.get("duration_minutes", 120)
-
-        logger.info(f"🗓️ [Tool] Checking calendar for user {user_id}: {date} {time}")
+        logger.info(f"🗓️ [Tool:check_calendar] User {user_id}: {calendar_params.date} {calendar_params.time} ({calendar_params.duration_minutes}min)")
 
         # TODO: Integrate with Google Calendar API
-        # For now, return mock data
+        # For now, return mock data assuming availability
 
-        # Mock: Check if time slot is available
-        # In production, this calls Google Calendar API
-        available = True  # Assume available for demo
+        available = True
         conflicts = []
+        suggested_times = [calendar_params.time, "20:00", "21:00"]
 
-        return {
+        response_data = {
+            "success": True,
             "available": available,
             "conflicts": conflicts,
-            "suggested_times": [time, "20:00", "21:00"],
-            "date": date,
-            "duration_minutes": duration
+            "suggested_times": suggested_times,
+            "date": calendar_params.date,
+            "time": calendar_params.time,
+            "duration_minutes": calendar_params.duration_minutes,
+            "message": f"Calendar is available at {calendar_params.time} on {calendar_params.date}" if available else "Time slot is not available"
         }
 
+        logger.info(f"✅ [Tool:check_calendar] Available: {available}")
+        return response_data
+
+    except HTTPException:
+        raise
     except Exception as e:
-        logger.error(f"❌ Calendar check error: {e}", exc_info=True)
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.error(f"❌ [Tool:check_calendar] Error: {e}", exc_info=True)
+        return {
+            "success": False,
+            "available": False,
+            "error": str(e),
+            "message": "Failed to check calendar availability"
+        }
 
 
 @router.post("/tools/book_calendar")
@@ -287,41 +385,64 @@ async def log_call(request: Request):
     Response:
     {
         "success": true,
-        "call_id": "call_123"
+        "logged": true,
+        "message": "Call logged successfully"
     }
     """
     try:
         data = await request.json()
+        call_sid, user_id, params = validate_tool_request(data)
 
-        call_sid = data.get("call_sid")
-        user_id = data.get("user_id")
-        params = data.get("parameters", {})
+        # Validate parameters
+        try:
+            log_params = LogCallParams(**params)
+        except Exception as e:
+            raise HTTPException(status_code=400, detail=f"Invalid parameters: {e}")
 
-        intent = params.get("intent")
-        summary = params.get("summary")
-        action_taken = params.get("action_taken")
-
-        logger.info(f"📝 [Tool] Logging call {call_sid}: {intent}")
+        logger.info(f"📝 [Tool:log_call] Logging call {call_sid}")
+        logger.info(f"   Intent: {log_params.intent}")
+        logger.info(f"   Action: {log_params.action_taken}")
+        logger.info(f"   Summary: {log_params.summary[:100]}...")
 
         # Update call record in Supabase
-        await db_service.update_call(
-            call_sid=call_sid,
-            intent=intent,
-            status="completed"
-        )
+        try:
+            await db_service.update_call(
+                call_sid=call_sid,
+                intent=log_params.intent,
+                status="completed",
+                action_taken=log_params.action_taken
+            )
+            logger.info(f"✅ [Tool:log_call] Call record updated")
+        except Exception as e:
+            logger.error(f"❌ [Tool:log_call] Failed to update call: {e}")
 
-        # Save summary
-        await db_service.save_transcript(call_sid, summary)
+        # Save transcript/summary
+        try:
+            await db_service.save_transcript(call_sid, log_params.summary)
+            logger.info(f"✅ [Tool:log_call] Transcript saved")
+        except Exception as e:
+            logger.error(f"❌ [Tool:log_call] Failed to save transcript: {e}")
 
         return {
             "success": True,
+            "logged": True,
             "call_sid": call_sid,
-            "logged_at": datetime.utcnow().isoformat()
+            "intent": log_params.intent,
+            "action_taken": log_params.action_taken,
+            "logged_at": datetime.utcnow().isoformat(),
+            "message": f"Call logged: {log_params.intent} - {log_params.action_taken}"
         }
 
+    except HTTPException:
+        raise
     except Exception as e:
-        logger.error(f"❌ Log call error: {e}", exc_info=True)
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.error(f"❌ [Tool:log_call] Error: {e}", exc_info=True)
+        return {
+            "success": False,
+            "logged": False,
+            "error": str(e),
+            "message": "Failed to log call"
+        }
 
 
 # ======================
@@ -351,51 +472,94 @@ async def block_scam(request: Request):
     {
         "success": true,
         "action": "call_terminated",
-        "report_id": "scam_123"
+        "blocked": true,
+        "message": "Scam call blocked successfully"
     }
     """
     try:
         data = await request.json()
+        call_sid, user_id, params = validate_tool_request(data)
 
-        call_sid = data.get("call_sid")
-        user_id = data.get("user_id")
-        params = data.get("parameters", {})
+        # Validate parameters
+        try:
+            scam_params = BlockScamParams(**params)
+        except Exception as e:
+            raise HTTPException(status_code=400, detail=f"Invalid parameters: {e}")
 
-        scam_type = params.get("scam_type")
-        confidence = params.get("confidence", 0.0)
-        red_flags = params.get("red_flags", [])
+        logger.warning(f"🚨 [Tool:block_scam] BLOCKING SCAM: {call_sid}")
+        logger.warning(f"   Type: {scam_params.scam_type}")
+        logger.warning(f"   Confidence: {scam_params.confidence:.2%}")
+        logger.warning(f"   Red Flags: {', '.join(scam_params.red_flags)}")
 
-        logger.warning(f"🚨 [Tool] Blocking scam call {call_sid}: {scam_type} ({confidence})")
-
-        # End call via Twilio
+        # End call via Twilio (CRITICAL - must happen immediately)
         from app.services.twilio_service import twilio_service
-        twilio_service.hangup_call(call_sid)
+        try:
+            await twilio_service.hangup_call(call_sid)
+            logger.info(f"✅ [Tool:block_scam] Call {call_sid} terminated")
+        except Exception as e:
+            logger.error(f"❌ [Tool:block_scam] Failed to hangup call: {e}")
+            # Continue with logging even if hangup fails
 
         # Log scam report to Supabase
-        await db_service.create_scam_report(
-            call_sid=call_sid,
-            scam_type=scam_type,
-            confidence=confidence,
-            pattern_matched=", ".join(red_flags)
-        )
+        try:
+            await db_service.create_scam_report(
+                call_sid=call_sid,
+                scam_type=scam_params.scam_type,
+                confidence=scam_params.confidence,
+                red_flags=scam_params.red_flags
+            )
+            logger.info(f"✅ [Tool:block_scam] Scam report logged")
+        except Exception as e:
+            logger.error(f"❌ [Tool:block_scam] Failed to log scam report: {e}")
 
         # Update call record
-        await db_service.update_call(
-            call_sid=call_sid,
-            intent="scam",
-            scam_score=confidence
-        )
+        try:
+            await db_service.update_call(
+                call_sid=call_sid,
+                intent="scam",
+                scam_score=scam_params.confidence,
+                action_taken="blocked"
+            )
+            logger.info(f"✅ [Tool:block_scam] Call record updated")
+        except Exception as e:
+            logger.error(f"❌ [Tool:block_scam] Failed to update call: {e}")
+
+        # Send SMS alert to user (optional, based on settings)
+        try:
+            user = await db_service.get_user_by_id(user_id)
+            if user and user.get("phone_number"):
+                # TODO: Uncomment when ready to send SMS alerts
+                # from app.services.twilio_service import twilio_service
+                # twilio_service.send_sms(
+                #     user["phone_number"],
+                #     f"🚨 AI Gatekeeper blocked a {scam_params.scam_type} scam call. Details in dashboard."
+                # )
+                pass
+        except Exception as e:
+            logger.error(f"⚠️ [Tool:block_scam] Failed to send SMS alert: {e}")
+
+        logger.warning(f"🛡️ [Tool:block_scam] SCAM BLOCKED SUCCESSFULLY: {scam_params.scam_type} ({scam_params.confidence:.0%})")
 
         return {
             "success": True,
             "action": "call_terminated",
-            "scam_type": scam_type,
-            "confidence": confidence
+            "blocked": True,
+            "scam_type": scam_params.scam_type,
+            "confidence": scam_params.confidence,
+            "red_flags": scam_params.red_flags,
+            "message": f"Scam call blocked: {scam_params.scam_type} (confidence: {scam_params.confidence:.0%})"
         }
 
+    except HTTPException:
+        raise
     except Exception as e:
-        logger.error(f"❌ Block scam error: {e}", exc_info=True)
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.error(f"❌ [Tool:block_scam] Critical error: {e}", exc_info=True)
+        return {
+            "success": False,
+            "blocked": False,
+            "error": str(e),
+            "message": "Failed to block scam call - please report this error"
+        }
 
 
 # ======================

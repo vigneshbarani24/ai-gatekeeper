@@ -206,6 +206,9 @@ class DatabaseService:
 
     async def save_transcript(self, call_sid: str, transcript: str) -> None:
         """Save call transcript"""
+        if not self.client:
+            return
+
         try:
             # Get call ID
             call = await self.get_call_by_sid(call_sid)
@@ -220,6 +223,16 @@ class DatabaseService:
 
         except Exception as e:
             logger.error(f"Error saving transcript: {e}")
+
+    async def update_call_transcript(self, call_sid: str, transcript: str) -> None:
+        """
+        Update call transcript (alias for save_transcript for consistency)
+
+        Args:
+            call_sid: Twilio Call SID
+            transcript: Full transcript text
+        """
+        await self.save_transcript(call_sid, transcript)
 
     # ========================
     # VOICE PROFILES
@@ -296,19 +309,36 @@ class DatabaseService:
         call_sid: str,
         scam_type: str,
         confidence: float,
-        pattern_matched: str
+        pattern_matched: str = None,
+        red_flags: list = None
     ) -> None:
-        """Log a detected scam"""
+        """
+        Log a detected scam
+
+        Args:
+            call_sid: Twilio Call SID
+            scam_type: Type of scam detected
+            confidence: Confidence score (0-1)
+            pattern_matched: Pattern that matched (deprecated, use red_flags)
+            red_flags: List of red flags detected
+        """
+        if not self.client:
+            return
+
         try:
             call = await self.get_call_by_sid(call_sid)
             if not call:
                 return
 
+            # Support both old and new parameter names
+            if red_flags and not pattern_matched:
+                pattern_matched = ", ".join(red_flags) if isinstance(red_flags, list) else str(red_flags)
+
             self.client.table("scam_reports").insert({
                 "call_id": call["id"],
                 "scam_type": scam_type,
                 "confidence": confidence,
-                "pattern_matched": pattern_matched,
+                "pattern_matched": pattern_matched or "unknown",
                 "action_taken": "blocked"
             }).execute()
 
@@ -316,6 +346,70 @@ class DatabaseService:
 
         except Exception as e:
             logger.error(f"Error creating scam report: {e}")
+
+    # ========================
+    # ANALYTICS
+    # ========================
+
+    async def update_analytics(
+        self,
+        user_id: str,
+        date: str,
+        total_calls_increment: int = 0,
+        scams_blocked_increment: int = 0,
+        time_saved_minutes: int = 0
+    ) -> None:
+        """
+        Update user analytics (daily aggregates)
+
+        Args:
+            user_id: User ID
+            date: Date (YYYY-MM-DD format)
+            total_calls_increment: Number to add to total calls
+            scams_blocked_increment: Number to add to scams blocked
+            time_saved_minutes: Minutes to add to time saved
+        """
+        if not self.client:
+            return
+
+        try:
+            from datetime import date as date_type
+
+            # Convert date to string if it's a date object
+            if isinstance(date, date_type):
+                date = date.isoformat()
+
+            # Check if record exists for this user and date
+            response = (
+                self.client.table("analytics")
+                .select("*")
+                .eq("user_id", user_id)
+                .eq("date", date)
+                .execute()
+            )
+
+            if response.data and len(response.data) > 0:
+                # Update existing record
+                existing = response.data[0]
+                self.client.table("analytics").update({
+                    "total_calls": existing.get("total_calls", 0) + total_calls_increment,
+                    "scams_blocked": existing.get("scams_blocked", 0) + scams_blocked_increment,
+                    "time_saved_minutes": existing.get("time_saved_minutes", 0) + time_saved_minutes
+                }).eq("user_id", user_id).eq("date", date).execute()
+            else:
+                # Create new record
+                self.client.table("analytics").insert({
+                    "user_id": user_id,
+                    "date": date,
+                    "total_calls": total_calls_increment,
+                    "scams_blocked": scams_blocked_increment,
+                    "time_saved_minutes": time_saved_minutes
+                }).execute()
+
+            logger.debug(f"✅ Updated analytics for user {user_id} on {date}")
+
+        except Exception as e:
+            logger.error(f"Error updating analytics: {e}")
 
 
 # Singleton instance

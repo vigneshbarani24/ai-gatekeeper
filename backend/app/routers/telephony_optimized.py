@@ -291,15 +291,22 @@ async def analyze_call_realtime(
             )
 
             # Upload evidence to GCS (immutable)
-            await gcs_service.upload_scam_evidence(
-                call_sid=call_sid,
-                user_id=user_id,
-                evidence={
-                    "transcript": transcript,
-                    "adk_analysis": analysis,
-                    "caller_number": caller_number
-                }
-            )
+            try:
+                evidence_url = await gcs_service.upload_scam_evidence(
+                    call_sid=call_sid,
+                    user_id=user_id,
+                    evidence={
+                        "transcript": transcript,
+                        "adk_analysis": analysis,
+                        "caller_number": caller_number
+                    }
+                )
+                if evidence_url:
+                    logger.info(f"✅ Scam evidence uploaded: {evidence_url}")
+                else:
+                    logger.warning(f"⚠️ Failed to upload scam evidence (demo mode?)")
+            except Exception as e:
+                logger.error(f"❌ Error uploading scam evidence: {e}")
 
             # Send alert
             logger.info(f"🚨 Sent scam alert for {call_sid}")
@@ -337,17 +344,24 @@ async def analyze_call_realtime(
         await db_service.update_call_transcript(call_sid, transcript)
 
         # 5. Upload to GCS with ADK analysis metadata
-        await gcs_service.upload_transcript(
-            call_sid=call_sid,
-            user_id=user_id,
-            transcript_text=transcript,
-            metadata={
-                "adk_analysis": analysis,
-                "caller_number": caller_number,
-                "intent": intent,
-                "scam_score": scam_score
-            }
-        )
+        try:
+            transcript_url = await gcs_service.upload_transcript(
+                call_sid=call_sid,
+                user_id=user_id,
+                transcript_text=transcript,
+                metadata={
+                    "adk_analysis": analysis,
+                    "caller_number": caller_number,
+                    "intent": intent,
+                    "scam_score": scam_score
+                }
+            )
+            if transcript_url:
+                logger.debug(f"✅ Transcript uploaded to GCS")
+            else:
+                logger.debug(f"⚠️ Transcript not uploaded (demo mode?)")
+        except Exception as e:
+            logger.error(f"❌ Error uploading transcript to GCS: {e}")
 
     except Exception as e:
         logger.error(f"❌ Real-time analysis error: {e}", exc_info=True)
