@@ -183,6 +183,52 @@ async def list_calls():
 
 @router.get("/{call_id}")
 async def get_call(call_id: str):
-    """Get call details + transcript"""
-    # TODO: Implement full call details with transcript
-    return {"call_id": call_id}
+    """
+    Get full call details including transcript
+
+    Returns:
+    - Complete call record
+    - Full transcript
+    - Scam report if applicable
+    - All metadata
+    """
+    try:
+        if not db_service.client:
+            logger.warning("Database not initialized")
+            return {
+                "id": call_id,
+                "error": "Database not available"
+            }
+
+        # Get call with transcript
+        response = db_service.client.table('calls') \
+            .select('*, call_transcripts(*), scam_reports(*)') \
+            .eq('id', call_id) \
+            .single() \
+            .execute()
+
+        if not response.data:
+            return {"error": "Call not found"}
+
+        call = response.data
+
+        # Format response
+        return {
+            "id": call['id'],
+            "call_sid": call.get('call_sid'),
+            "caller_number": call.get('caller_number'),
+            "caller_name": call.get('caller_name', 'Unknown'),
+            "intent": call.get('intent', 'unknown'),
+            "scam_score": call.get('scam_score', 0.0),
+            "action_taken": call.get('action_taken'),
+            "status": call.get('status'),
+            "started_at": call.get('started_at'),
+            "duration_seconds": call.get('duration_seconds', 0),
+            "transcript": call['call_transcripts'][0] if call.get('call_transcripts') else None,
+            "scam_report": call['scam_reports'][0] if call.get('scam_reports') else None,
+            "passed_through": call.get('passed_through', False)
+        }
+
+    except Exception as e:
+        logger.error(f"Error getting call {call_id}: {e}")
+        return {"error": str(e)}
