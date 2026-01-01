@@ -10,7 +10,7 @@ import logging
 from contextlib import asynccontextmanager
 
 from app.core.config import settings
-from app.routers import telephony_optimized as telephony, webhooks, contacts, calls, analytics, elevenlabs_tools
+from app.routers import telephony_optimized as telephony, webhooks, contacts, calls, analytics, elevenlabs_tools, realtime
 from app.services.database import init_database
 from app.services.vector_store import init_vector_store
 
@@ -168,6 +168,11 @@ app.include_router(
     elevenlabs_tools.router,
     prefix="/api",
     tags=["ElevenLabs Tools"],
+)
+
+app.include_router(
+    realtime.router,
+    tags=["Realtime"],
 )
 
 

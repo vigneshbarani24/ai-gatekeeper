@@ -22,6 +22,9 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
+# Import realtime broadcaster
+from app.routers.realtime import broadcast_call_created, broadcast_call_updated
+
 
 # ======================
 # OPTIMIZED FLOW
@@ -117,15 +120,21 @@ async def incoming_call(request: Request, background_tasks: BackgroundTasks):
         logger.info(f"{mode_label}: Connecting to ElevenLabs with voice {voice_id}")
 
         # Create call record
-        background_tasks.add_task(
-            db_service.create_call,
-            user_id=user_id,
-            call_sid=call_sid,
-            caller_number=caller_number,
-            intent="unknown",
-            scam_score=0.0,
-            action_taken=action_taken  # "assisting" or "screening"
-        )
+        async def create_and_broadcast_call():
+            """Create call in DB and broadcast to frontend"""
+            call = await db_service.create_call(
+                user_id=user_id,
+                call_sid=call_sid,
+                caller_number=caller_number,
+                intent="unknown",
+                scam_score=0.0,
+                action_taken=action_taken  # "assisting" or "screening"
+            )
+            # Broadcast to frontend for real-time UI update
+            if call:
+                await broadcast_call_created(user_id, call)
+
+        background_tasks.add_task(create_and_broadcast_call)
 
         # Call ElevenLabs Register Call API to get TwiML
         # This returns correct TwiML for connecting to Conversational AI agent
@@ -281,6 +290,13 @@ async def analyze_call_realtime(
                     "action_taken": "blocked"
                 }
             )
+
+            # Broadcast update to frontend
+            await broadcast_call_updated(user_id, call_sid, {
+                "intent": "scam",
+                "scam_score": scam_score,
+                "action_taken": "blocked"
+            })
 
             # Save scam report
             await db_service.create_scam_report(

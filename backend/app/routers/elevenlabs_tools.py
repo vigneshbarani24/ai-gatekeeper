@@ -18,6 +18,13 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
+# Import realtime broadcaster
+from app.routers.realtime import (
+    broadcast_call_updated,
+    broadcast_scam_blocked,
+    broadcast_tool_executed
+)
+
 
 # ======================
 # REQUEST MODELS
@@ -413,6 +420,13 @@ async def log_call(request: Request):
                 action_taken=log_params.action_taken
             )
             logger.info(f"✅ [Tool:log_call] Call record updated")
+
+            # Broadcast update to frontend
+            await broadcast_call_updated(user_id, call_sid, {
+                "intent": log_params.intent,
+                "action_taken": log_params.action_taken,
+                "status": "completed"
+            })
         except Exception as e:
             logger.error(f"❌ [Tool:log_call] Failed to update call: {e}")
 
@@ -422,6 +436,13 @@ async def log_call(request: Request):
             logger.info(f"✅ [Tool:log_call] Transcript saved")
         except Exception as e:
             logger.error(f"❌ [Tool:log_call] Failed to save transcript: {e}")
+
+        # Broadcast tool execution
+        await broadcast_tool_executed(user_id, "log_call", {
+            "call_sid": call_sid,
+            "intent": log_params.intent,
+            "success": True
+        })
 
         return {
             "success": True,
@@ -539,6 +560,17 @@ async def block_scam(request: Request):
             logger.error(f"⚠️ [Tool:block_scam] Failed to send SMS alert: {e}")
 
         logger.warning(f"🛡️ [Tool:block_scam] SCAM BLOCKED SUCCESSFULLY: {scam_params.scam_type} ({scam_params.confidence:.0%})")
+
+        # Broadcast to frontend for real-time UI update
+        await broadcast_scam_blocked(user_id, call_sid, scam_params.scam_type, scam_params.confidence)
+
+        # Broadcast tool execution
+        await broadcast_tool_executed(user_id, "block_scam", {
+            "call_sid": call_sid,
+            "scam_type": scam_params.scam_type,
+            "confidence": scam_params.confidence,
+            "blocked": True
+        })
 
         return {
             "success": True,
