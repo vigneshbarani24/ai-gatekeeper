@@ -7,7 +7,14 @@ import { useEffect, useRef, useState } from 'react';
 import { config } from '@/config';
 
 export interface RealtimeEvent {
-    type: 'call_created' | 'call_updated' | 'scam_blocked' | 'tool_executed' | 'analytics_updated';
+    type: 'call_created' | 'call_updated' | 'scam_blocked' | 'tool_executed' | 'analytics_updated' | 'ai_thinking';
+    data: any;
+    timestamp: string;
+}
+
+export interface AIThinkingEvent {
+    agent: string;
+    thought: string;
     data: any;
     timestamp: string;
 }
@@ -18,6 +25,7 @@ export interface RealtimeOptions {
     onScamBlocked?: (data: any) => void;
     onToolExecuted?: (data: any) => void;
     onAnalyticsUpdated?: (data: any) => void;
+    onAIThinking?: (data: AIThinkingEvent) => void;
     onError?: (error: Error) => void;
 }
 
@@ -105,6 +113,13 @@ export function useRealtime(userId: string | null, options: RealtimeOptions = {}
                     const event: RealtimeEvent = JSON.parse(e.data);
                     console.log('[Realtime] Analytics updated:', event);
                     options.onAnalyticsUpdated?.(event.data);
+                });
+
+                // AI thinking event
+                eventSource.addEventListener('ai_thinking', (e) => {
+                    const event: RealtimeEvent = JSON.parse(e.data);
+                    console.log('[Realtime] 🤖 AI thinking:', event.data.thought);
+                    options.onAIThinking?.(event.data as AIThinkingEvent);
                 });
 
                 // Error handler

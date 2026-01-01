@@ -11,6 +11,8 @@ import { useState, useEffect, useCallback } from 'react';
 import { useRealtime } from '@/hooks/useRealtime';
 import { fetchDashboardStats, fetchRecentCalls } from '@/utils/api';
 import type { DashboardStats, Call } from '@/types';
+import AIActivityLog, { useAIActivityLog } from '@/components/AIActivityLog';
+import type { AIThinkingEvent } from '@/hooks/useRealtime';
 
 export default function CompleteDashboard() {
   // ============================================================================
@@ -21,6 +23,9 @@ export default function CompleteDashboard() {
   const [calls, setCalls] = useState<Call[]>([]);
   const [loading, setLoading] = useState(true);
   const [realtimeConnected, setRealtimeConnected] = useState(false);
+
+  // AI Activity Log
+  const { addLog } = useAIActivityLog();
 
   // ============================================================================
   // Data Fetching
@@ -151,6 +156,19 @@ export default function CompleteDashboard() {
     onAnalyticsUpdated: (data) => {
       console.log('📊 Analytics updated:', data);
       setStats(prev => prev ? { ...prev, ...data } : null);
+    },
+
+    // 🎯 USER STORY 6: AI Thinking - Show what AI is doing
+    onAIThinking: (data: AIThinkingEvent) => {
+      console.log('🤖 AI thinking:', data.thought);
+
+      // Add to activity log
+      addLog(data);
+
+      // Show notification for critical events
+      if (data.agent === 'scam_detector' && data.thought.includes('SCAM DETECTED')) {
+        showNotification('🚨 AI Alert', data.thought, 'error');
+      }
     },
 
     // Error handling
@@ -322,6 +340,11 @@ export default function CompleteDashboard() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* ========== AI Activity Log ========== */}
+      <div className="mb-8">
+        <AIActivityLog className="mb-8" />
       </div>
 
       {/* ========== Recent Calls ========== */}

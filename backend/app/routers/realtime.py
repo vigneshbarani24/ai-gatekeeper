@@ -155,6 +155,7 @@ async def sse_endpoint(user_id: str, request: Request):
     - scam_blocked: Scam detected and blocked
     - tool_executed: Webhook tool called
     - analytics_updated: Stats changed
+    - ai_thinking: AI agent activity and thoughts
     """
     return StreamingResponse(
         event_stream(user_id, request),
@@ -210,6 +211,24 @@ async def broadcast_tool_executed(user_id: str, tool_name: str, result: Dict[str
 async def broadcast_analytics_update(user_id: str, metrics: Dict[str, Any]):
     """Broadcast that analytics were updated"""
     await broadcaster.broadcast(user_id, "analytics_updated", metrics)
+
+
+async def broadcast_ai_thinking(user_id: str, agent: str, thought: str, data: Dict[str, Any] = None):
+    """
+    Broadcast AI thinking/activity for real-time visibility
+
+    Shows users what the AI is doing:
+    - "Analyzing caller's intent..."
+    - "Checking scam patterns..."
+    - "Searching calendar..."
+    - "Detected suspicious keywords"
+    """
+    await broadcaster.broadcast(user_id, "ai_thinking", {
+        "agent": agent,
+        "thought": thought,
+        "data": data or {},
+        "timestamp": datetime.utcnow().isoformat()
+    })
 
 
 # ============================================================================

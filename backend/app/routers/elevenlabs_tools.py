@@ -22,7 +22,8 @@ router = APIRouter()
 from app.routers.realtime import (
     broadcast_call_updated,
     broadcast_scam_blocked,
-    broadcast_tool_executed
+    broadcast_tool_executed,
+    broadcast_ai_thinking
 )
 
 
@@ -154,6 +155,12 @@ async def check_calendar(request: Request):
 
         logger.info(f"🗓️ [Tool:check_calendar] User {user_id}: {calendar_params.date} {calendar_params.time} ({calendar_params.duration_minutes}min)")
 
+        # Broadcast AI thinking
+        await broadcast_ai_thinking(user_id, "calendar_agent", f"📅 Checking calendar for {calendar_params.date} at {calendar_params.time}...", {
+            "date": calendar_params.date,
+            "time": calendar_params.time
+        })
+
         # TODO: Integrate with Google Calendar API
         # For now, return mock data assuming availability
 
@@ -281,6 +288,11 @@ async def check_contact(request: Request):
         phone_number = params.get("phone_number")
 
         logger.info(f"📞 [Tool] Checking contact for user {user_id}: {phone_number}")
+
+        # Broadcast AI thinking
+        await broadcast_ai_thinking(user_id, "contact_matcher", f"👤 Checking if {phone_number} is in your contacts...", {
+            "phone_number": phone_number
+        })
 
         # Query Supabase for contact
         contact = await db_service.get_contact_by_phone(user_id, phone_number)
@@ -411,6 +423,13 @@ async def log_call(request: Request):
         logger.info(f"   Action: {log_params.action_taken}")
         logger.info(f"   Summary: {log_params.summary[:100]}...")
 
+        # Broadcast AI thinking
+        await broadcast_ai_thinking(user_id, "screener_agent", f"📝 Logging call as '{log_params.intent}' - {log_params.action_taken}", {
+            "intent": log_params.intent,
+            "action": log_params.action_taken,
+            "summary_preview": log_params.summary[:80]
+        })
+
         # Update call record in Supabase
         try:
             await db_service.update_call(
@@ -511,6 +530,14 @@ async def block_scam(request: Request):
         logger.warning(f"   Type: {scam_params.scam_type}")
         logger.warning(f"   Confidence: {scam_params.confidence:.2%}")
         logger.warning(f"   Red Flags: {', '.join(scam_params.red_flags)}")
+
+        # Broadcast AI thinking - CRITICAL DETECTION
+        await broadcast_ai_thinking(user_id, "scam_detector", f"🚨 SCAM DETECTED: {scam_params.scam_type} ({scam_params.confidence:.0%} confidence) - BLOCKING NOW!", {
+            "scam_type": scam_params.scam_type,
+            "confidence": scam_params.confidence,
+            "red_flags": scam_params.red_flags,
+            "action": "blocking_call"
+        })
 
         # End call via Twilio (CRITICAL - must happen immediately)
         from app.services.twilio_service import twilio_service
