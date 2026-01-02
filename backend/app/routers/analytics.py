@@ -17,40 +17,98 @@ logger = logging.getLogger(__name__)
 router = APIRouter(tags=["analytics"])
 
 
-@router.get("/dashboard")
-async def get_dashboard_stats(user_id: str = "demo_user"):
+@router.get("/analyze-scam")
+async def analyze_scam(text: str):
     """
-    Get dashboard statistics for the bento grid
-
+    Analyze text for scam indicators using Google Gemini
+    
+    Args:
+        text: The text/transcript to analyze
+        
     Returns:
-    - total_calls: Total calls all time
-    - scams_blocked: Total scams blocked
-    - time_saved_minutes: Total time saved
-    - current_status: Current AI status
-    - today_calls: Calls today
-    - block_rate: Scam block rate (0-1)
-    - avg_call_duration: Average call duration in seconds
+        Analysis result with scam detection status
     """
+    try:
+        # Check if Google API key is configured
+        if not settings.GOOGLE_GENERATIVE_AI_API_KEY:
+            return {
+                "status": "error",
+                "message": "Google Generative AI API key not configured"
+            }
+        
+        # Use Gemini service for analysis
+        gemini = get_gemini_service()
+        
+        # Use Gemini service for analysis
+        gemini = get_gemini_service()
+        
+        # Perform deep analysis
+        result = await gemini.analyze_scam_indicators(
+            transcript=text, 
+            caller_number="Unknown" # Context will improve if we pass this
+        )
+        
+        # Add reasoning string for the UI logs
+        reasoning = []
+        if result.get('is_scam'):
+            reasoning.append(f"❌ DETECTED SCAM PATTERN: {result.get('scam_type', 'unknown').upper()}")
+        
+        if result.get('red_flags'):
+            reasoning.append(f"🚩 Red Flags: {', '.join(result['red_flags'][:2])}")
+            
+        confidence = result.get('confidence', 0.0)
+        reasoning.append(f"📊 Confidence Score: {confidence:.2f}")
+        
+        if confidence < 0.3:
+            reasoning.append("✅ Context appears safe so far.")
+        elif confidence < 0.7:
+            reasoning.append("⚠️ Potentially suspicious activity detected.")
+            
+        return {
+            "status": "success",
+            "is_scam": result.get('is_scam', False),
+            "score": confidence,
+            "reasoning": " | ".join(reasoning),
+            "full_analysis": result,
+            "model": settings.GEMINI_MODEL_ANALYSIS
+        }
+        
+    except Exception as e:
+        logger.error(f"Scam analysis error: {e}")
+        return {
+            "status": "error",
+            "message": str(e)
+        }
 
-    # Demo data (matches frontend expectations)
-    demo_stats = {
-        "total_calls": 1247,
-        "scams_blocked": 89,
-        "time_saved_minutes": 2340,
-        "current_status": "active",
-        "today_calls": 12,
-        "block_rate": 0.987,
-        "avg_call_duration": 45,
-    }
 
+
+@router.get("/dashboard")
+async def get_dashboard_stats(user_id: str = "00000000-0000-0000-0000-000000000001"):
+    """
+    Get dashboard statistics from Supabase
+    
+    Returns real-time stats from database
+    """
+    
     try:
         if not db_service.client:
-            logger.info("Database not initialized, returning demo dashboard stats")
-            return demo_stats
+            logger.error("Database not initialized!")
+            return {
+                "error": "Database not connected",
+                "total_calls": 0,
+                "scams_blocked": 0,
+                "time_saved_minutes": 0,
+                "current_status": "error",
+                "today_calls": 0,
+                "block_rate": 0,
+                "avg_call_duration": 0,
+            }
 
-        # Get all-time stats
+        # Get all calls for user from Supabase
         all_calls = db_service.client.table('calls').select('*').eq('user_id', user_id).execute()
         calls_data = all_calls.data if all_calls.data else []
+        
+        logger.info(f"Found {len(calls_data)} calls in database for user {user_id}")
 
         total_calls = len(calls_data)
         scams_blocked = sum(1 for call in calls_data if call.get('intent') == 'scam' and call.get('status') == 'blocked')
@@ -88,7 +146,16 @@ async def get_dashboard_stats(user_id: str = "demo_user"):
 
     except Exception as e:
         logger.error(f"Error getting dashboard stats: {e}")
-        return demo_stats
+        return {
+            "error": str(e),
+            "total_calls": 0,
+            "scams_blocked": 0,
+            "time_saved_minutes": 0,
+            "current_status": "error",
+            "today_calls": 0,
+            "block_rate": 0,
+            "avg_call_duration": 0,
+        }
 
 
 @router.get("/summary")

@@ -4,13 +4,35 @@ import { useState, useEffect } from 'react';
 import { Shield, Phone, Ban, Clock, Activity, Settings, User, Heart } from 'lucide-react';
 import Link from 'next/link';
 
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000';
+
 export default function Home() {
-    const [stats] = useState({
-        total_calls: 1247,
-        scams_blocked: 89,
-        time_saved_hours: 39,
-        block_rate: 99,
+    const [stats, setStats] = useState({
+        total_calls: 0,
+        scams_blocked: 0,
+        time_saved_hours: 0,
+        block_rate: 0,
     });
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        // Fetch real stats from backend
+        fetch(`${BACKEND_URL}/api/analytics/dashboard`)
+            .then(res => res.json())
+            .then(data => {
+                setStats({
+                    total_calls: data.total_calls || 0,
+                    scams_blocked: data.scams_blocked || 0,
+                    time_saved_hours: data.time_saved_hours || 0,
+                    block_rate: data.block_rate || 0,
+                });
+                setLoading(false);
+            })
+            .catch(err => {
+                console.error('Failed to fetch stats:', err);
+                setLoading(false);
+            });
+    }, []);
 
     return (
         <div style={{

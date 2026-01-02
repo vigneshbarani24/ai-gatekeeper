@@ -41,6 +41,14 @@ class Settings(BaseSettings):
         description="Allowed frontend origins"
     )
 
+    @validator("CORS_ORIGINS", pre=True)
+    def parse_cors_origins(cls, v):
+        """Parse CORS_ORIGINS from various formats"""
+        if isinstance(v, str):
+            # Handle comma-separated string
+            return [origin.strip() for origin in v.split(",")]
+        return v
+
     # ============================================================================
     # Twilio Configuration
     # ============================================================================
@@ -95,6 +103,9 @@ class Settings(BaseSettings):
     VERTEX_AI_LOCATION: str = Field(default="us-central1", description="Vertex AI location")
     GEMINI_MODEL_FAST: str = Field(default="gemini-2.0-flash-exp", description="Fast model for real-time")
     GEMINI_MODEL_ANALYSIS: str = Field(default="gemini-1.5-pro", description="Powerful model for analysis")
+    
+    # Google Generative AI (direct API)
+    GOOGLE_GENERATIVE_AI_API_KEY: Optional[str] = Field(default=None, description="Google Gemini API key for direct access")
 
     # Calendar API
     GOOGLE_CALENDAR_ID: str = Field(default="primary", description="Calendar ID to check")
