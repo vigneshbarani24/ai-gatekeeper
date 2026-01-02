@@ -1,10 +1,17 @@
 # 🚀 Deployment Guide: AI Gatekeeper
 
 ## 1. Backend (Google Cloud Run)
-**Status**: ✅ Deployed
-**URL**: `https://ai-gatekeeper-backend-i65wrni36q-uc.a.run.app`
+**Status**: ✅ **REDEPLOYED & LIVE**
+URL: `https://ai-gatekeeper-backend-707989164210.us-central1.run.app`
 
-The backend is live and serving the API.
+We updated the Gemini Service code (switched to `gemini-2.0-flash-exp`). **You MUST redeploy the backend** for these changes to take effect.
+
+**Deploy Command:**
+```bash
+cd backend
+gcloud run deploy ai-gatekeeper-backend --source . --platform managed --region us-central1 --allow-unauthenticated
+```
+(Adjust region/name if different)
 
 ---
 
